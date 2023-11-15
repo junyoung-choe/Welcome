@@ -2,6 +2,7 @@ package com.welcome.enjoytrip.board.model.service;
 
 import com.welcome.enjoytrip.board.model.BoardDto;
 import com.welcome.enjoytrip.board.model.BoardListDto;
+import com.welcome.enjoytrip.board.model.CommentDto;
 import com.welcome.enjoytrip.board.model.FileInfoDto;
 import com.welcome.enjoytrip.board.model.mapper.BoardMapper;
 import org.springframework.stereotype.Service;
@@ -51,10 +52,10 @@ public class BoardServiceImpl implements BoardService{
     @Transactional
     public void writeBoard(BoardDto boardDto) throws Exception {
         boardMapper.writeArticle(boardDto);
-        List<FileInfoDto> fileInfos = boardDto.getFileInfos();
-        if (fileInfos != null && !fileInfos.isEmpty()) {
-            boardMapper.registerFile(boardDto);
-        }
+//        List<FileInfoDto> fileInfos = boardDto.getFileInfos();
+//        if (fileInfos != null && !fileInfos.isEmpty()) {
+//            boardMapper.registerFile(boardDto);
+//        }
     }
 
     @Override
@@ -75,5 +76,15 @@ public class BoardServiceImpl implements BoardService{
     @Override
     public void deleteBoard(int boardId) throws Exception {
         boardMapper.deleteBoard(boardId);
+    }
+
+    @Override
+    public void writeComment(CommentDto commentDto) throws Exception {
+        boardMapper.writeComment(commentDto);
+    }
+
+    @Override
+    public List<CommentDto> getComment(int boardId) throws Exception {
+        return boardMapper.getComment(boardId);
     }
 }

@@ -2,6 +2,7 @@ package com.welcome.enjoytrip.board.controller;
 
 import com.welcome.enjoytrip.board.model.BoardDto;
 import com.welcome.enjoytrip.board.model.BoardListDto;
+import com.welcome.enjoytrip.board.model.CommentDto;
 import com.welcome.enjoytrip.board.model.service.BoardService;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -46,8 +47,10 @@ public class BoardController {
 
     @GetMapping("/{boardId}")
     public ResponseEntity<BoardDto> boardView( @PathVariable("boardId") int boardId ) throws Exception {
-        boardService.updateViews(boardId);
-        return new ResponseEntity<BoardDto>(boardService.getBoard(boardId), HttpStatus.OK);
+//        boardService.updateViews(boardId);
+        BoardDto boardDto = boardService.getBoard(boardId);
+        boardDto.setCommentDtos(boardService.getComment(boardId));
+        return new ResponseEntity<BoardDto>(boardDto, HttpStatus.OK);
     }
 
     @GetMapping("/modify/{boardId}")
@@ -68,10 +71,22 @@ public class BoardController {
 
     }
 
+    @PostMapping("/comment")
+    public ResponseEntity<?> commentWrite(@RequestBody CommentDto commentDto) {
+        try {
+            boardService.writeComment(commentDto);
+            return new ResponseEntity<Void>(HttpStatus.CREATED);
+        } catch (Exception e) {
+            return exceptionHandling(e);
+        }
+    }
 
 
     private ResponseEntity<String> exceptionHandling(Exception e) {
         e.printStackTrace();
         return new ResponseEntity<String>("Error : " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
+
+
+
 }

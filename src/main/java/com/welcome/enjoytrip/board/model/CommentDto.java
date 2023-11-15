@@ -1,4 +1,4 @@
-package com.welcome.enjoytrip.comment.dto;
+package com.welcome.enjoytrip.board.model;
 
 import lombok.*;
 
