@@ -1,10 +1,14 @@
 package com.welcome.enjoytrip.location.dto;
 
-import lombok.Data;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 public class LocationDto {
     private long location_id;
     private long tourboard_id;

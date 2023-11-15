@@ -1,10 +1,14 @@
-package com.welcome.enjoytrip.board.dto;
+package com.welcome.enjoytrip.board.model;
 
-import lombok.Data;
+import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
-@Data
+@Getter @Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
 public class BoardDto {
     private long board_id;
     private long user_id;
@@ -12,4 +16,6 @@ public class BoardDto {
     private String board_content;
     private int board_views;
     private LocalDateTime board_regDate;
+    private List<FileInfoDto> fileInfos;
+
 }

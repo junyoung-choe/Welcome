@@ -1,11 +1,15 @@
 package com.welcome.enjoytrip.member.dto;
 
-import lombok.Data;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
 
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 public class MemberDto {
     private long user_id;
     private String user_account;

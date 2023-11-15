@@ -1,10 +1,14 @@
 package com.welcome.enjoytrip.comment.dto;
 
-import lombok.Data;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 public class CommentDto {
     private long comment_id;
     private long user_id;

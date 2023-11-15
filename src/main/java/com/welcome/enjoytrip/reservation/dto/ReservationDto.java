@@ -1,10 +1,14 @@
 package com.welcome.enjoytrip.reservation.dto;
 
-import lombok.Data;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 public class ReservationDto {
     private long reservation_id;
     private long user_id;

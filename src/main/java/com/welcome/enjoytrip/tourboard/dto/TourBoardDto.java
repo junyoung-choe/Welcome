@@ -1,10 +1,14 @@
 package com.welcome.enjoytrip.tourboard.dto;
 
-import lombok.Data;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 public class TourBoardDto {
     private long tourboard_id;
     private long user_id;
