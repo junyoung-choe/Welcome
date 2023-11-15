@@ -1,6 +1,6 @@
-package com.welcome.enjoytrip.member.mapper;
+package com.welcome.enjoytrip.member.model.mapper;
 
-import com.welcome.enjoytrip.member.dto.MemberDto;
+import com.welcome.enjoytrip.member.model.MemberDto;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper

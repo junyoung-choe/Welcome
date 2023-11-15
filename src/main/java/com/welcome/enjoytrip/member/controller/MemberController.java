@@ -1,7 +1,7 @@
 package com.welcome.enjoytrip.member.controller;
 
-import com.welcome.enjoytrip.member.dto.MemberDto;
-import com.welcome.enjoytrip.member.service.MemberService;
+import com.welcome.enjoytrip.member.model.MemberDto;
+import com.welcome.enjoytrip.member.model.service.MemberService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

@@ -5,7 +5,7 @@
 
 
 <mapper
-	namespace="com.welcome.enjoytrip.member.mapper.MemberMapper">
+	namespace="com.welcome.enjoytrip.member.model.mapper.MemberMapper">
 
 	<insert id="join" parameterType="memberdto">
 		insert into user(user_account, user_password, user_role, user_name, user_phone, user_regDate, user_cash)
@@ -15,7 +15,7 @@
 	<select id="login" resultType="memberdto" parameterType="memberdto">
 		select *
 		from user
-		where user_id = #{user_id} and user_password = #{user_password}
+		where user_account = #{user_account} and user_password = #{user_password}
 	</select>
 
 	<select id="mypage" resultType="memberdto" parameterType="string">

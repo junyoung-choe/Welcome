@@ -1,6 +1,6 @@
-package com.welcome.enjoytrip.member.service;
+package com.welcome.enjoytrip.member.model.service;
 
-import com.welcome.enjoytrip.member.dto.MemberDto;
+import com.welcome.enjoytrip.member.model.MemberDto;
 
 // 로그인 회원가입 회원탈퇴 회원페이지 비밀번호변경
 public interface MemberService {

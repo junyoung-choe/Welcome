@@ -1,7 +1,7 @@
-package com.welcome.enjoytrip.member.service;
+package com.welcome.enjoytrip.member.model.service;
 
-import com.welcome.enjoytrip.member.dto.MemberDto;
-import com.welcome.enjoytrip.member.mapper.MemberMapper;
+import com.welcome.enjoytrip.member.model.MemberDto;
+import com.welcome.enjoytrip.member.model.mapper.MemberMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
