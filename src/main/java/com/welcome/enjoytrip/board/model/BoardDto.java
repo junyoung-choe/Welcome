@@ -16,6 +16,7 @@ public class BoardDto {
     private String board_content;
     private int board_views;
     private LocalDateTime board_regDate;
-    private List<FileInfoDto> fileInfos;
+//    private List<FileInfoDto> fileInfos;
+    private List<CommentDto> commentDtos;
 
 }
