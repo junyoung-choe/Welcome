@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper
+	namespace="com.welcome.enjoytrip.member.model.mapper.MemberMapper">
+
+	<insert id="join" parameterType="memberdto">
+		insert into user(user_account, user_password, user_role, user_name, user_phone, user_regDate, user_cash)
+		values(#{user_account},#{user_password},#{user_role},#{user_name}, #{user_phone}, now(), #{user_cash})
+	</insert>
+
+	<select id="login" resultType="memberdto" parameterType="memberdto">
+		select *
+		from user
+		where user_account = #{user_account} and user_password = #{user_password}
+	</select>
+
+	<select id="mypage" resultType="memberdto" parameterType="string">
+		select *
+		from user
+		where user_id = #{user_id}
+	</select>
+
+	<update id="changePW" parameterType="memberdto">
+		update user set user_password =
+		#{user_password}
+		where user_id = #{user_id}
+	</update>
+
+	<delete id="delete" parameterType="string">
+		delete from user
+		where user_id = #{user_id}
+	</delete>
+</mapper>
