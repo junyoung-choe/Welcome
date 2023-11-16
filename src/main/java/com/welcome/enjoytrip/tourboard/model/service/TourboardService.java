@@ -9,7 +9,7 @@ public interface TourboardService {
 
     public TourboardListDto listTourboard(Map<String, String> map) throws Exception;
 
-    public void tourboardWrite(TourBoardDto tourBoardDto);
+    public void tourboardWrite(TourBoardDto tourBoardDto) throws Exception;
 
     public TourBoardDto tourboardView(int tourboard_id);
     public List<TourBoardDto> tourboardList();

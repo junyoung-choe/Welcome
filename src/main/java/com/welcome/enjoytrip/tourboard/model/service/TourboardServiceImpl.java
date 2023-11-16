@@ -46,13 +46,17 @@ public class TourboardServiceImpl implements TourboardService {
     }
 
     @Override
-    public void tourboardWrite(TourBoardDto tourBoardDto) {
+    public void tourboardWrite(TourBoardDto tourBoardDto) throws Exception {
         tourboardMapper.tourboardWrite(tourBoardDto);
+        tourboardMapper.registerFile(tourBoardDto);
     }
 
     @Override
     public TourBoardDto tourboardView(int tourboard_id) {
-        return tourboardMapper.tourboardView(tourboard_id);
+        TourBoardDto tourBoardDto;
+        tourBoardDto = tourboardMapper.tourboardView(tourboard_id);
+        tourBoardDto.setFileInfos(tourboardMapper.fileInfoList(tourboard_id));
+        return tourBoardDto;
     }
 
     @Override
