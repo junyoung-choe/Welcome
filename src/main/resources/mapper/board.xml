@@ -97,7 +97,7 @@
     </select>
 
     <select id="getBoard" parameterType="int" resultType="boardDto">
-        select b.board_id, b.user_id, b.board_title, b.board_content, b.board_views, b.board_regDate
+        select b.board_id, b.user_id, b.board_title, b.board_content, b.board_views, b.board_regDate, m.user_name
         from board b, user m
         where b.user_id = m.user_id
         and b.board_id = #{board_id}
