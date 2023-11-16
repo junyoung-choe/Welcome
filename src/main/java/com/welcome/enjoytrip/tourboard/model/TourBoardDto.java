@@ -1,4 +1,4 @@
-package com.welcome.enjoytrip.tourboard.dto;
+package com.welcome.enjoytrip.tourboard.model;
 
 import lombok.*;
 
@@ -22,7 +22,7 @@ public class TourBoardDto {
     private int tourboard_salePrice;
     private int tourboard_stock;
     private int tourboard_stockCnt;
-    private int tourboard_finishedYn;
+    private boolean tourboard_fnishedYn;
     private String tourboard_departure;
     private String tourboard_destination;
     private String tourboard_views;

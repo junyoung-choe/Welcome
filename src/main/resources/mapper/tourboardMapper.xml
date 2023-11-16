@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.welcome.enjoytrip.tourboard.model.mapper.TourboardMapper">
+
+    <insert id="tourboardWrite" parameterType="tourboardDto">
+        insert into tourboard (user_id, tourboard_tourName, tourboard_keyword, tourboard_regDate, tourboard_startDate, tourboard_endDate, tourboard_deadLineDate
+        , tourboard_price, tourboard_salePrice, tourboard_stock, tourboard_stockCnt, tourboard_fnishedYn, tourboard_departure, tourboard_destination, tourboard_views)
+        values (#{user_id}, #{tourboard_tourName}, #{tourboard_keyword}, now(), now(), now(), now()
+        , #{tourboard_price}, #{tourboard_salePrice}, #{tourboard_stock}, #{tourboard_stockCnt}, #{tourboard_fnishedYn}, #{tourboard_departure}, #{tourboard_destination}, #{tourboard_views})
+    </insert>
+
+
+    <select id="tourboardView" parameterType="Integer" resultType="tourboardDto" >
+        select tourboard_id, user_id, tourboard_tourName, tourboard_keyword, tourboard_regDate, tourboard_startDate, tourboard_endDate, tourboard_deadLineDate
+             , tourboard_price, tourboard_salePrice, tourboard_stock, tourboard_stockCnt, tourboard_fnishedYn, tourboard_departure, tourboard_destination, tourboard_views
+        from tourboard
+        where tourboard_id = #{tourboard_id}
+    </select>
+
+    <select id="tourboardList" resultType="tourboardDto">
+        select tourboard_id, user_id, tourboard_tourName, tourboard_keyword, tourboard_regDate, tourboard_startDate, tourboard_endDate, tourboard_deadLineDate
+             , tourboard_price, tourboard_salePrice, tourboard_stock, tourboard_stockCnt, tourboard_fnishedYn, tourboard_departure, tourboard_destination, tourboard_views
+        from tourboard
+    </select>
+
+
+    <update id="tourboardPatch" parameterType="tourboardDto">
+        update tourboard
+        set tourboard_stockCnt = #{tourboard_stockCnt} + 1
+        where tourboard_id = #{tourboard_id}
+    </update>
+
+    <update id="tourboardPut" parameterType="tourboardDto">
+        update tourboard
+        set tourboard_tourName = #{tourboard_tourName},
+            tourboard_keyword = #{tourboard_keyword},
+            tourboard_regDate = #{tourboard_regDate},
+            tourboard_startDate = #{tourboard_startDate},
+            tourboard_endDate = #{tourboard_endDate},
+            tourboard_deadLineDate = #{tourboard_deadLineDate},
+            tourboard_price = #{tourboard_price},
+            tourboard_salePrice = #{tourboard_salePrice},
+            tourboard_stock = #{tourboard_stock},
+            tourboard_stockCnt = #{tourboard_stockCnt},
+            tourboard_fnishedYn = #{tourboard_fnishedYn},
+            tourboard_departure = #{tourboard_departure},
+            tourboard_destination = #{tourboard_destination},
+            tourboard_views = #{tourboard_views}
+        where tourboard_id = #{tourboard_id}
+    </update>
+
+    <delete id="tourboardDelete" >
+        delete from tourboard
+        where tourboard_id = #{tourboard_id}
+    </delete>
+
+</mapper>

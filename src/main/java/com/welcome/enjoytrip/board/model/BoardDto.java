@@ -16,7 +16,11 @@ public class BoardDto {
     private String board_content;
     private int board_views;
     private LocalDateTime board_regDate;
+    // join을 위한 변수
+    private String user_name;
+
 //    private List<FileInfoDto> fileInfos;
     private List<CommentDto> commentDtos;
+
 
 }
