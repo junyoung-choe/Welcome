@@ -10,12 +10,32 @@ const router = createRouter({
       component: TheMainView,
     },
     {
-      path: '/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import('../views/AboutView.vue'),
+      path: '/board',
+      name: 'board',
+      component: () => import('../views/TheBoardView.vue'),
+      redirect: { name: 'board-list' },
+      children: [
+        {
+          path: 'list',
+          name: 'board-list',
+          component: () => import('../components/board/BoardList.vue'),
+        },
+        {
+          path: 'view/:board_id',
+          name: 'board-view',
+          component: () => import('../components/board/BoardView.vue'),
+        },
+        {
+          path: 'modify/:board_id',
+          name: 'board-modify',
+          component: () => import('../components/board/BoardModify.vue'),
+        },
+        {
+          path: 'write',
+          name: 'board-write',
+          component: () => import('../components/board/BoardWrite.vue'),
+        },
+      ],
     },
     {
       path: '/map',
