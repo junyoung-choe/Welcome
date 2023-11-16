@@ -10,7 +10,7 @@
     </insert>
 
     <select id="locationList" resultType="locationDto">
-        select tourboard_id, location_name, location_startDate, location_endDate
+        select tourboard_id, user_id, location_name, location_startDate, location_endDate
         from location
     </select>
 
@@ -19,7 +19,6 @@
         set location_name = #{location_name},
             location_startDate = #{location_startDate},
             location_endDate = #{location_endDate}
-
         where location_id = #{location_id}
     </update>
 

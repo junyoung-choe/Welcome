@@ -9,7 +9,7 @@
 		<typeAlias type="com.welcome.enjoytrip.member.model.MemberDto" alias="memberdto" />
 		<typeAlias type="com.welcome.enjoytrip.board.model.CommentDto" alias="commentdto" />
 		<typeAlias type="com.welcome.enjoytrip.location.model.LocationDto" alias="locationdto" />
-		<typeAlias type="com.welcome.enjoytrip.reservation.dto.ReservationDto" alias="reservationdto" />
+		<typeAlias type="com.welcome.enjoytrip.reservation.model.ReservationDto" alias="reservationdto" />
 		<typeAlias type="com.welcome.enjoytrip.tourboard.model.TourBoardDto" alias="tourboarddto" />
 	</typeAliases>
 

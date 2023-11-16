@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.welcome.enjoytrip.reservation.model.mapper.ReservationMapper">
+
+    <insert id="reservationWrite" parameterType="reservationDto">
+        insert into reservation (user_id, tourboard_id, reservation_regDate, reservation_yn)
+        values (#{user_id}, #{tourboard_id}, now(), #{reservation_yn} )
+    </insert>
+
+    <select id="reservationList" resultType="reservationDto">
+        select reservation_id, user_id, tourboard_id, reservation_regDate, reservation_yn
+        from reservation
+    </select>
+
+    <update id="reservationPut" parameterType="reservationDto">
+        update reservation
+        set user_id = #{user_id},
+            tourboard_id = #{tourboard_id},
+            reservation_regDate = #{reservation_regDate},
+            reservation_yn = #{reservation_yn}
+
+        where reservation_id = #{reservation_id}
+    </update>
+
+    <delete id="reservationDelete" parameterType="Integer" >
+        delete from reservation
+        where reservation_id = #{reservation_id}
+    </delete>
+</mapper>
