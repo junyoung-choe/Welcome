@@ -1,4 +1,4 @@
-package com.welcome.enjoytrip.location.dto;
+package com.welcome.enjoytrip.location.model;
 
 import lombok.*;
 
