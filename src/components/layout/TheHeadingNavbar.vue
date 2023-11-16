@@ -1,6 +1,6 @@
 <script setup>
-import { useMenuStore } from '@/stores/menu';
-import { storeToRefs } from 'pinia';
+import { useMenuStore } from "@/stores/menu";
+import { storeToRefs } from "pinia";
 
 const menuStore = useMenuStore();
 
@@ -8,7 +8,7 @@ const { menuList } = storeToRefs(menuStore);
 const { changeMenuState } = menuStore;
 
 const logout = () => {
-  console.log('로그아웃!!!!');
+  console.log("로그아웃!!!!");
   changeMenuState();
 };
 </script>
@@ -43,6 +43,9 @@ const logout = () => {
           </li>
           <li class="nav-item">
             <router-link to="/board" class="nav-link">소통</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link to="/map" class="nav-link">요즘국내여행</router-link>
           </li>
           <li class="nav-item">
             <!-- <router-link :to="{ name: 'estations' }" class="nav-link">전기차충전소</router-link> -->
