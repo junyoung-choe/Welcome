@@ -51,7 +51,7 @@
         where tourboard_id = #{tourboard_id}
     </update>
 
-    <delete id="tourboardDelete" >
+    <delete id="tourboardDelete" parameterType="Integer">
         delete from tourboard
         where tourboard_id = #{tourboard_id}
     </delete>

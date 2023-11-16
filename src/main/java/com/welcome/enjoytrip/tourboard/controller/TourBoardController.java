@@ -103,9 +103,4 @@ public class TourBoardController {
         ResponseEntity<Map<String, Object>> res = new ResponseEntity(map, HttpStatus.OK);
         return res;
     }
-
-
-
-
-
 }
