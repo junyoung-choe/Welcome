@@ -58,9 +58,7 @@
 
     <sql id="search">
         <if test="word != null and word != ''">
-            <if test="key == 'keyword'">
-                and tourboard_keyword like concat('%', #{word}, '%')
-            </if>
+            and tourboard_keyword like concat('%', #{word}, '%')
         </if>
     </sql>
 

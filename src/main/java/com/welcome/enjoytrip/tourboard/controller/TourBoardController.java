@@ -67,6 +67,7 @@ public class TourBoardController {
     @GetMapping
     public ResponseEntity<?> tourboardList(@RequestParam Map<String, String> map) {
         try {
+            System.out.println(map);
             TourboardListDto tourboardListDto = tourboardService.listTourboard(map);
             HttpHeaders header = new HttpHeaders();
             header.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
