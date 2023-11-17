@@ -3,6 +3,7 @@ import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import { listTourBoard } from '@/api/tourboard.js';
 
+import VSelect from '../common/VSelect.vue';
 import TourBoardListItem from '@/components/tour/item/TourBoardListItem.vue';
 import VPageNavigation from '@/components/common/VPageNavigation.vue';
 
@@ -49,6 +50,12 @@ const onPageChange = (val) => {
 </script>
 
 <template>
+  <form class="d-flex" @submit.prevent="getTourBoardList">
+    <div class="input-group input-group-sm ms-1">
+      <input type="text" class="form-control" v-model="param.word" placeholder="검색어..." />
+      <button class="btn btn-dark" type="submit">검색</button>
+    </div>
+  </form>
   <div>
     <TourBoardListItem
       v-for="tourBoard in tourBoards"
