@@ -20,5 +20,7 @@ public interface TourboardMapper {
     void tourboardPatch(TourBoardDto tourBoardDto);
     void tourboardPut(TourBoardDto tourBoardDto);
     void tourboardDelete(int tourboard_id);
+    List<TourBoardDto> getDepartureList() throws Exception;
+    List<TourBoardDto> getDestinationList(String depa) throws Exception;
 
 }
