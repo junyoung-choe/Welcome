@@ -2,12 +2,15 @@ package com.welcome.enjoytrip.tourboard.controller;
 
 import com.welcome.enjoytrip.tourboard.model.TourBoardDto;
 import com.welcome.enjoytrip.tourboard.model.service.TourboardService;
+import com.welcome.enjoytrip.tourboard.model.TourboardListDto;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.nio.charset.Charset;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -47,19 +50,30 @@ public class TourBoardController {
         ResponseEntity<Map<String, Object>> res = new ResponseEntity(map, HttpStatus.OK);
         return res;
     }
+//    @GetMapping
+//    public ResponseEntity<?> tourboardList() {
+//        Map<String, Object> map = new HashMap<>();
+//        try {
+//            List<TourBoardDto> list = tourboardService.tourboardList();
+//            map.put("resmsg", "리스트 불러오기 성공");
+//            map.put("tourboards", list);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            map.put("resmsg", "리스트 불러오기 실패");
+//        }
+//        ResponseEntity<Map<String, Object>> res = new ResponseEntity(map, HttpStatus.OK);
+//        return res;
+//    }
     @GetMapping
-    public ResponseEntity<?> tourboardList() {
-        Map<String, Object> map = new HashMap<>();
+    public ResponseEntity<?> tourboardList(@RequestParam Map<String, String> map) {
         try {
-            List<TourBoardDto> list = tourboardService.tourboardList();
-            map.put("resmsg", "리스트 불러오기 성공");
-            map.put("tourboards", list);
+            TourboardListDto tourboardListDto = tourboardService.listTourboard(map);
+            HttpHeaders header = new HttpHeaders();
+            header.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+            return ResponseEntity.ok().headers(header).body(tourboardListDto);
         } catch (Exception e) {
-            e.printStackTrace();
-            map.put("resmsg", "리스트 불러오기 실패");
+            return exceptionHandling(e);
         }
-        ResponseEntity<Map<String, Object>> res = new ResponseEntity(map, HttpStatus.OK);
-        return res;
     }
 
     @PatchMapping
@@ -102,5 +116,10 @@ public class TourBoardController {
         }
         ResponseEntity<Map<String, Object>> res = new ResponseEntity(map, HttpStatus.OK);
         return res;
+    }
+
+    private ResponseEntity<String> exceptionHandling(Exception e) {
+        e.printStackTrace();
+        return new ResponseEntity<String>("Error : " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

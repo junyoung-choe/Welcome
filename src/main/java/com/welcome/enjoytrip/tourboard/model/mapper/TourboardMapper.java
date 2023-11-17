@@ -3,9 +3,17 @@ package com.welcome.enjoytrip.tourboard.model.mapper;
 import com.welcome.enjoytrip.tourboard.model.TourBoardDto;
 import org.apache.ibatis.annotations.Mapper;
 
-import java.util.List;
+import java.sql.SQLException;
+import java.util.*;
 @Mapper
 public interface TourboardMapper {
+//    add pagination
+    List<TourBoardDto> listTourBoard(Map<String, Object> param) throws SQLException;
+
+    int getTotalTourCount(Map<String, Object> param) throws SQLException;
+//
+
+
     void tourboardWrite(TourBoardDto tourBoardDto);
     TourBoardDto tourboardView(int tourboard_id);
     List<TourBoardDto> tourboardList();

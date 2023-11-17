@@ -1,10 +1,13 @@
 package com.welcome.enjoytrip.tourboard.model.service;
 
 import com.welcome.enjoytrip.tourboard.model.TourBoardDto;
+import com.welcome.enjoytrip.tourboard.model.TourboardListDto;
 
-import java.util.List;
+import java.util.*;
 
 public interface TourboardService {
+
+    public TourboardListDto listTourboard(Map<String, String> map) throws Exception;
 
     public void tourboardWrite(TourBoardDto tourBoardDto);
 
