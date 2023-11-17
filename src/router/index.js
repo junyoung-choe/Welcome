@@ -53,6 +53,11 @@ const router = createRouter({
           name: 'tour-list',
           component: () => import('../components/tour/TourBoardList.vue'),
         },
+        {
+          path: 'write',
+          name: 'tour-wirte',
+          component: () => import('../components/tour/TourBoardWrite.vue'),
+        },
       ],
     },
   ],
