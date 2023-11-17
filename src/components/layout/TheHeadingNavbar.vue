@@ -50,9 +50,6 @@ const logout = () => {
           <li class="nav-item">
             <router-link to="/tour" class="nav-link">여행상품</router-link>
           </li>
-          <li class="nav-item">
-            <!-- <router-link :to="{ name: 'estations' }" class="nav-link">전기차충전소</router-link> -->
-          </li>
         </ul>
         <!-- <form class="d-flex" role="search">
           <input

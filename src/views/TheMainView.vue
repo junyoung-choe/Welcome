@@ -1,8 +1,10 @@
-<script setup></script>
+<script setup>
+import TourMain from '../components/tourMain/TourMain.vue';
+</script>
 
 <template>
   <div>
-    <p>this is main page</p>
+    <TourMain />
   </div>
 </template>
 

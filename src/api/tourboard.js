@@ -6,4 +6,12 @@ function listTourBoard(param, success, fail) {
   local.get(`/tourboard`, { params: param }).then(success).catch(fail);
 }
 
-export { listTourBoard };
+function listDeparture(success, fail) {
+  local.get(`/tourboard/departureList`).then(success).catch(fail);
+}
+
+function listDestination(param, success, fail) {
+  local.get(`/tourboard/destinationList`, { params: param }).then(success).catch(fail);
+}
+
+export { listTourBoard, listDeparture, listDestination };
