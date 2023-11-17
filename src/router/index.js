@@ -46,6 +46,14 @@ const router = createRouter({
       path: '/tour',
       name: 'tour',
       component: () => import('../views/TheTourView.vue'),
+      redirect: { name: 'tour-list' },
+      children: [
+        {
+          path: 'list',
+          name: 'tour-list',
+          component: () => import('../components/tour/TourBoardList.vue'),
+        },
+      ],
     },
   ],
 });
