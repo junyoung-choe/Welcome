@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.nio.charset.Charset;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -117,6 +118,16 @@ public class TourBoardController {
         }
         ResponseEntity<Map<String, Object>> res = new ResponseEntity(map, HttpStatus.OK);
         return res;
+    }
+
+    @GetMapping("/departureList")
+    public ResponseEntity<List<TourBoardDto>> departureList() throws Exception {
+        return new ResponseEntity<List<TourBoardDto>>(tourboardService.getDepartureList(), HttpStatus.OK);
+    }
+
+    @GetMapping("/destinationList")
+    public ResponseEntity<List<TourBoardDto>> destinationList(@RequestParam("depa") String depa) throws Exception {
+        return new ResponseEntity<List<TourBoardDto>>(tourboardService.getDestinationList(depa), HttpStatus.OK);
     }
 
     private ResponseEntity<String> exceptionHandling(Exception e) {

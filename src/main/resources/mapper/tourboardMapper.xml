@@ -79,4 +79,14 @@
         </where>
     </select>
 
+    <select id="getDepartureList" resultType="tourBoardDto">
+        select tourboard_id, tourboard_departure
+        from tourboard
+    </select>
+
+    <select id="getDestinationList" parameterType="string" resultType="tourBoardDto">
+        select tourboard_id, tourboard_destination
+        from tourboard
+        where tourboard_departure = #{depa}
+    </select>
 </mapper>
