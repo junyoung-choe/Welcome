@@ -26,6 +26,6 @@ public class TourBoardDto {
     private boolean tourboard_fnishedYn;
     private String tourboard_departure;
     private String tourboard_destination;
-    private String tourboard_views;
+    private int tourboard_views;
     private List<FileInfoDto> fileInfos;
 }

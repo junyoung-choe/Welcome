@@ -35,7 +35,7 @@ public class TourBoardController {
         this.tourboardService = tourboardService;
     }
     @PostMapping
-    public ResponseEntity<?> tourboardWrite(@RequestBody TourBoardDto tourBoardDto, @RequestParam("upfile") MultipartFile[] files) {
+    public ResponseEntity<?> tourboardWrite(@ModelAttribute TourBoardDto tourBoardDto, @RequestParam("upfile") MultipartFile[] files) {
         Map<String, Object> map = new HashMap<>();
         try {
 //            logger.debug("uploadPath : {}, uploadImagePath : {}, uploadFilePath : {}", uploadPath, uploadImagePath, uploadFilePath);
@@ -46,7 +46,7 @@ public class TourBoardController {
 //			String realPath = servletContext.getRealPath(UPLOAD_PATH);
 //			String realPath = servletContext.getRealPath("/resources/img");
                 String today = new SimpleDateFormat("yyMMdd").format(new Date());
-                String saveFolder = uploadPath + File.separator + today;
+                String saveFolder = uploadImagePath + File.separator + today;
 //                logger.debug("저장 폴더 : {}", saveFolder);
                 File folder = new File(saveFolder);
                 if (!folder.exists())
