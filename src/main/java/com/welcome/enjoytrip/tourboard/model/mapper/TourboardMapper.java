@@ -22,5 +22,6 @@ public interface TourboardMapper {
     void tourboardDelete(int tourboard_id);
     List<TourBoardDto> getDepartureList() throws Exception;
     List<TourBoardDto> getDestinationList(String depa) throws Exception;
+    List<TourBoardDto> getTourSearchList(String depa, String dest) throws Exception;
 
 }

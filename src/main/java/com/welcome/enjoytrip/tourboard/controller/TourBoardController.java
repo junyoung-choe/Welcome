@@ -130,6 +130,11 @@ public class TourBoardController {
         return new ResponseEntity<List<TourBoardDto>>(tourboardService.getDestinationList(depa), HttpStatus.OK);
     }
 
+    @GetMapping("/tourSearchList")
+    public ResponseEntity<List<TourBoardDto>> tourSearchList(@RequestParam("depa") String depa, @RequestParam("dest") String dest) throws Exception {
+        return new ResponseEntity<List<TourBoardDto>>(tourboardService.getTourSearchList(depa, dest), HttpStatus.OK);
+    }
+
     private ResponseEntity<String> exceptionHandling(Exception e) {
         e.printStackTrace();
         return new ResponseEntity<String>("Error : " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
