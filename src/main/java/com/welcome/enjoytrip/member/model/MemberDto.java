@@ -20,4 +20,6 @@ public class MemberDto {
     private LocalDateTime user_regDate;
     private int user_cash;
     private int user_mileage;
+
+    private String refreshToken;
 }

@@ -10,4 +10,10 @@ public interface MemberService {
     public int changePW(MemberDto memberDto);
     public int delete(String user_id);
 
+    // jwt
+
+    void saveRefreshToken(String userId, String refreshToken) throws Exception;
+    Object getRefreshToken(String userId) throws Exception;
+    void deleRefreshToken(String userId) throws Exception;
+
 }
