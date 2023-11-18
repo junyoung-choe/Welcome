@@ -16,6 +16,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/member")
 @Slf4j
+@CrossOrigin(origins = "*")
 public class MemberController {
 
     private final MemberService memberService;
@@ -47,13 +48,13 @@ public class MemberController {
         try {
             MemberDto loginUser = memberService.login(memberDto);
             if(loginUser != null) {
-                String accessToken = jwtUtil.createAccessToken(Long.toString(loginUser.getUser_id()));
-                String refreshToken = jwtUtil.createRefreshToken(Long.toString(loginUser.getUser_id()));
+                String accessToken = jwtUtil.createAccessToken(loginUser.getUser_id());
+                String refreshToken = jwtUtil.createRefreshToken(loginUser.getUser_id());
                 log.debug("access token : {}", accessToken);
-                log.debug("refresh token : {}", refreshToken);
+                log.debug("access token : {}", accessToken);
 
 //				발급받은 refresh token을 DB에 저장.
-                memberService.saveRefreshToken(Long.toString(loginUser.getUser_id()), refreshToken);
+                memberService.saveRefreshToken(loginUser.getUser_id(), refreshToken);
 
 //				JSON으로 token 전달.
                 map.put("access-token", accessToken);
@@ -154,6 +155,7 @@ public class MemberController {
 //				로그인 사용자 정보.
                 MemberDto memberDto = memberService.mypage(user_id);
                 resultMap.put("userInfo", memberDto);
+//                log.info(memberDto.toString());
                 status = HttpStatus.OK;
             } catch (Exception e) {
                 log.error("정보조회 실패 : {}", e);
@@ -193,8 +195,8 @@ public class MemberController {
         String token = request.getHeader("refreshToken");
         log.debug("token : {}, memberDto : {}", token, memberDto);
         if (jwtUtil.checkToken(token)) {
-            if (token.equals(memberService.getRefreshToken(Long.toString(memberDto.getUser_id())))) {
-                String accessToken = jwtUtil.createAccessToken(Long.toString(memberDto.getUser_id()));
+            if (token.equals(memberService.getRefreshToken(memberDto.getUser_id()))) {
+                String accessToken = jwtUtil.createAccessToken(memberDto.getUser_id());
                 log.debug("token : {}", accessToken);
                 log.debug("정상적으로 액세스토큰 재발급!!!");
                 resultMap.put("access-token", accessToken);
