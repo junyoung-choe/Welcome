@@ -24,5 +24,7 @@ public interface TourboardService {
 
     public List<TourBoardDto> getDestinationList(String depa) throws Exception;
 
+    public List<TourBoardDto> getTourSearchList(String depa, String dest) throws Exception;
+
 
 }

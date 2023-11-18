@@ -85,5 +85,10 @@ public class TourboardServiceImpl implements TourboardService {
         return tourboardMapper.getDestinationList(depa);
     }
 
+    @Override
+    public List<TourBoardDto> getTourSearchList(String depa, String dest) throws Exception {
+        return tourboardMapper.getTourSearchList(depa, dest);
+    }
+
 
 }

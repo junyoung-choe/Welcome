@@ -89,4 +89,10 @@
         from tourboard
         where tourboard_departure = #{depa}
     </select>
+
+    <select id="getTourSearchList" parameterType="string" resultType="tourBoardDto">
+        select *
+        from tourboard
+        where tourboard_departure = #{depa} and tourboard_destination = #{dest}
+    </select>
 </mapper>
