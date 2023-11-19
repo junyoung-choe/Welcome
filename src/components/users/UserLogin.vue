@@ -27,6 +27,12 @@ const login = async () => {
   }
   router.push("/");
 };
+
+const goRegist = () => {
+  router.push({
+    path: "join",
+  });
+};
 </script>
 
 <template>
@@ -70,7 +76,11 @@ const login = async () => {
             >
               로그인
             </button>
-            <button type="button" class="btn btn-outline-success ms-1 mb-3">
+            <button
+              type="button"
+              class="btn btn-outline-success ms-1 mb-3"
+              @click="goRegist"
+            >
               회원가입
             </button>
           </div>

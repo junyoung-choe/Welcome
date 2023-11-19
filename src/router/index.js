@@ -120,6 +120,11 @@ const router = createRouter({
             }
           },
         },
+        {
+          path: "detail/:tourboard_id",
+          name: "tour-detail",
+          component: () => import("../components/tour/TourBoardView.vue"),
+        },
       ],
     },
   ],
