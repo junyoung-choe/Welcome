@@ -11,15 +11,26 @@ const onSelect = () => {
 </script>
 
 <template>
-  <select
-    v-model="key"
-    class="form-select form-select-sm w-50"
-    @change="onSelect"
-  >
+  <select v-model="key" class="select-box" @change="onSelect" onfocus="">
+    <option value="" disabled selected hidden>선택</option>
     <option v-for="option in selectOption" :key="option" :value="option">
       {{ option }}
     </option>
   </select>
 </template>
 
-<style scoped></style>
+<style scoped>
+.select-box {
+  /* border-radius: 15px; */
+  border: none;
+  padding: 10px;
+  margin-bottom: 10px;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.select-box:focus {
+  outline: none;
+}
+</style>

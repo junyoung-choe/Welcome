@@ -56,30 +56,48 @@ const sortListCheap = () => {
 </script>
 
 <template>
-  <button @click="sortListCheap">낮은가격순</button>
-  <form class="d-flex" @submit.prevent="getTourBoardList">
-    <div class="input-group input-group-sm ms-1">
-      <input
-        type="text"
-        class="form-control"
-        v-model="param.word"
-        placeholder="검색어..."
-      />
-      <button class="btn btn-dark" type="submit">검색</button>
+  <div class="main">
+    <div class="section-left">
+      <p>asdasd</p>
     </div>
-  </form>
-  <div>
-    <TourBoardListItem
-      v-for="tourBoard in tourBoards"
-      :key="tourBoard.tourboard_id"
-      :tourBoard="tourBoard"
-    />
+    <div class="section-right">
+      <button @click="sortListCheap">낮은가격순</button>
+      <form class="d-flex" @submit.prevent="getTourBoardList">
+        <div class="input-group input-group-sm ms-1">
+          <input
+            type="text"
+            class="form-control"
+            v-model="param.word"
+            placeholder="검색어..."
+          />
+          <button class="btn btn-dark" type="submit">검색</button>
+        </div>
+      </form>
+      <div>
+        <TourBoardListItem
+          v-for="tourBoard in tourBoards"
+          :key="tourBoard.tourboard_id"
+          :tourBoard="tourBoard"
+        />
+      </div>
+      <VPageNavigation
+        :current-page="currentPage"
+        :total-page="totalPage"
+        @pageChange="onPageChange"
+      ></VPageNavigation>
+    </div>
   </div>
-  <VPageNavigation
-    :current-page="currentPage"
-    :total-page="totalPage"
-    @pageChange="onPageChange"
-  ></VPageNavigation>
 </template>
 
-<style scoped></style>
+<style scoped>
+.main {
+  display: flex;
+}
+.section-left {
+  flex-grow: 1;
+}
+
+.section-right {
+  flex-grow: 1;
+}
+</style>

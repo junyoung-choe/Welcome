@@ -9,8 +9,6 @@ const destinationList = ref([]);
 const depa = ref("");
 const dest = ref("");
 
-const tourList = ref([]);
-
 onMounted(() => {
   getDepartureList();
 });
@@ -67,16 +65,49 @@ const onChangeDestination = (val) => {
             @onKeySelect="onChangeDestination"
           />
         </div>
-        <div>
-          <router-link
-            :to="`/tour/toursearchresult/${depa.value}/${dest.value}`"
-            >검색</router-link
-          >
-        </div>
+        <router-link
+          class="search-link"
+          :to="`/tour/toursearchresult/${depa.value}/${dest.value}`"
+          >검색</router-link
+        >
       </div>
     </div>
 
-    <div class="slide-img"></div>
+    <div
+      id="carouselExampleControls"
+      class="carousel slide w-50"
+      data-bs-ride="carousel"
+    >
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img src="src\img\winter.png" class="d-block w-100" alt="..." />
+        </div>
+        <div class="carousel-item">
+          <img src="src\img\winter.png" class="d-block w-100" alt="..." />
+        </div>
+        <div class="carousel-item">
+          <img src="src\img\winter.png" class="d-block w-100" alt="..." />
+        </div>
+      </div>
+      <button
+        class="carousel-control-prev"
+        type="button"
+        data-bs-target="#carouselExampleControls"
+        data-bs-slide="prev"
+      >
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button
+        class="carousel-control-next"
+        type="button"
+        data-bs-target="#carouselExampleControls"
+        data-bs-slide="next"
+      >
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
   </div>
 </template>
 
@@ -86,7 +117,8 @@ const onChangeDestination = (val) => {
   padding-bottom: 40px;
   background-color: #cff0fa;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
+  align-items: center;
 }
 
 .welcome-msg > p {
@@ -95,5 +127,24 @@ const onChangeDestination = (val) => {
 }
 .select-box {
   width: 400px;
+}
+
+.submit-btn {
+  background-color: #06233a;
+  text-align: center;
+}
+
+.search-link {
+  text-align: center;
+  background-color: #06233a;
+  display: block;
+  text-decoration: none;
+  color: white;
+  padding: 10px;
+  font-size: 20px;
+}
+
+#carouselExampleControls {
+  width: 35% !important;
 }
 </style>

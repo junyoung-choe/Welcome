@@ -63,7 +63,40 @@ const moveWrite = () => {
 </script>
 
 <template>
-  <div>
+  <div class="col-md-5 offset-7 search-box">
+    <form class="d-flex" @submit.prevent="getArticleList">
+      <VSelect :selectOption="selectOption" @onKeySelect="changeKey" />
+      <div class="input-group input-group-sm ms-1">
+        <input
+          type="text"
+          class="form-control"
+          v-model="param.word"
+          placeholder="검색어"
+        />
+        <button class="btn btn-dark" type="submit">검색</button>
+      </div>
+    </form>
+  </div>
+
+  <table class="table">
+    <thead>
+      <tr class="text-center">
+        <th scope="col">글번호</th>
+        <th scope="col">제목</th>
+        <th scope="col">작성자</th>
+        <th scope="col">등록일</th>
+        <th scope="col">조회수</th>
+      </tr>
+    </thead>
+    <tbody>
+      <BoardListItem
+        v-for="board in boards"
+        :key="board.board_id"
+        :board="board"
+      />
+    </tbody>
+  </table>
+  <div style="text-align: right">
     <button
       type="button"
       class="btn btn-outline-primary btn-sm"
@@ -72,27 +105,6 @@ const moveWrite = () => {
       글쓰기
     </button>
   </div>
-  <div class="col-md-5 offset-5">
-    <form class="d-flex" @submit.prevent="getArticleList">
-      <VSelect :selectOption="selectOption" @onKeySelect="changeKey" />
-      <div class="input-group input-group-sm ms-1">
-        <input
-          type="text"
-          class="form-control"
-          v-model="param.word"
-          placeholder="검색어..."
-        />
-        <button class="btn btn-dark" type="submit">검색</button>
-      </div>
-    </form>
-  </div>
-  <div>
-    <BoardListItem
-      v-for="board in boards"
-      :key="board.board_id"
-      :board="board"
-    />
-  </div>
   <VPageNavigation
     :current-page="currentPage"
     :total-page="totalPage"
@@ -100,4 +112,14 @@ const moveWrite = () => {
   ></VPageNavigation>
 </template>
 
-<style scoped></style>
+<style scoped>
+.table {
+  width: 100%;
+  border-top: 1px solid black;
+}
+
+.search-box {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+</style>
