@@ -20,5 +20,11 @@ public interface TourboardService {
 
     public void tourboardDelete(int tourboard_id);
 
+    public List<TourBoardDto> getDepartureList() throws Exception;
+
+    public List<TourBoardDto> getDestinationList(String depa) throws Exception;
+
+    public List<TourBoardDto> getTourSearchList(String depa, String dest) throws Exception;
+
 
 }

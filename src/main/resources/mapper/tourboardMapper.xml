@@ -70,9 +70,7 @@
 
     <sql id="search">
         <if test="word != null and word != ''">
-            <if test="key == 'keyword'">
-                and tourboard_keyword like concat('%', #{word}, '%')
-            </if>
+            and tourboard_keyword like concat('%', #{word}, '%')
         </if>
     </sql>
 
@@ -92,6 +90,7 @@
             <include refid="search"></include>
         </where>
     </select>
+
 
 <!-- file 관련 -->
     <!-- tourboardmapper 에서 호출한다 tourboardWrite 와 따로 호출된다   -->
@@ -116,5 +115,23 @@
 <!--        delete from file_info-->
 <!--        where article_no = #{articleNo}-->
 <!--    </delete>-->
+
+
+    <select id="getDepartureList" resultType="tourBoardDto">
+        select tourboard_id, tourboard_departure
+        from tourboard
+    </select>
+
+    <select id="getDestinationList" parameterType="string" resultType="tourBoardDto">
+        select tourboard_id, tourboard_destination
+        from tourboard
+        where tourboard_departure = #{depa}
+    </select>
+
+    <select id="getTourSearchList" parameterType="string" resultType="tourBoardDto">
+        select *
+        from tourboard
+        where tourboard_departure = #{depa} and tourboard_destination = #{dest}
+    </select>
 
 </mapper>

@@ -79,5 +79,20 @@ public class TourboardServiceImpl implements TourboardService {
         tourboardMapper.tourboardDelete(tourboard_id);
     }
 
+    @Override
+    public List<TourBoardDto> getDepartureList() throws Exception {
+        return tourboardMapper.getDepartureList();
+    }
+
+    @Override
+    public List<TourBoardDto> getDestinationList(String depa) throws Exception {
+        return tourboardMapper.getDestinationList(depa);
+    }
+
+    @Override
+    public List<TourBoardDto> getTourSearchList(String depa, String dest) throws Exception {
+        return tourboardMapper.getTourSearchList(depa, dest);
+    }
+
 
 }
