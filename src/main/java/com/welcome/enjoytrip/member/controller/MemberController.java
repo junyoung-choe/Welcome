@@ -145,6 +145,7 @@ public class MemberController {
         return res;
     };
 
+    // vue 에서 로그인 이후에 연결된 로직으로 실행된
     // 토큰이 유효한지 확인하고 회원의 dto 를 가져온다
     @GetMapping("/info/{userId}")
     public ResponseEntity<Map<String, Object>> getInfo(
@@ -168,6 +169,7 @@ public class MemberController {
             }
         } else {
             log.error("사용 불가능 토큰!!!");
+            // vue로 throw 해버린다
             status = HttpStatus.UNAUTHORIZED;
         }
         return new ResponseEntity<Map<String, Object>>(resultMap, status);
@@ -190,6 +192,7 @@ public class MemberController {
 
     }
 
+    // vue 에서 가지고 있는 리프레쉬 토큰을 헤더에 담아서 보내고 해당 리프레쉬 토근이랑 db 리프레쉬 토큰이랑 같은지 비교하고 + 아직 유효하다면 access 토큰을 다시 발급해준
     // refresh 토큰을 확인하고 아직 유효하다면 access 토큰을 재발급 해준다
     @PostMapping("/refresh")
     public ResponseEntity<?> refreshToken(@RequestBody MemberDto memberDto, HttpServletRequest request)

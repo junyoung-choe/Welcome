@@ -90,7 +90,8 @@ public class JWTUtil {
 //			Claims 는 Map의 구현체 형태
             log.debug("claims: {}", claims);
             return true;
-        } catch (Exception e) {
+
+        } catch (Exception e) { // 이리로 오면 유효하지 않은 토큰이라는 것이다
             log.error(e.getMessage());
             return false;
         }
