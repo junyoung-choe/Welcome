@@ -54,6 +54,7 @@ public class MemberServiceImpl implements MemberService{
         Map<String, String> map = new HashMap<String, String>();
         map.put("user_id", userId);
         map.put("refreshToken", refreshToken);
+        System.out.println("여기는?" + userId + refreshToken );
         memberMapper.saveRefreshToken(map);
     }
 

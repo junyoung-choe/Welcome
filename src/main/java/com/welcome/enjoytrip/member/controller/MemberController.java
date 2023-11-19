@@ -50,11 +50,14 @@ public class MemberController {
             if(loginUser != null) {
                 String accessToken = jwtUtil.createAccessToken(loginUser.getUser_id());
                 String refreshToken = jwtUtil.createRefreshToken(loginUser.getUser_id());
+                System.out.println(loginUser.getUser_id());
                 log.debug("access token : {}", accessToken);
                 log.debug("access token : {}", accessToken);
 
 //				발급받은 refresh token을 DB에 저장.
+                System.out.println("여기 지나가냐?");
                 memberService.saveRefreshToken(loginUser.getUser_id(), refreshToken);
+                System.out.println(accessToken);
 
 //				JSON으로 token 전달.
                 map.put("access-token", accessToken);
@@ -71,6 +74,7 @@ public class MemberController {
             map.put("message", e.getMessage());
             status = HttpStatus.INTERNAL_SERVER_ERROR;
         }
+        //System.out.println(map.get("access-token"));
         return new ResponseEntity<Map<String, Object>>(map, status);
     }
 
