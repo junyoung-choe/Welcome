@@ -3,6 +3,7 @@ package com.welcome.enjoytrip.tourboard.model;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Setter
@@ -25,5 +26,6 @@ public class TourBoardDto {
     private boolean tourboard_fnishedYn;
     private String tourboard_departure;
     private String tourboard_destination;
-    private String tourboard_views;
+    private int tourboard_views;
+    private List<FileInfoDto> fileInfos;
 }

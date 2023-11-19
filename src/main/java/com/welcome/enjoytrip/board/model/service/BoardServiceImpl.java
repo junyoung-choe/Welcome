@@ -3,7 +3,6 @@ package com.welcome.enjoytrip.board.model.service;
 import com.welcome.enjoytrip.board.model.BoardDto;
 import com.welcome.enjoytrip.board.model.BoardListDto;
 import com.welcome.enjoytrip.board.model.CommentDto;
-import com.welcome.enjoytrip.board.model.FileInfoDto;
 import com.welcome.enjoytrip.board.model.mapper.BoardMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
