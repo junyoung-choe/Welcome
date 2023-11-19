@@ -48,9 +48,14 @@ endDate.value = `${props.tourBoard.tourboard_endDate[0]}/${props.tourBoard.tourb
       <div style="height: 100%; position: relative">
         <p class="price">{{ tourBoard.tourboard_price }}원</p>
         <p class="sale-price">{{ tourBoard.tourboard_salePrice }}원</p>
-        <div class="btn-box">
-          <button class="show-btn">상세보기</button>
-        </div>
+        <router-link
+          class="btn-box"
+          :to="{
+            name: 'tour-detail',
+            params: { tourboard_id: tourBoard.tourboard_id },
+          }"
+          >상세보기</router-link
+        >
       </div>
     </div>
   </div>
@@ -80,6 +85,14 @@ img {
 .btn-box {
   position: absolute;
   bottom: 0;
+  text-decoration: none;
+  background-color: #cff0fa;
+  width: 100px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
 }
 
 .line {

@@ -3,7 +3,6 @@ import { ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import { listTourBoard } from "@/api/tourboard.js";
 
-import VSelect from "../common/VSelect.vue";
 import TourBoardListItem from "@/components/tour/item/TourBoardListItem.vue";
 import VPageNavigation from "@/components/common/VPageNavigation.vue";
 
@@ -12,10 +11,10 @@ const router = useRouter();
 const tourBoards = ref([]);
 const currentPage = ref(1);
 const totalPage = ref(0);
-const { VITE_ARTICLE_LIST_SIZE } = import.meta.env;
+const { VITE_TOURBOARD_LIST_SIZE } = import.meta.env;
 const param = ref({
   pgno: currentPage.value,
-  spp: VITE_ARTICLE_LIST_SIZE,
+  spp: VITE_TOURBOARD_LIST_SIZE,
   key: "",
   word: "",
 });
@@ -29,6 +28,7 @@ const getTourBoardList = () => {
   listTourBoard(
     param.value,
     ({ data }) => {
+      console.log(data);
       tourBoards.value = data.tourboards;
       console.log(tourBoards.value);
       currentPage.value = data.currentPage;
@@ -58,21 +58,20 @@ const sortListCheap = () => {
 <template>
   <div class="main">
     <div class="section-left">
-      <p>asdasd</p>
-    </div>
-    <div class="section-right">
-      <button @click="sortListCheap">낮은가격순</button>
       <form class="d-flex" @submit.prevent="getTourBoardList">
         <div class="input-group input-group-sm ms-1">
           <input
             type="text"
             class="form-control"
             v-model="param.word"
-            placeholder="검색어..."
+            placeholder="키워드검색"
           />
           <button class="btn btn-dark" type="submit">검색</button>
         </div>
       </form>
+      <button @click="sortListCheap">낮은가격순</button>
+    </div>
+    <div class="section-right">
       <div>
         <TourBoardListItem
           v-for="tourBoard in tourBoards"

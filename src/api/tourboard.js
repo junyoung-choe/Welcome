@@ -24,4 +24,19 @@ function listTourSerachBoard(param, success, fail) {
     .catch(fail);
 }
 
-export { listTourBoard, listDeparture, listDestination, listTourSerachBoard };
+function tourboardView(param, success, fail) {
+  local.get(`/tourboard/${param}`).then(success).catch(fail);
+}
+
+function getPopularList(success, fail) {
+  local.get(`/tourboard/popularList`).then(success).catch(fail);
+}
+
+export {
+  listTourBoard,
+  listDeparture,
+  listDestination,
+  listTourSerachBoard,
+  tourboardView,
+  getPopularList,
+};

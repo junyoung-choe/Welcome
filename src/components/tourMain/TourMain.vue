@@ -3,6 +3,7 @@ import { ref, onMounted } from "vue";
 import { listDeparture, listDestination } from "@/api/tourboard";
 
 import VTourSelect from "../common/VTourSelect.vue";
+import Recommend from "./TourPopular.vue";
 
 const departureList = ref([]);
 const destinationList = ref([]);
@@ -109,6 +110,14 @@ const onChangeDestination = (val) => {
       </button>
     </div>
   </div>
+
+  <div class="recommend-section">
+    <Recommend />
+  </div>
+
+  <div class="popular-section"></div>
+
+  <div class="age-section"></div>
 </template>
 
 <style scoped>

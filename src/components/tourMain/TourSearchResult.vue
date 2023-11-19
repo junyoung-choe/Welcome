@@ -36,6 +36,7 @@ const getTourSearchResultList = () => {
 
 <template>
   <div>
+    <p>{{ depa }} -> {{ dest }}</p>
     <TourBoardListItem
       v-for="tour in tourList"
       :key="tour.tourboard_id"
