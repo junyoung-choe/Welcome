@@ -7,10 +7,12 @@ async function userConfirm(param, success, fail) {
 }
 
 async function findById(userid, success, fail) {
+  // 헤더에 Authorization 이라는 이름으로 access 토큰을 담아서 보낸다 즉 토큰이 유효해야 유저 정보를 받아온다 (유효하지 않으면 에러가 나온다)
   local.defaults.headers["Authorization"] = sessionStorage.getItem("accessToken");
   await local.get(`/member/info/${userid}`).then(success).catch(fail);
 }
 
+// 헤더에 refresh 토큰 담아서 서버에서 유효한지 + db 에 값과 같은지 확인하고 access 를 다시 받아올수도 있다 
 async function tokenRegeneration(user, success, fail) {
   local.defaults.headers["refreshToken"] = sessionStorage.getItem("refreshToken"); //axios header에 refresh-token 셋팅
   await local.post(`/member/refresh`, user).then(success).catch(fail);

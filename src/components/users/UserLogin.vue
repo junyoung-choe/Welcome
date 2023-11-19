@@ -21,9 +21,15 @@ const loginUser = ref({
 const login = async () => {
   await userLogin(loginUser.value);
   let token = sessionStorage.getItem("accessToken");
+  // 토큰을 발급 받았다 완료 !
   if (isLogin) {
+    // vue 에서 해당 회원의 정보를 알기 위해서 가져온다
+    // access 만료되면 refresh 까지 시도하고 온다
     getUserInfo(token);
+    // 로그인이 됬으니 화면 로그인 된걸로 바꿔 (navi 부분)
     changeMenuState();
+    // 그리고 그 이후에는 router 에서 before 에서 로그인 체크하는것 !
+    // 로그인 안되있으면 또 로그인 화면 가야해
   }
   router.push("/");
 };
