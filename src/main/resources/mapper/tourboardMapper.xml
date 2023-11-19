@@ -134,4 +134,11 @@
         where tourboard_departure = #{depa} and tourboard_destination = #{dest}
     </select>
 
+    <select id="getPopularList" resultType="tourBoardDto">
+        select *
+        from tourboard
+        order by tourboard_views desc
+        limit 4
+    </select>
+
 </mapper>
