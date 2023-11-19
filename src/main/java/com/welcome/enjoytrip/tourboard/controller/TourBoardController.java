@@ -186,6 +186,11 @@ public class TourBoardController {
         return new ResponseEntity<List<TourBoardDto>>(tourboardService.getTourSearchList(depa, dest), HttpStatus.OK);
     }
 
+    @GetMapping("/popularList")
+    public ResponseEntity<List<TourBoardDto>> popularList() throws Exception {
+        return new ResponseEntity<List<TourBoardDto>>(tourboardService.getPopularList(), HttpStatus.OK);
+    }
+
     private ResponseEntity<String> exceptionHandling(Exception e) {
         e.printStackTrace();
         return new ResponseEntity<String>("Error : " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);

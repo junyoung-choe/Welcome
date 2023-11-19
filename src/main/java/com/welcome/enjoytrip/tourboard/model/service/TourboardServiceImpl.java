@@ -94,5 +94,10 @@ public class TourboardServiceImpl implements TourboardService {
         return tourboardMapper.getTourSearchList(depa, dest);
     }
 
+    @Override
+    public List<TourBoardDto> getPopularList() throws Exception {
+        return tourboardMapper.getPopularList();
+    }
+
 
 }
