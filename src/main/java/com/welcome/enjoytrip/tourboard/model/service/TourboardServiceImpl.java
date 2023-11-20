@@ -34,8 +34,6 @@ public class TourboardServiceImpl implements TourboardService {
 //            param.put("key", key == null ? "" : "b.user_id");
 
 
-        return list;
-
         /// file 같이 가져오기
         List<TourBoardDto> list = tourboardMapper.listTourBoard(param);
         for(TourBoardDto tourBoardDto : list) {
@@ -44,15 +42,16 @@ public class TourboardServiceImpl implements TourboardService {
 //            System.out.println("확인");
 //            System.out.println(files);
         }
+        return list;
 
-        int totalTourCount = tourboardMapper.getTotalTourCount(param);
-        int totalPageCount = (totalTourCount - 1) / sizePerPage + 1;
-
-        TourboardListDto tourboardListDto = new TourboardListDto();
-        tourboardListDto.setTourboards(list);
-        tourboardListDto.setCurrentPage(currentPage);
-        tourboardListDto.setTotalPageCount(totalPageCount);
-        return tourboardListDto;
+//        int totalTourCount = tourboardMapper.getTotalTourCount(param);
+//        int totalPageCount = (totalTourCount - 1) / sizePerPage + 1;
+//
+//        TourboardListDto tourboardListDto = new TourboardListDto();
+//        tourboardListDto.setTourboards(list);
+//        tourboardListDto.setCurrentPage(currentPage);
+//        tourboardListDto.setTotalPageCount(totalPageCount);
+//        return tourboardListDto;
 
     }
 
