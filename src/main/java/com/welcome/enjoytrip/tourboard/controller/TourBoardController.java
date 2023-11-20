@@ -40,14 +40,14 @@ public class TourBoardController {
         this.tourboardService = tourboardService;
     }
     @PostMapping
-    public ResponseEntity<?> tourboardWrite(@ModelAttribute TourBoardDto tourBoardDto, @RequestParam("upfile") MultipartFile[] files) {
+    public ResponseEntity<?> tourboardWrite(@ModelAttribute TourBoardDto tourBoardDto, @RequestParam(value = "upfile", required = false) MultipartFile[] files) {
         Map<String, Object> map = new HashMap<>();
         try {
 //            logger.debug("uploadPath : {}, uploadImagePath : {}, uploadFilePath : {}", uploadPath, uploadImagePath, uploadFilePath);
 //            logger.debug("MultipartFile.isEmpty : {}", files[0].isEmpty());
 
             //		FileUpload 관련 설정.
-            if (!files[0].isEmpty()) {
+            if (files != null && !files[0].isEmpty()) {
 //			String realPath = servletContext.getRealPath(UPLOAD_PATH);
 //			String realPath = servletContext.getRealPath("/resources/img");
                 String today = new SimpleDateFormat("yyMMdd").format(new Date());
