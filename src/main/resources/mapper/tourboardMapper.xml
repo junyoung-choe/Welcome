@@ -80,16 +80,15 @@
         where 1
         <include refid="search"></include>
         order by tourboard_id desc
-        limit #{start}, #{listsize}
     </select>
 
-    <select id="getTotalTourCount" parameterType="map" resultType="int">
-        select count(tourboard_id)
-        from tourboard
-        <where>
-            <include refid="search"></include>
-        </where>
-    </select>
+<!--    <select id="getTotalTourCount" parameterType="map" resultType="int">-->
+<!--        select count(tourboard_id)-->
+<!--        from tourboard-->
+<!--        <where>-->
+<!--            <include refid="search"></include>-->
+<!--        </where>-->
+<!--    </select>-->
 
 
 <!-- file 관련 -->
