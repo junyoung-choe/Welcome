@@ -1,6 +1,48 @@
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, onUnmounted } from "vue";
 
+
+/// 사진 업로드를 위한 코드
+import { localAxios } from "@/util/http-commons";
+const local = localAxios();
+const imageUrl = ref("");
+
+const photo = ref();
+
+onMounted(() => {
+  if (props.tourBoard.fileInfos.length > 0) {
+    getFile();
+  }
+  console.log(photo.value);
+  // console.log("--------=-=-=-==--=-");
+  // console.log(props.tourBoard.fileInfos[0]);
+});
+
+onUnmounted(() => {
+  photo.value = false; // Vue 컴포넌트가 해제될 때 photo를 다시 false로 초기화
+});
+
+const getFile = () => {
+  const sfolder = props.tourBoard.fileInfos[0].saveFolder; // 서버에서 필요한 폴더명
+  const ofile = props.tourBoard.fileInfos[0].originalFile; // 서버에서 필요한 원본 파일명
+  const sfile = props.tourBoard.fileInfos[0].saveFile; // 서버에서 필요한 저장된 파일명
+  // console.log("--------");
+  // console.log(props.tourBoard.fileInfos[0]);
+
+  local
+    .get(`/file/${sfolder}/${ofile}/${sfile}`, { responseType: "arraybuffer" })
+    .then((response) => {
+      const blob = new Blob([response.data], { type: "image/jpeg" });
+      imageUrl.value = URL.createObjectURL(blob);
+      console.log("imageUrl.value = ");
+      // console.log(photo.value);
+      photo.value = true;
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+};
+///
 const props = defineProps({ tourBoard: Object });
 
 const keywords = ref([]);
@@ -21,7 +63,14 @@ endDate.value = `${props.tourBoard.tourboard_endDate[0]}/${props.tourBoard.tourb
       </router-link> -->
   <div class="main">
     <div class="img-section">
-      <img src="/src/img/winter.png" alt="" />
+      <template v-if="photo">
+        <img :src="imageUrl" alt="Uploaded Image" />
+      </template>
+      <template v-else>
+        <img src="/src/img/winter.png" alt="Uploaded Image" />
+      </template>
+      <!-- <img :src="imageUrl" alt="Uploaded Image" /> -->
+      <!-- <img src="/src/img/winter.png" alt="" /> -->
     </div>
     <div class="product-section">
       <div class="title-name">

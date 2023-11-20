@@ -36,7 +36,7 @@
     <label>Tour tourboard_destination:</label>
     <input v-model="tourBoardDto.tourboard_destination.value" type="text" />
     <br />
-    <input type="file" @change="onFileChange" />
+    <input type="file" multiple @change="onFileChange" />
     <button @click="upload">Upload</button>
   </div>
 </template>
@@ -81,14 +81,20 @@ const tourBoardDto = {
 
 const onFileChange = (e) => {
   console.log("onFileChange called"); // 함수 호출 확인
-  console.log(e.target.files[0]); // 선택한 파일 객체 확인
-  file.value = e.target.files[0];
+  console.log(e.target.files); // 선택한 파일 객체 확인
+  file.value = e.target.files;
 };
 
 const upload = async () => {
   let formData = new FormData();
 
-  formData.append("upfile", file.value); // file의 실제 값을 얻음
+  // console.log(file.value);
+  // formData.append("upfile", file.value); // file의 실제 값을 얻음
+  if (file.value && file.value.length > 0) {
+    for (let i = 0; i < file.value.length; i++) {
+      formData.append("upfile", file.value[i]); // 다중 파일 업로드를 위해 배열 형태로 추가
+    }
+  }
 
   for (let key in tourBoardDto) {
     formData.append(key, tourBoardDto[key].value); // 각 키와 실제 값을 얻어 FormData에 추가

@@ -30,6 +30,11 @@ function getCheapList(success, fail) {
   local.get(`/tourboard/cheapList`).then(success).catch(fail);
 }
 
+// 파일을 받아온다
+function getFile(sfolder, ofile ,sfile ,success, fail) {
+  local.get(`/file/${sfolder}/${ofile}/${sfile}`).then(success).catch(fail);
+}
+
 export {
   listTourBoard,
   listDeparture,
@@ -38,4 +43,5 @@ export {
   tourboardView,
   getPopularList,
   getCheapList,
+  getFile,
 };
