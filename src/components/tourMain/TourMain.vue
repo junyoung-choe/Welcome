@@ -1,14 +1,14 @@
 <script setup>
-import { ref, onMounted } from "vue";
-import { listDeparture, listDestination } from "@/api/tourboard";
+import { ref, onMounted } from 'vue';
+import { listDeparture, listDestination } from '@/api/tourboard';
 
-import VTourSelect from "../common/VTourSelect.vue";
-import Recommend from "./TourPopular.vue";
+import VTourSelect from '../common/VTourSelect.vue';
+import TourPopular from './TourPopular.vue';
 
 const departureList = ref([]);
 const destinationList = ref([]);
-const depa = ref("");
-const dest = ref("");
+const depa = ref('');
+const dest = ref('');
 
 onMounted(() => {
   getDepartureList();
@@ -55,30 +55,18 @@ const onChangeDestination = (val) => {
       </div>
       <div class="tour-search-box">
         <div class="select-box">
-          <VTourSelect
-            :selectOption="departureList"
-            @onKeySelect="onChangeDeparture"
-          />
+          <VTourSelect :selectOption="departureList" @onKeySelect="onChangeDeparture" />
         </div>
         <div class="select-box">
-          <VTourSelect
-            :selectOption="destinationList"
-            @onKeySelect="onChangeDestination"
-          />
+          <VTourSelect :selectOption="destinationList" @onKeySelect="onChangeDestination" />
         </div>
-        <router-link
-          class="search-link"
-          :to="`/tour/toursearchresult/${depa.value}/${dest.value}`"
+        <router-link class="search-link" :to="`/tour/toursearchresult/${depa.value}/${dest.value}`"
           >검색</router-link
         >
       </div>
     </div>
 
-    <div
-      id="carouselExampleControls"
-      class="carousel slide w-50"
-      data-bs-ride="carousel"
-    >
+    <div id="carouselExampleControls" class="carousel slide w-50" data-bs-ride="carousel">
       <div class="carousel-inner">
         <div class="carousel-item active">
           <img src="src\img\winter.png" class="d-block w-100" alt="..." />
@@ -111,11 +99,11 @@ const onChangeDestination = (val) => {
     </div>
   </div>
 
-  <div class="recommend-section">
-    <Recommend />
-  </div>
+  <div class="recommend-section"></div>
 
-  <div class="popular-section"></div>
+  <div class="popular-section">
+    <TourPopular />
+  </div>
 
   <div class="age-section"></div>
 </template>

@@ -1,8 +1,9 @@
 <script setup>
-import { ref, onMounted } from "vue";
-import { getPopularList } from "@/api/tourboard.js";
+import { ref, onMounted } from 'vue';
+import { getPopularList } from '@/api/tourboard.js';
+import { Swiper, SwiperSlide } from 'swiper/vue';
 
-import TourListInMainItem from "./item/TourListInMainItem.vue";
+import TourListInMainItem from './item/TourListInMainItem.vue';
 
 const popularList = ref([]);
 
@@ -19,7 +20,7 @@ const getList = () => {
 </script>
 
 <template>
-  <h2>🌟요즘 뜨는 여행지</h2>
+  <p class="subject">🌟요즘 뜨는 여행지</p>
   <div class="main">
     <TourListInMainItem
       v-for="popularItem in popularList"
@@ -32,6 +33,14 @@ const getList = () => {
 <style scoped>
 .main {
   display: flex;
+  justify-content: space-around;
+}
+
+.subject {
+  margin: 20px;
+  margin-top: 50px;
+  font-size: 30px;
+  font-weight: 600;
 }
 </style>
 
