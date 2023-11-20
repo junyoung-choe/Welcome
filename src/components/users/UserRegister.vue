@@ -17,52 +17,50 @@ const join = async () => {
   await userRegister(loginUser.value);
   router.push("/user/login");
 };
+
+const goLogin = () => {
+  router.push({
+    path: "login",
+  });
+};
 </script>
 
 <template>
-  <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-lg-10">
-        <h2 class="my-3 py-3 shadow-sm bg-light text-center">
-          <mark class="orange">회원가입</mark>
-        </h2>
-      </div>
-      <div class="col-lg-10 text-start">
+  <div class="main">
+    <div class="regist-box">
+      <p class="welcome">Welcome</p>
+      <div class="">
         <form>
-          <div class="mb-3">
-            <label for="username" class="form-label">이름 : </label>
+          <div class="">
             <input
               type="text"
-              class="form-control"
+              class=""
               v-model="loginUser.user_name"
-              placeholder="이름..."
+              placeholder="Name"
             />
           </div>
-          <div class="mb-3">
-            <label for="userid" class="form-label">아이디 : </label>
+          <div class="">
             <input
               type="text"
-              class="form-control"
+              class=""
               v-model="loginUser.user_account"
-              placeholder="아이디..."
+              placeholder="ID"
             />
           </div>
-          <div class="mb-3">
-            <label for="userpwd" class="form-label">비밀번호 : </label>
+          <div class="">
             <input
               type="password"
-              class="form-control"
+              class=""
               v-model="loginUser.user_password"
-              placeholder="비밀번호..."
+              placeholder="Password"
             />
           </div>
-          <div class="mb-3">
-            <label for="userpwd" class="form-label">핸드폰번호 : </label>
+          <div class="">
             <input
               type="text"
-              class="form-control"
+              class=""
               v-model="loginUser.user_phone"
-              placeholder="핸드폰번호..."
+              placeholder="PhoneNumber"
             />
           </div>
 
@@ -84,12 +82,16 @@ const join = async () => {
               </select>
             </div>
           </div> -->
-
-          <div class="col-auto text-center">
-            <button type="button" class="btn btn-outline-primary mb-3" @click="join">
-              회원가입
+          <div>
+            <button type="button" class="regist-btn" @click="join">
+              Register
             </button>
-            <button type="button" class="btn btn-outline-success ms-1 mb-3">초기화</button>
+          </div>
+          <div class="login-box">
+            <span>Already have an account? </span>
+            <button type="button" class="login-btn" @click="goLogin">
+              Click Here
+            </button>
           </div>
         </form>
       </div>
@@ -97,4 +99,63 @@ const join = async () => {
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.regist-box {
+  margin-top: 100px;
+  padding: 30px;
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.welcome {
+  font-size: 30px;
+  font-weight: 900;
+  margin: 40px;
+}
+input {
+  outline: none;
+  border: none;
+  border-radius: 0px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  padding: 10px;
+  width: 260px;
+  margin-top: 20px;
+}
+
+input:focus {
+  border-bottom: 2px solid #2184d6;
+}
+
+.regist-btn {
+  border-radius: 20px;
+  width: 200px;
+  margin-top: 30px;
+  border: none;
+  background: linear-gradient(-225deg, #7de2fc 0%, #b9b6e5 100%);
+  padding: 7px;
+  color: white;
+  font-size: 20px;
+  font-weight: 900;
+}
+
+.login-box {
+  margin-top: 50px;
+}
+
+.login-btn {
+  border: none;
+  background-color: white;
+  color: blue;
+}
+</style>

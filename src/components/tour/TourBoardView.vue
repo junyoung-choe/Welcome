@@ -72,6 +72,30 @@ const getFile = (j) => {
     </div>
     <!-- <img :src="imageUrl" alt="Uploaded Image" /> -->
   </div>
+  <div class="main">
+    <div class="section-left">
+      <!-- 이미지 -->
+      <img class="main-img" src="/src/img/winter.png" alt="" />
+    </div>
+    <div class="section-right">
+      <div>
+        <p>{{ tourboard.tourboard_tourName }}</p>
+        <p>{{ tourboard.tourboard_keyword }}</p>
+        <p>{{ tourboard.tourboard_price }}</p>
+        <p>{{ tourboard.tourboard_salePrice }}</p>
+      </div>
+    </div>
+  </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.main {
+  padding: 0px 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.main-img {
+  width: 400px;
+}
+</style>
