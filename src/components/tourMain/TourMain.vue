@@ -4,6 +4,7 @@ import { listDeparture, listDestination } from '@/api/tourboard';
 
 import VTourSelect from '../common/VTourSelect.vue';
 import TourPopular from './TourPopular.vue';
+import TourCheap from './TourCheap.vue';
 
 const departureList = ref([]);
 const destinationList = ref([]);
@@ -103,6 +104,10 @@ const onChangeDestination = (val) => {
 
   <div class="popular-section">
     <TourPopular />
+  </div>
+
+  <div class="cheap-section">
+    <TourCheap />
   </div>
 
   <div class="age-section"></div>
