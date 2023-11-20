@@ -1,6 +1,7 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from "vue";
 
+
 /// 사진 업로드를 위한 코드
 import { localAxios } from "@/util/http-commons";
 const local = localAxios();
@@ -45,10 +46,10 @@ const getFile = () => {
 const props = defineProps({ tourBoard: Object });
 
 const keywords = ref([]);
-const startDate = ref("");
-const endDate = ref("");
+const startDate = ref('');
+const endDate = ref('');
 
-keywords.value = props.tourBoard.tourboard_keyword.split(", ");
+keywords.value = props.tourBoard.tourboard_keyword.split(', ');
 startDate.value = `${props.tourBoard.tourboard_startDate[0]}/${props.tourBoard.tourboard_startDate[1]}/${props.tourBoard.tourboard_startDate[2]}`;
 endDate.value = `${props.tourBoard.tourboard_endDate[0]}/${props.tourBoard.tourboard_endDate[1]}/${props.tourBoard.tourboard_endDate[2]}`;
 </script>
@@ -80,8 +81,8 @@ endDate.value = `${props.tourBoard.tourboard_endDate[0]}/${props.tourBoard.tourb
       </div>
       <div class="content">
         <span
-          >가성비 좋은 시내 호텔에서 투숙하며, 다낭 핵심 시내 관광코스와 인기
-          관광지인 바나힐 테마파크를 관광할 수 있는 특가 상품입니다.</span
+          >가성비 좋은 시내 호텔에서 투숙하며, 다낭 핵심 시내 관광코스와 인기 관광지인 바나힐
+          테마파크를 관광할 수 있는 특가 상품입니다.</span
         >
       </div>
       <div class="date">

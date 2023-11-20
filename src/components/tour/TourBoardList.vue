@@ -1,89 +1,139 @@
 <script setup>
-import { ref, onMounted } from "vue";
-import { useRouter } from "vue-router";
-import { listTourBoard } from "@/api/tourboard.js";
+import { ref, onMounted } from 'vue';
+import { useRouter } from 'vue-router';
+import { listTourBoard } from '@/api/tourboard.js';
 
-import TourBoardListItem from "@/components/tour/item/TourBoardListItem.vue";
-import VPageNavigation from "@/components/common/VPageNavigation.vue";
+import TourBoardListItem from '@/components/tour/item/TourBoardListItem.vue';
+import VPageNavigation from '@/components/common/VPageNavigation.vue';
 
 const router = useRouter();
 
-const tourBoards = ref([]);
-const currentPage = ref(1);
-const totalPage = ref(0);
-const { VITE_TOURBOARD_LIST_SIZE } = import.meta.env;
+// const tourBoards = ref([]);
+// const currentPage = ref(1);
+// const totalPage = ref(0);
+// const { VITE_TOURBOARD_LIST_SIZE } = import.meta.env;
 const param = ref({
-  pgno: currentPage.value,
-  spp: VITE_TOURBOARD_LIST_SIZE,
-  key: "",
-  word: "",
+  // pgno: currentPage.value,
+  // spp: VITE_TOURBOARD_LIST_SIZE,
+  key: '',
+  word: '',
 });
+
+const tourList = ref([]);
+const tourListView = ref([]);
+const cnt = ref(10);
+const curCnt = ref(10);
 
 onMounted(() => {
   getTourBoardList();
 });
 
 const getTourBoardList = () => {
-  console.log("서버에서 글목록 얻어오자!!!", param.value);
+  tourListView.value.length = 0;
+  console.log('서버에서 글목록 얻어오자!!!', param.value);
   listTourBoard(
     param.value,
     ({ data }) => {
-      console.log(data);
-      tourBoards.value = data.tourboards;
-      console.log(tourBoards.value);
-      currentPage.value = data.currentPage;
-      totalPage.value = data.totalPageCount;
+      tourList.value = data;
+      // currentPage.value = data.currentPage;
+      // totalPage.value = data.totalPageCount;
+      console.log(tourList.value);
+      for (let index = 0; index < cnt.value; index++) {
+        if (tourList.value[index] == undefined) {
+          break;
+        }
+        tourListView.value.push(tourList.value[index]);
+      }
     },
     (error) => {
-      console.log("error");
+      console.log('error');
       console.log(error);
     }
   );
 };
 
-const onPageChange = (val) => {
-  console.log(val + "번 페이지로 이동 준비 끝!!!");
-  currentPage.value = val;
-  param.value.pgno = val;
-  getTourBoardList();
-};
+// const onPageChange = (val) => {
+//   console.log(val + '번 페이지로 이동 준비 끝!!!');
+//   currentPage.value = val;
+//   param.value.pgno = val;
+//   getTourBoardList();
+// };
 
 const sortListCheap = () => {
-  tourBoards.value.sort(function (a, b) {
+  tourList.value.sort(function (a, b) {
     return a.tourboard_salePrice - b.tourboard_salePrice;
   });
+  tourListView.value.length = 0;
+  for (let index = 0; index < cnt.value; index++) {
+    if (tourList.value[index] == undefined) {
+      break;
+    }
+    tourListView.value.push(tourList.value[index]);
+  }
+};
+
+const sortListExpensive = () => {
+  tourList.value.sort(function (a, b) {
+    return b.tourboard_salePrice - a.tourboard_salePrice;
+  });
+  tourListView.value.length = 0;
+  for (let index = 0; index < cnt.value; index++) {
+    if (tourList.value[index] == undefined) {
+      break;
+    }
+    tourListView.value.push(tourList.value[index]);
+  }
+};
+
+const getMore = () => {
+  if (curCnt.value >= tourList.value.length) {
+    alert('마지막 입니다!');
+  }
+
+  for (let index = curCnt.value; index < cnt.value + curCnt.value; index++) {
+    if (tourList.value[index] == undefined) {
+      break;
+    }
+    tourListView.value.push(tourList.value[index]);
+  }
+  curCnt.value += cnt.value;
 };
 </script>
 
 <template>
   <div class="main">
     <div class="section-left">
-      <form class="d-flex" @submit.prevent="getTourBoardList">
-        <div class="input-group input-group-sm ms-1">
-          <input
-            type="text"
-            class="form-control"
-            v-model="param.word"
-            placeholder="키워드검색"
-          />
-          <button class="btn btn-dark" type="submit">검색</button>
+      <div class="box">
+        <form class="d-flex" @submit.prevent="getTourBoardList">
+          <div class="input-group input-group-sm ms-1">
+            <input type="text" class="form-control" v-model="param.word" placeholder="키워드검색" />
+            <button class="btn btn-dark" type="submit">검색</button>
+          </div>
+        </form>
+        <div class="btn-box">
+          <button @click="sortListCheap">낮은가격순</button>
+          <button @click="sortListExpensive">높은가격순</button>
+          <button @click="sortListExpensive">평점순</button>
+          <button @click="sortListExpensive">예약순</button>
         </div>
-      </form>
-      <button @click="sortListCheap">낮은가격순</button>
+      </div>
     </div>
     <div class="section-right">
       <div>
         <TourBoardListItem
-          v-for="tourBoard in tourBoards"
+          v-for="tourBoard in tourListView"
           :key="tourBoard.tourboard_id"
           :tourBoard="tourBoard"
         />
       </div>
-      <VPageNavigation
+      <div class="more-btn-box">
+        <button @click="getMore">더보기▽</button>
+      </div>
+      <!-- <VPageNavigation
         :current-page="currentPage"
         :total-page="totalPage"
         @pageChange="onPageChange"
-      ></VPageNavigation>
+      ></VPageNavigation> -->
     </div>
   </div>
 </template>
@@ -93,10 +143,50 @@ const sortListCheap = () => {
   display: flex;
 }
 .section-left {
+  border-top: 1px solid rgba(0, 0, 0, 0.2);
   flex-grow: 1;
+  padding-top: 10px;
+  width: 250px;
 }
 
 .section-right {
   flex-grow: 1;
+}
+.more-btn-box {
+  text-align: center;
+}
+.more-btn-box button {
+  width: 100px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  background-color: rgb(255, 249, 237);
+}
+
+button:hover {
+  background-color: rgba(0, 0, 0, 0.2) !important;
+}
+
+.btn-box {
+  display: flex;
+  flex-direction: column;
+}
+
+.btn-box button {
+  background-color: white;
+  border-radius: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  color: rgba(0, 0, 0, 0.8);
+  margin-top: 10px;
+}
+
+.btn {
+  background-color: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  color: rgba(0, 0, 0, 0.7);
+}
+.box {
+  position: fixed;
+  top: 140px;
+  left: 10px;
+  width: 200px !important;
 }
 </style>
