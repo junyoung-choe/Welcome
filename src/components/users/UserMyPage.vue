@@ -1,4 +1,44 @@
-<script setup></script>
+<script setup>
+import { ref, onMounted } from "vue";
+import { userMyPage } from "@/api/user";
+import { jwtDecode } from "jwt-decode";
+
+// const user_id = ref();
+// const user_password = ref();
+// const user_regDate = ref();
+// const refreshToken = ref();
+const user_account = ref("");
+const user_role = ref("");
+const user_name = ref("");
+const user_phone = ref("");
+const user_cash = ref("");
+const user_mileage = ref("");
+
+onMounted(() => {
+  // 페이지 로드전 객체를 불러온다.
+  getUserInformation();
+});
+
+const getUserInformation = () => {
+  let token = sessionStorage.getItem("accessToken");
+  let decodeToken = jwtDecode(token);
+  userMyPage(
+    decodeToken.userId,
+    ({ data }) => {
+      console.log(data.resdata);
+      user_account.value = data.resdata.user_account;
+      user_role.value = data.resdata.user_role;
+      user_name.value = data.resdata.user_name;
+      user_phone.value = data.resdata.user_phone;
+      user_cash.value = data.resdata.user_cash;
+      user_mileage.value = data.resdata.user_mileage;
+    },
+    (error) => {
+      console.log(error);
+    }
+  );
+};
+</script>
 
 <template>
   <div class="container">
@@ -21,16 +61,18 @@
             <div class="col-md-8">
               <div class="card-body text-start">
                 <ul class="list-group list-group-flush">
-                  <li class="list-group-item">SSAFY</li>
-                  <li class="list-group-item">김싸피</li>
-                  <li class="list-group-item">ssafy@ssafy.com</li>
+                  <li class="list-group-item">{{ user_account }}</li>
+                  <li class="list-group-item">{{ user_name }}</li>
+                  <li class="list-group-item">{{ user_phone }}</li>
+                  <li class="list-group-item">{{ user_cash }}</li>
+                  <li class="list-group-item">{{ user_mileage }}</li>
                 </ul>
               </div>
             </div>
           </div>
         </div>
         <div>
-          <button type="button" class="btn btn-outline-secondary mt-2">수정</button>
+          <!-- <button type="button" class="btn btn-outline-secondary mt-2">수정</button> -->
         </div>
       </div>
     </div>

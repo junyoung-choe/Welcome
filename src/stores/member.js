@@ -36,28 +36,38 @@ export const useMemberStore = defineStore("memberStore", () => {
       },
       (error) => {
         console.error(error);
+        // 에러시 다시 로그인 화면으로 보낸다
+        router.push({ path: '/user/login' })
       }
     );
   };
 
   const getUserInfo = (token) => {
+    // login 과정에서 여기가 호출되고
     let decodeToken = jwtDecode(token);
     findById(
+      // user 의 pk 가 들어있고 이 pk 가지고 axios 로 info 호출을 보내서 해당 유저의 객체를 받아온다
       decodeToken.userId,
       (response) => {
+        // info 로 다녀왔을때 상태가 ok 로 전달 받았다면
         if (response.status === httpStatusCode.OK) {
+          // 가져온 객체를 userInfo에 담는다 (위에 선언 되어있다)
           userInfo.value = response.data.userInfo;
         } else {
           console.log("유저 정보 없음!!!!");
+          // 다시 로그인 페이지로 보내야 한다
+          router.push({ path: '/user/login' })
         }
       },
       async (error) => {
+        // 서버에서 에러를 던져버렸고 즉 토큰이 유효하지 않다는것 
         console.error(
           "getUserInfo() error code [토큰 만료되어 사용 불가능.] ::: ",
           error.response.status
         );
         isValidToken.value = false;
 
+        // 그러면 refresh 는 유효한지 확인하고  있으면 acess로 다시 들어온다 
         await tokenRegenerate();
       }
     );
@@ -102,6 +112,7 @@ export const useMemberStore = defineStore("memberStore", () => {
     );
   };
 
+  // 여기서 Json 호출한다 즉 외부에서는 이 함수를 호출하면 된다
   const userLogout = async (userid) => {
     await logout(
       userid,
