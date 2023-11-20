@@ -19,14 +19,12 @@ public class TourboardServiceImpl implements TourboardService {
     }
 
     @Override
-    public TourboardListDto listTourboard(Map<String, String> map) throws Exception {
+    public List<TourBoardDto> listTourboard(Map<String, String> map) throws Exception {
+        System.out.println("===========");
+        System.out.println(map);
+        System.out.println("===========");
         Map<String, Object> param = new HashMap<>();
         param.put("word", map.get("word") == null ? "" : map.get("word"));
-        int currentPage = Integer.parseInt(map.get("pgno") == null ? "1" : map.get("pgno"));
-        int sizePerPage = Integer.parseInt(map.get("spp") == null ? "20" : map.get("spp"));
-        int start = currentPage * sizePerPage - sizePerPage;
-        param.put("start", start);
-        param.put("listsize", sizePerPage);
 
         String key = map.get("key");
         param.put("key", key == null ? "" : key);
@@ -34,15 +32,7 @@ public class TourboardServiceImpl implements TourboardService {
 //            param.put("key", key == null ? "" : "b.user_id");
         List<TourBoardDto> list = tourboardMapper.listTourBoard(param);
 
-
-        int totalTourCount = tourboardMapper.getTotalTourCount(param);
-        int totalPageCount = (totalTourCount - 1) / sizePerPage + 1;
-
-        TourboardListDto tourboardListDto = new TourboardListDto();
-        tourboardListDto.setTourboards(list);
-        tourboardListDto.setCurrentPage(currentPage);
-        tourboardListDto.setTotalPageCount(totalPageCount);
-        return tourboardListDto;
+        return list;
     }
 
     @Override

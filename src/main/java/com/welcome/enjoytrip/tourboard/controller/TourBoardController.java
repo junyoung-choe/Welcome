@@ -120,10 +120,11 @@ public class TourBoardController {
     public ResponseEntity<?> tourboardList(@RequestParam Map<String, String> map) {
         try {
             System.out.println(map);
-            TourboardListDto tourboardListDto = tourboardService.listTourboard(map);
+//            TourboardListDto tourboardListDto = tourboardService.listTourboard(map);
+            List<TourBoardDto> tourboardDtoList = tourboardService.listTourboard(map);
             HttpHeaders header = new HttpHeaders();
             header.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
-            return ResponseEntity.ok().headers(header).body(tourboardListDto);
+            return ResponseEntity.ok().headers(header).body(tourboardDtoList);
         } catch (Exception e) {
             return exceptionHandling(e);
         }

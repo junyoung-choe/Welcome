@@ -7,7 +7,7 @@ import java.util.*;
 
 public interface TourboardService {
 
-    public TourboardListDto listTourboard(Map<String, String> map) throws Exception;
+    public List<TourBoardDto> listTourboard(Map<String, String> map) throws Exception;
 
     public void tourboardWrite(TourBoardDto tourBoardDto) throws Exception;
 
