@@ -99,5 +99,10 @@ public class TourboardServiceImpl implements TourboardService {
         return tourboardMapper.getPopularList();
     }
 
+    @Override
+    public List<TourBoardDto> getCheapList() throws Exception {
+        return tourboardMapper.getCheapList();
+    }
+
 
 }

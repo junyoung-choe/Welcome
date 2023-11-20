@@ -25,6 +25,7 @@ public interface TourboardMapper {
     List<TourBoardDto> getDestinationList(String depa) throws Exception;
     List<TourBoardDto> getTourSearchList(String depa, String dest) throws Exception;
     List<TourBoardDto> getPopularList() throws Exception;
+    List<TourBoardDto> getCheapList() throws Exception;
 
     List<FileInfoDto> fileInfoList(int tourboard_id);
 

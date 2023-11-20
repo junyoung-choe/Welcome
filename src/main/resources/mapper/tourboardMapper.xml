@@ -141,4 +141,11 @@
         limit 4
     </select>
 
+    <select id="getCheapList" resultType="tourBoardDto">
+        select *
+        from tourboard
+        order by tourboard_salePrice asc
+        limit 4
+    </select>
+
 </mapper>
