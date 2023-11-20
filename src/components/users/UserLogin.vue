@@ -27,6 +27,7 @@ const login = async () => {
     // access 만료되면 refresh 까지 시도하고 온다
     getUserInfo(token);
     // 로그인이 됬으니 화면 로그인 된걸로 바꿔 (navi 부분)
+    console.log("로그인 됬으니까 정보 바꿔 녀석아");
     changeMenuState();
     // 그리고 그 이후에는 router 에서 before 에서 로그인 체크하는것 !
     // 로그인 안되있으면 또 로그인 화면 가야해
@@ -75,18 +76,10 @@ const goRegist = () => {
             />
           </div>
           <div class="col-auto text-center">
-            <button
-              type="button"
-              class="btn btn-outline-primary mb-3"
-              @click="login"
-            >
+            <button type="button" class="btn btn-outline-primary mb-3" @click="login">
               로그인
             </button>
-            <button
-              type="button"
-              class="btn btn-outline-success ms-1 mb-3"
-              @click="goRegist"
-            >
+            <button type="button" class="btn btn-outline-success ms-1 mb-3" @click="goRegist">
               회원가입
             </button>
           </div>

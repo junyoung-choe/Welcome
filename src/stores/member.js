@@ -112,6 +112,7 @@ export const useMemberStore = defineStore("memberStore", () => {
     );
   };
 
+  // 여기서 Json 호출한다 즉 외부에서는 이 함수를 호출하면 된다
   const userLogout = async (userid) => {
     await logout(
       userid,

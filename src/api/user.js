@@ -1,6 +1,15 @@
 import { localAxios } from "@/util/http-commons";
 
+
 const local = localAxios();
+
+async function userRegister(param, success, fail) {
+  await local.post(`/member/join`, param).then(success).catch(fail);
+}
+
+async function userMyPage(userid, success, fail) {
+  await local.get(`/member/mypage/${userid}`).then(success).catch(fail);
+}
 
 async function userConfirm(param, success, fail) {
   await local.post(`/member/login`, param).then(success).catch(fail);
@@ -20,6 +29,7 @@ async function tokenRegeneration(user, success, fail) {
 
 async function logout(userid, success, fail) {
   await local.get(`/member/logout/${userid}`).then(success).catch(fail);
+  // 로그아웃 후에 로그인 화면으로 이동한다
 }
 
-export { userConfirm, findById, tokenRegeneration, logout };
+export { userConfirm, findById, tokenRegeneration, logout, userRegister, userMyPage };

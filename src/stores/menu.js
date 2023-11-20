@@ -9,9 +9,14 @@ export const useMenuStore = defineStore('menuStore', () => {
     { name: '로그아웃', show: false, routeName: 'user-logout' },
   ]);
 
+  // 로그인 된 이후에 메뉴를 변경해준다
   const changeMenuState = () => {
+    // true 인것들은 false 로 변경 // false 인것은 true 로 변경
     menuList.value = menuList.value.map((item) => ({ ...item, show: !item.show }));
+    console.log("------------------------")
+    console.log(menuList.value)
   };
+
   return {
     menuList,
     changeMenuState,

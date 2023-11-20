@@ -14,9 +14,12 @@ const onlyAuthUser = async (to, from, next) => {
   if (userInfo.value != null && token) {
     await getUserInfo(token);
   }
+  console.log(userInfo.value , isValidToken.value)
   if (!isValidToken.value || userInfo.value === null) {
+    console.log("로그인 화면으로 가자")
     next({ name: "user-login" });
   } else {
+    console.log(userInfo.value , isValidToken.value)
     next();
   }
 };
