@@ -1,10 +1,12 @@
 package com.welcome.enjoytrip.tourboard.model.service;
 
+import com.welcome.enjoytrip.tourboard.model.FileInfoDto;
 import com.welcome.enjoytrip.tourboard.model.TourBoardDto;
 import com.welcome.enjoytrip.tourboard.model.TourboardListDto;
 import com.welcome.enjoytrip.tourboard.model.mapper.TourboardMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,15 +32,36 @@ public class TourboardServiceImpl implements TourboardService {
         param.put("key", key == null ? "" : key);
 //        if ("user_id".equals(key))
 //            param.put("key", key == null ? "" : "b.user_id");
-        List<TourBoardDto> list = tourboardMapper.listTourBoard(param);
+
 
         return list;
+
+        /// file 같이 가져오기
+        List<TourBoardDto> list = tourboardMapper.listTourBoard(param);
+        for(TourBoardDto tourBoardDto : list) {
+            List<FileInfoDto> files = tourboardMapper.fileInfoList((int)tourBoardDto.getTourboard_id());
+            tourBoardDto.setFileInfos(files);
+//            System.out.println("확인");
+//            System.out.println(files);
+        }
+
+        int totalTourCount = tourboardMapper.getTotalTourCount(param);
+        int totalPageCount = (totalTourCount - 1) / sizePerPage + 1;
+
+        TourboardListDto tourboardListDto = new TourboardListDto();
+        tourboardListDto.setTourboards(list);
+        tourboardListDto.setCurrentPage(currentPage);
+        tourboardListDto.setTotalPageCount(totalPageCount);
+        return tourboardListDto;
+
     }
 
     @Override
     public void tourboardWrite(TourBoardDto tourBoardDto) throws Exception {
         tourboardMapper.tourboardWrite(tourBoardDto);
-        tourboardMapper.registerFile(tourBoardDto);
+        if(tourBoardDto.getFileInfos() != null) {
+            tourboardMapper.registerFile(tourBoardDto);
+        }
     }
 
     @Override
@@ -51,7 +74,14 @@ public class TourboardServiceImpl implements TourboardService {
 
     @Override
     public List<TourBoardDto> tourboardList() {
-        return tourboardMapper.tourboardList();
+        List<TourBoardDto> list = tourboardMapper.tourboardList();
+        for(TourBoardDto tourBoardDto : list) {
+            List<FileInfoDto> files = tourboardMapper.fileInfoList((int)tourBoardDto.getTourboard_id());
+            tourBoardDto.setFileInfos(files);
+            System.out.println("확인");
+            System.out.println(files);
+        }
+        return list;
     }
 
     @Override
