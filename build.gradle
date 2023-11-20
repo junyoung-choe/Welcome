@@ -27,6 +27,14 @@ dependencies {
 	implementation 'org.apache.commons:commons-dbcp2:2.9.0'
 	testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:2.3.1'
 
+	// JWT
+
+	// Dependencies for JSON Web Token (JWT) Library
+	implementation 'io.jsonwebtoken:jjwt:0.9.1'
+
+	// Dependency to resolve JAXB issue for JDK 11 and above
+	implementation 'org.glassfish.jaxb:jaxb-runtime'
+
 	implementation 'commons-io:commons-io:2.11.0'
 }
 

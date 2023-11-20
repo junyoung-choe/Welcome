@@ -13,7 +13,7 @@
 	</insert>
 
 	<select id="login" resultType="memberdto" parameterType="memberdto">
-		select *
+		select user_id, user_account, user_password, refreshToken
 		from user
 		where user_account = #{user_account} and user_password = #{user_password}
 	</select>
@@ -34,4 +34,24 @@
 		delete from user
 		where user_id = #{user_id}
 	</delete>
+
+	<!--   JWT     -->
+
+	<update id="saveRefreshToken" parameterType="map">
+		update user
+		set refreshToken = #{refreshToken}
+		where user_id = #{user_id}
+	</update>
+
+	<select id="getRefreshToken" parameterType="string" resultType="string">
+		select refreshToken
+		from user
+		where user_id = #{user_id}
+	</select>
+
+	<update id="deleteRefreshToken" parameterType="map">
+		update user
+		set refreshToken = #{refreshToken, jdbcType=VARCHAR}
+		where user_id = #{user_id}
+	</update>
 </mapper>

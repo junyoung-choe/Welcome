@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @ToString
 public class MemberDto {
-    private long user_id;
+    private String user_id;
     private String user_account;
     private String user_password;
     private String user_role;
@@ -20,4 +20,6 @@ public class MemberDto {
     private LocalDateTime user_regDate;
     private int user_cash;
     private int user_mileage;
+
+    private String refreshToken;
 }
