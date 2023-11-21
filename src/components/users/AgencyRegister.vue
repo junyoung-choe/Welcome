@@ -6,12 +6,14 @@ import { userRegister } from "@/api/user";
 
 const router = useRouter();
 
+const AgencyCode = ref("");
+
 const loginUser = ref({
   user_name: "",
   user_account: "",
   user_password: "",
   user_phone: "",
-  user_role: "user",
+  user_role: "agency",
 });
 
 const join = async () => {
@@ -25,9 +27,9 @@ const goLogin = () => {
   });
 };
 
-const goAgencyRegister = () => {
+const goNomalRegister = () => {
   router.push({
-    path: "AgencyJoin",
+    path: "join",
   });
 };
 </script>
@@ -37,8 +39,16 @@ const goAgencyRegister = () => {
     <div class="regist-box">
       <p class="welcome">Welcome</p>
       <div class="">
-        Nomal User Register
+        travel Agency Register
         <form>
+          <div class="">
+            <input
+              type="text"
+              class=""
+              v-model="AgencyCode"
+              placeholder="Agency Code"
+            />
+          </div>
           <div class="">
             <input
               type="text"
@@ -102,8 +112,8 @@ const goAgencyRegister = () => {
             </button>
           </div>
           <div class="login-box">
-            <span>are you travel agency ? </span>
-            <button type="button" class="login-btn" @click="goAgencyRegister">
+            <span>are you nomal user ? </span>
+            <button type="button" class="login-btn" @click="goNomalRegister">
               Click Here
             </button>
           </div>

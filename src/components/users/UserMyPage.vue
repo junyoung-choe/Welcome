@@ -2,7 +2,7 @@
 import { ref, onMounted } from "vue";
 
 // (getUserInformation) 로그인 정보를 받아오기 위한 필드와 메소드
-import { userMyPage } from "@/api/user";
+import { userMyPage, getReservation } from "@/api/user";
 import { jwtDecode } from "jwt-decode";
 
 // const user_id = ref();
@@ -16,9 +16,14 @@ const user_phone = ref("");
 const user_cash = ref("");
 const user_mileage = ref("");
 
+const reservation = ref([]);
+
 onMounted(() => {
   // 페이지 로드전 객체를 불러온다.
   getUserInformation();
+
+  // 회원 ID로 reservation 에서 tourBoard_id 를 찾아서 tourBoard 들을 불러온다
+  getReservePackage();
 });
 
 const getUserInformation = () => {
@@ -41,6 +46,20 @@ const getUserInformation = () => {
   );
 };
 
+const getReservePackage = () => {
+  let token = sessionStorage.getItem("accessToken");
+  let decodeToken = jwtDecode(token);
+  getReservation(
+    decodeToken.userId,
+    ({ data }) => {
+      reservation.value = data.resdata;
+      console.log(data.resdata);
+    },
+    (error) => {
+      console.log(error);
+    }
+  );
+};
 ///
 </script>
 
@@ -75,6 +94,7 @@ const getUserInformation = () => {
             </div>
           </div>
         </div>
+        asdfasdf {{ reservation }}
         <div>
           <!-- <button type="button" class="btn btn-outline-secondary mt-2">수정</button> -->
         </div>
