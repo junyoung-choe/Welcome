@@ -1,5 +1,5 @@
 <script setup>
-import BoardFormItem from "./item/BoardFormItem.vue";
+import BoardFormItem from './item/BoardFormItem.vue';
 </script>
 
 <template>
