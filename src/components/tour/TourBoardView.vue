@@ -1,9 +1,10 @@
 <script setup>
-import { localAxios } from "@/util/http-commons";
+import { localAxios } from '@/util/http-commons';
 
-import { ref, onMounted } from "vue";
-import { useRoute } from "vue-router";
-import { tourboardView } from "@/api/tourboard";
+import { ref, onMounted } from 'vue';
+import { useRoute } from 'vue-router';
+import { tourboardView } from '@/api/tourboard';
+import { start } from '@popperjs/core';
 
 const route = useRoute();
 const local = localAxios();
@@ -14,6 +15,11 @@ const tourboard = ref({});
 const file = ref([]);
 const imageUrl = ref([]);
 
+const tag = ref([]);
+
+const startDate = ref('');
+const endDate = ref('');
+
 onMounted(() => {
   getTourBoard();
 });
@@ -23,13 +29,26 @@ const getTourBoard = () => {
     tourboard_id,
     ({ data }) => {
       tourboard.value = data.tourboard;
+      console.log(tourboard.value.tourboard_startDate[0]);
       // 이 부분에 for 문으로 반복을 시켜야겠다
       // for (var i = 0; i < data.tourboard.fileInfos.value.
       for (var j = 0; j < data.tourboard.fileInfos.length; j++) {
-        console.log("welcome");
+        console.log('welcome');
         file.value.push(data.tourboard.fileInfos[j]);
         getFile(j);
       }
+
+      tag.value = tourboard.value.tourboard_keyword.split(', ');
+      for (var j = 0; j < tag.value.length; j++) {
+        tag.value[j] = '#' + tag.value[j];
+      }
+      startDate.value = `${tourboard.value.tourboard_startDate[0]}/${tourboard.value.tourboard_startDate[1]}/${tourboard.value.tourboard_startDate[3]}`;
+      endDate.value =
+        tourboard.value.tourboard_endDate[0] +
+        '/' +
+        tourboard.value.tourboard_endDate[1] +
+        '/' +
+        tourboard.value.tourboard_endDate[3];
     },
     (error) => {
       console.log(error);
@@ -45,9 +64,9 @@ const getFile = (j) => {
   // console.log(file.value.saveFolder);
 
   local
-    .get(`/file/${sfolder}/${ofile}/${sfile}`, { responseType: "arraybuffer" })
+    .get(`/file/${sfolder}/${ofile}/${sfile}`, { responseType: 'arraybuffer' })
     .then((response) => {
-      const blob = new Blob([response.data], { type: "image/jpeg" });
+      const blob = new Blob([response.data], { type: 'image/jpeg' });
       imageUrl.value[j] = URL.createObjectURL(blob);
     })
     .catch((error) => {
@@ -55,47 +74,217 @@ const getFile = (j) => {
     });
 };
 
+const msg = () => {
+  alert('예약완료!!');
+};
 // 파일 정보를 back 으로 보내고 binary 파일로 받아온다
 </script>
 
 <template>
   <div>
-    {{ tourboard }}
-
     <!-- {{ file }}
     {{ file.saveFolder }}
     {{ file.originalFile }}
     {{ file.saveFile }} -->
 
-    <div v-for="(url, index) in imageUrl" :key="index">
-      <img :src="url" alt="Uploaded Image" />
-    </div>
     <!-- <img :src="imageUrl" alt="Uploaded Image" /> -->
   </div>
-  <div class="main">
-    <div class="section-left">
-      <!-- 이미지 -->
-      <img class="main-img" src="/src/img/winter.png" alt="" />
+  <div class="outside">
+    <div class="main">
+      <div class="section-left">
+        <div v-for="(url, index) in imageUrl" :key="index">
+          <img class="main-img" :src="url" alt="Uploaded Image" />
+        </div>
+        <!-- <img class="main-img" src="/src/img/winter.png" alt="" /> -->
+      </div>
+      <div class="section-right">
+        <div>
+          <p class="title">{{ tourboard.tourboard_tourName }}</p>
+          <p class="note">
+            안전, 청결은 기본. 장가계 핵심 명소 관광으로 구성된 상품입니다. 합리적인 가격으로
+            장가계를 여행해보세요.
+          </p>
+          <hr />
+          <div class="tagAndStar">
+            <div>
+              <span class="hash-tag" v-for="(item, index) in tag" :key="index">{{ item }}</span>
+            </div>
+            <div>
+              <font-awesome-icon icon="fa-solid fa-star" />
+              <span class="score">4.5</span>
+            </div>
+          </div>
+          <hr />
+          <div class="icon-box">
+            <div>
+              <font-awesome-icon class="icon" icon="fa fa-calendar" />
+              <span>3박 4일</span>
+            </div>
+            <div>
+              <font-awesome-icon class="icon" icon="fas fa-plane" />
+              <span>LCC</span>
+            </div>
+            <div>
+              <font-awesome-icon class="icon" icon="fas fa-shopping-bag" />
+              <span>쇼핑</span>
+            </div>
+            <div>
+              <font-awesome-icon class="icon" icon="fas fa-users" />
+              <span>단체여행</span>
+            </div>
+            <div>
+              <font-awesome-icon class="icon" icon="fas fa-flag" />
+              <span>인솔자동행</span>
+            </div>
+          </div>
+          <div class="price-box">
+            <p class="price">{{ tourboard.tourboard_price }}</p>
+            <span class="price-sale">{{ tourboard.tourboard_salePrice }}</span>
+            <span class="won">원</span>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="section-right">
-      <div>
-        <p>{{ tourboard.tourboard_tourName }}</p>
-        <p>{{ tourboard.tourboard_keyword }}</p>
-        <p>{{ tourboard.tourboard_price }}</p>
-        <p>{{ tourboard.tourboard_salePrice }}</p>
+    <div class="reservation-btn-box">
+      <button class="reservation-btn" @click="msg">예약하기</button>
+    </div>
+    <div class="second-box">
+      <div class="schedule">
+        <p class="schedule-title">여행 주요일정</p>
+        <div class="schedule-section01">
+          <div><p>일정</p></div>
+          <div>
+            <p>{{ startDate }}</p>
+            <p>{{ endDate }}</p>
+          </div>
+        </div>
+        <div>
+          <div><p>여행도시</p></div>
+        </div>
+        <div class="reservation-section01">
+          <div><p>예약현황</p></div>
+          <div>
+            <span class="reservation-text">예약: {{ tourboard.tourboard_stock }}명</span>
+            <span>현재: {{ tourboard.tourboard_stockCnt }}명</span>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <style scoped>
+.outside {
+  padding: 0px 200px;
+}
 .main {
-  padding: 0px 100px;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
+  margin-top: 60px;
+  padding-bottom: 100px;
 }
 .main-img {
-  width: 400px;
+  width: 600px;
+  height: 400px;
+  object-fit: cover;
+}
+.section-right {
+  width: 600px;
+  padding-left: 50px;
+}
+.title {
+  font-size: 30px;
+  font-weight: 600;
+}
+
+.note {
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.7);
+}
+.tagAndStar {
+  display: flex;
+  justify-content: space-between;
+}
+.hash-tag {
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, 0.1);
+  margin-right: 15px;
+}
+.score {
+  margin-left: 10px;
+}
+
+.icon-box {
+  display: flex;
+}
+
+.icon-box div {
+  display: flex;
+  flex-direction: column;
+  margin-right: 30px;
+}
+
+.icon {
+  font-size: 20px;
+}
+
+.icon-box span {
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.7);
+}
+.price-box {
+  position: relative;
+  margin-top: 20px;
+}
+.price {
+  right: 0px;
+  position: absolute;
+  color: rgba(0, 0, 0, 0.4);
+  text-decoration: line-through;
+}
+.price-sale {
+  right: 15px;
+  position: absolute;
+  top: 20px;
+  font-size: 30px;
+  font-weight: 700;
+}
+
+.won {
+  right: 0px;
+  position: absolute;
+  top: 35px;
+}
+.second-box {
+  border-top: 1px solid rgba(0, 0, 0, 0.4);
+}
+.schedule-title {
+  font-size: 25px;
+  font-weight: 800;
+}
+.schedule-section01 {
+  display: flex;
+}
+.reservation-btn-box {
+  position: relative;
+  margin-bottom: 50px;
+}
+.reservation-btn {
+  position: absolute;
+  right: 0px;
+  border: none;
+  border-radius: 10px;
+  background-color: #cff0fa;
+  width: 200px;
+  height: 40px;
+}
+
+.reservation-section01 {
+  display: flex;
+}
+.reservation-text {
+  margin-right: 20px;
 }
 </style>

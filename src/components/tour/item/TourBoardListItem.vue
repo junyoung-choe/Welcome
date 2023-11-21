@@ -1,10 +1,10 @@
 <script setup>
-import { ref, onMounted, onUnmounted } from "vue";
+import { ref, onMounted, onUnmounted } from 'vue';
 
 /// 사진 업로드를 위한 코드
-import { localAxios } from "@/util/http-commons";
+import { localAxios } from '@/util/http-commons';
 const local = localAxios();
-const imageUrl = ref("");
+const imageUrl = ref('');
 
 const photo = ref();
 
@@ -29,11 +29,11 @@ const getFile = () => {
   // console.log(props.tourBoard.fileInfos[0]);
 
   local
-    .get(`/file/${sfolder}/${ofile}/${sfile}`, { responseType: "arraybuffer" })
+    .get(`/file/${sfolder}/${ofile}/${sfile}`, { responseType: 'arraybuffer' })
     .then((response) => {
-      const blob = new Blob([response.data], { type: "image/jpeg" });
+      const blob = new Blob([response.data], { type: 'image/jpeg' });
       imageUrl.value = URL.createObjectURL(blob);
-      console.log("imageUrl.value = ");
+      console.log('imageUrl.value = ');
       // console.log(photo.value);
       photo.value = true;
     })
@@ -45,10 +45,10 @@ const getFile = () => {
 const props = defineProps({ tourBoard: Object });
 
 const keywords = ref([]);
-const startDate = ref("");
-const endDate = ref("");
+const startDate = ref('');
+const endDate = ref('');
 
-keywords.value = props.tourBoard.tourboard_keyword.split(", ");
+keywords.value = props.tourBoard.tourboard_keyword.split(', ');
 startDate.value = `${props.tourBoard.tourboard_startDate[0]}/${props.tourBoard.tourboard_startDate[1]}/${props.tourBoard.tourboard_startDate[2]}`;
 endDate.value = `${props.tourBoard.tourboard_endDate[0]}/${props.tourBoard.tourboard_endDate[1]}/${props.tourBoard.tourboard_endDate[2]}`;
 </script>

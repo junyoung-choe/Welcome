@@ -1,9 +1,12 @@
 <script setup>
 import { ref, onMounted } from 'vue';
+import { useRouter } from 'vue-router';
 const props = defineProps({ item: Object });
 
 const arr = ref([]);
 const tag = ref('');
+
+const router = useRouter();
 
 onMounted(() => {
   makeTag();
@@ -17,10 +20,18 @@ const makeTag = () => {
   }
   console.log(tag.value);
 };
+
+const mvView = () => {
+  router.push({ path: '/tour/detail/' + props.item.tourboard_id });
+};
+
+const moveWrite = () => {
+  router.push({ name: 'board-write' });
+};
 </script>
 
 <template>
-  <div class="main">
+  <div class="main" @click="mvView">
     <div class="img-section">
       <img src="src\img\winter.png" alt="" />
     </div>
@@ -36,8 +47,10 @@ const makeTag = () => {
 .main {
   display: block !important;
   width: 300px;
-
   box-shadow: 1px 5px 5px rgba(0, 0, 0, 0.2);
+}
+.main:hover {
+  cursor: pointer;
 }
 img {
   width: 100%;
