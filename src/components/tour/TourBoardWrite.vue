@@ -4,51 +4,82 @@
       <p>여행 등록</p>
     </div>
     <div class="content">
-      <table>
+      <table class="input-table">
         <tr>
           <th><label>여행 이름 </label></th>
-          <th><input type="text" v-model="tourBoardDto.tourboard_tourName.value" /></th>
+          <th>
+            <input class="text-type" type="text" v-model="tourBoardDto.tourboard_tourName.value" />
+          </th>
         </tr>
         <tr>
           <th><label>키워드 등록 </label></th>
-          <th><input v-model="tourBoardDto.tourboard_keyword.value" type="text" /></th>
+          <th>
+            <input
+              class="text-type"
+              v-model="tourBoardDto.tourboard_keyword.value"
+              type="text"
+              placeholder=", (콤마)를 기준으로 키워드 입력 (ex 일본, 중국)"
+            />
+          </th>
         </tr>
         <tr>
           <th><label>여행 시작일 </label></th>
-          <th><input v-model="tourBoardDto.tourboard_startDate.value" type="text" /></th>
+          <th>
+            <input class="text-type" v-model="tourBoardDto.tourboard_startDate.value" type="text" />
+          </th>
         </tr>
         <tr>
           <th><label>여행 도착일</label></th>
-          <th><input v-model="tourBoardDto.tourboard_endDate.value" type="text" /></th>
+          <th>
+            <input class="text-type" v-model="tourBoardDto.tourboard_endDate.value" type="text" />
+          </th>
         </tr>
         <tr>
           <th><label>신청 마감 날짜</label></th>
-          <th><input v-model="tourBoardDto.tourboard_deadLineDate.value" type="text" /></th>
+          <th>
+            <input
+              class="text-type"
+              v-model="tourBoardDto.tourboard_deadLineDate.value"
+              type="text"
+            />
+          </th>
         </tr>
         <tr>
           <th><label>가격</label></th>
-          <th><input v-model="tourBoardDto.tourboard_price.value" type="text" /></th>
+          <th>
+            <input class="text-type" v-model="tourBoardDto.tourboard_price.value" type="text" />
+          </th>
         </tr>
         <tr>
           <th><label>총원</label></th>
-          <th><input v-model="tourBoardDto.tourboard_stock.value" type="text" /></th>
+          <th>
+            <input class="text-type" v-model="tourBoardDto.tourboard_stock.value" type="text" />
+          </th>
         </tr>
         <tr>
           <th><label>출발지</label></th>
-          <th><input v-model="tourBoardDto.tourboard_departure.value" type="text" /></th>
+          <th>
+            <input class="text-type" v-model="tourBoardDto.tourboard_departure.value" type="text" />
+          </th>
         </tr>
         <tr>
           <th><label>여행지</label></th>
-          <th><input v-model="tourBoardDto.tourboard_destination.value" type="text" /></th>
+          <th>
+            <input
+              class="text-type"
+              v-model="tourBoardDto.tourboard_destination.value"
+              type="text"
+            />
+          </th>
         </tr>
         <tr>
           <th><label>여행설명</label></th>
-          <th><input type="text" /></th>
+          <th><input class="text-type" type="text" placeholder="여행의 테마나 주의사항 등" /></th>
         </tr>
       </table>
-      <input type="file" multiple @change="onFileChange" />
+      <input type="file" multiple @change="onFileChange" class="file-type" />
       <!--  -->
-      <button @click="upload">등록</button>
+      <button class="regist-btn" @click="upload">여행지 등록</button>
     </div>
   </div>
 </template>
@@ -56,8 +87,10 @@
 <script setup>
 import axios from 'axios';
 import { ref, watch } from 'vue';
+import { useRouter } from 'vue-router';
 const file = ref(null);
 const date = new Date();
+const router = useRouter();
 // const formattedDate = date.toISOString().slice(0, 16);
 const formattedDate = date.toLocaleString;
 const tourBoardDto = {
@@ -101,29 +134,34 @@ const onFileChange = (e) => {
 };
 
 const upload = async () => {
-  let formData = new FormData();
+  if (confirm('여행지를 등록하시겠습니까?')) {
+    let formData = new FormData();
 
-  // console.log(file.value);
-  // formData.append("upfile", file.value); // file의 실제 값을 얻음
-  if (file.value && file.value.length > 0) {
-    for (let i = 0; i < file.value.length; i++) {
-      formData.append('upfile', file.value[i]); // 다중 파일 업로드를 위해 배열 형태로 추가
+    // console.log(file.value);
+    // formData.append("upfile", file.value); // file의 실제 값을 얻음
+    if (file.value && file.value.length > 0) {
+      for (let i = 0; i < file.value.length; i++) {
+        formData.append('upfile', file.value[i]); // 다중 파일 업로드를 위해 배열 형태로 추가
+      }
     }
-  }
 
-  for (let key in tourBoardDto) {
-    formData.append(key, tourBoardDto[key].value); // 각 키와 실제 값을 얻어 FormData에 추가
-  }
+    for (let key in tourBoardDto) {
+      formData.append(key, tourBoardDto[key].value); // 각 키와 실제 값을 얻어 FormData에 추가
+    }
 
-  try {
-    await axios.post('http://localhost:70/tourboard', formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
+    try {
+      await axios.post('http://localhost:70/tourboard', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+      console.log('File and TourBoardDto uploaded successfully.');
+    } catch (err) {
+      console.error(err);
+    }
+    router.push({
+      path: '/tour/list',
     });
-    console.log('File and TourBoardDto uploaded successfully.');
-  } catch (err) {
-    console.error(err);
   }
 };
 
@@ -150,5 +188,53 @@ const upload = async () => {
 <style scoped>
 .main {
   text-align: center;
+}
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+input {
+  width: 350px;
+}
+
+.title {
+  font-size: 30px;
+  font-weight: 700;
+}
+
+.text-type {
+  border: none;
+  outline: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  margin-bottom: 10px;
+  margin-left: 10px;
+}
+.text-type:focus {
+  border-bottom: 2px solid #2184d6;
+}
+
+.text-type::placeholder {
+  font-size: 13px;
+}
+.regist-btn {
+  width: 150px;
+  border-radius: 15px;
+  border: none;
+  background-color: #cff0fa;
+  height: 40px;
+  margin-top: 20px;
+}
+input[type='file']::file-selector-button {
+  width: 150px;
+  height: 30px;
+  background: #fff;
+  border: 1px solid rgb(77, 77, 77);
+  border-radius: 10px;
+  cursor: pointer;
+}
+.file-type {
+  margin-top: 10px;
 }
 </style>
