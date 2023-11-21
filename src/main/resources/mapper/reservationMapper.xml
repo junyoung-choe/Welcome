@@ -6,7 +6,7 @@
 
     <insert id="reservationWrite" parameterType="reservationDto">
         insert into reservation (user_id, tourboard_id, reservation_regDate, reservation_yn)
-        values (#{user_id}, #{tourboard_id}, now(), #{reservation_yn} )
+        values (#{user_id}, #{tourboard_id}, now(), true )
     </insert>
 
     <select id="reservationList" resultType="reservationDto">

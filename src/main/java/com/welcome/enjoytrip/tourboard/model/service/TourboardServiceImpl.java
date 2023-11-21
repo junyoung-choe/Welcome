@@ -110,7 +110,13 @@ public class TourboardServiceImpl implements TourboardService {
 
     @Override
     public List<TourBoardDto> getTourSearchList(String depa, String dest) throws Exception {
-        return tourboardMapper.getTourSearchList(depa, dest);
+        List<TourBoardDto> list = tourboardMapper.getTourSearchList(depa, dest);
+        for(TourBoardDto tourBoardDto : list) {
+            List<FileInfoDto> files = tourboardMapper.fileInfoList((int) tourBoardDto.getTourboard_id());
+            tourBoardDto.setFileInfos(files);
+        }
+
+        return list;
     }
 
     @Override
