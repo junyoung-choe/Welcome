@@ -9,7 +9,9 @@ const imageUrl = ref("");
 const photo = ref();
 
 onMounted(() => {
-  if (props.tourBoard.fileInfos != null && props.tourBoard.fileInfos.length > 0) {
+  console.log("asdfasdflkjasdhflkjasdhflkjasdhflkjasdhflkjash");
+  console.log(props.tourBoard.fileInfos[0]);
+  if (props.tourBoard.fileInfos[0] != null && props.tourBoard.fileInfos.length > 0) {
     getFile();
   }
   console.log(photo.value);

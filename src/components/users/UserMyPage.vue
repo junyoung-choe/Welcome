@@ -1,5 +1,7 @@
 <script setup>
 import { ref, onMounted } from "vue";
+
+// (getUserInformation) 로그인 정보를 받아오기 위한 필드와 메소드
 import { userMyPage } from "@/api/user";
 import { jwtDecode } from "jwt-decode";
 
@@ -38,6 +40,8 @@ const getUserInformation = () => {
     }
   );
 };
+
+///
 </script>
 
 <template>
