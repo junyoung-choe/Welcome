@@ -129,5 +129,13 @@ public class TourboardServiceImpl implements TourboardService {
         return tourboardMapper.getCheapList();
     }
 
+    @Override
+    public void plus(int tourboard_id, int reserveNum) throws Exception {
+        Map<String, Integer> map = new HashMap<>();
+        map.put("tourboard_id", tourboard_id);
+        map.put("reserveNum", reserveNum);
+        tourboardMapper.plus(map);
+    }
+
 
 }

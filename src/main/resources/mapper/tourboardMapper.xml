@@ -147,4 +147,10 @@
         limit 4
     </select>
 
+    <update id="plus" parameterType="map">
+        update tourboard
+        set tourboard_stockCnt = tourboard_stockCnt + #{reserveNum}
+        where tourboard_id = #{tourboard_id}
+    </update>
+
 </mapper>
