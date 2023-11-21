@@ -99,17 +99,18 @@ public class MemberController {
     public ResponseEntity<Map<String, Object>> mypage(@PathVariable("id") String id) {
         MemberDto memberDto = new MemberDto();
         Map<String, Object> map = new HashMap<>();
+        HttpStatus status = HttpStatus.ACCEPTED;
 
         try {
             MemberDto member = memberService.mypage(id);
             map.put("resdata", member);
-            map.put("resmsg", "조회성공");
+            status = HttpStatus.CREATED;
         } catch (Exception e) {
             e.printStackTrace();
             map.put("resmsg", "조회실패");
-            map.put("resdata", e.getMessage());
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
         }
-        ResponseEntity<Map<String, Object>> res = new ResponseEntity<>(map, HttpStatus.OK);
+        ResponseEntity<Map<String, Object>> res = new ResponseEntity<>(map, status);
         return res;
     }
 
