@@ -32,20 +32,10 @@ const goLogin = () => {
       <div class="">
         <form>
           <div class="">
-            <input
-              type="text"
-              class=""
-              v-model="loginUser.user_name"
-              placeholder="Name"
-            />
+            <input type="text" class="" v-model="loginUser.user_name" placeholder="Name" />
           </div>
           <div class="">
-            <input
-              type="text"
-              class=""
-              v-model="loginUser.user_account"
-              placeholder="ID"
-            />
+            <input type="text" class="" v-model="loginUser.user_account" placeholder="ID" />
           </div>
           <div class="">
             <input
@@ -56,12 +46,7 @@ const goLogin = () => {
             />
           </div>
           <div class="">
-            <input
-              type="text"
-              class=""
-              v-model="loginUser.user_phone"
-              placeholder="PhoneNumber"
-            />
+            <input type="text" class="" v-model="loginUser.user_phone" placeholder="PhoneNumber" />
           </div>
 
           <!-- <div class="mb-3">
@@ -83,15 +68,11 @@ const goLogin = () => {
             </div>
           </div> -->
           <div>
-            <button type="button" class="regist-btn" @click="join">
-              Register
-            </button>
+            <button type="button" class="regist-btn" @click="join">Register</button>
           </div>
           <div class="login-box">
             <span>Already have an account? </span>
-            <button type="button" class="login-btn" @click="goLogin">
-              Click Here
-            </button>
+            <button type="button" class="login-btn" @click="goLogin">Click Here</button>
           </div>
         </form>
       </div>

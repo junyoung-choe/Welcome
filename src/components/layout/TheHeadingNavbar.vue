@@ -17,6 +17,14 @@ const { changeMenuState } = menuStore;
 const isLogout = ref({});
 
 onMounted(() => {
+  let token = sessionStorage.getItem("accessToken");
+  // 토큰이 존재한다면 -> 새로고침 시에도 로그인이 유지 되야한다
+  if (token != null) {
+    menuList.value[0].show = false;
+    menuList.value[1].show = false;
+    menuList.value[2].show = true;
+    menuList.value[3].show = true;
+  }
   console.log("======================");
   console.log(menuList.value);
   isLogout.value = menuList.value[3].show;
@@ -88,6 +96,10 @@ const logout = async () => {
             로그아웃
           </button>
         </ul> -->
+        <!-- {{ menuList[0] }}
+        {{ menuList[1] }}
+        {{ menuList[2] }}
+        {{ menuList[3] }} -->
         <template v-for="menu in menuList" :key="menu.routeName">
           <template v-if="menu.show">
             <template v-if="menu.routeName === 'user-logout'">

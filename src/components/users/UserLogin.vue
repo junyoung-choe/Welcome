@@ -1,9 +1,9 @@
 <script setup>
-import { ref } from 'vue';
-import { storeToRefs } from 'pinia';
-import { useRouter } from 'vue-router';
-import { useMemberStore } from '@/stores/member';
-import { useMenuStore } from '@/stores/menu';
+import { ref } from "vue";
+import { storeToRefs } from "pinia";
+import { useRouter } from "vue-router";
+import { useMemberStore } from "@/stores/member";
+import { useMenuStore } from "@/stores/menu";
 
 const router = useRouter();
 
@@ -14,30 +14,31 @@ const { userLogin, getUserInfo } = memberStore;
 const { changeMenuState } = useMenuStore();
 
 const loginUser = ref({
-  user_account: '',
-  user_password: '',
+  user_account: "",
+  user_password: "",
 });
 
 const login = async () => {
   await userLogin(loginUser.value);
-  let token = sessionStorage.getItem('accessToken');
+  let token = sessionStorage.getItem("accessToken");
+
   // 토큰을 발급 받았다 완료 !
   if (isLogin) {
     // vue 에서 해당 회원의 정보를 알기 위해서 가져온다
     // access 만료되면 refresh 까지 시도하고 온다
     getUserInfo(token);
     // 로그인이 됬으니 화면 로그인 된걸로 바꿔 (navi 부분)
-    console.log('로그인 됬으니까 정보 바꿔 녀석아');
+    console.log("로그인 됬으니까 정보 바꿔 녀석아");
     changeMenuState();
     // 그리고 그 이후에는 router 에서 before 에서 로그인 체크하는것 !
     // 로그인 안되있으면 또 로그인 화면 가야해
   }
-  router.push('/');
+  router.push("/");
 };
 
 const goRegist = () => {
   router.push({
-    path: 'join',
+    path: "join",
   });
 };
 </script>
