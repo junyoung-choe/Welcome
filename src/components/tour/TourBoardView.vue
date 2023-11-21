@@ -1,10 +1,10 @@
 <script setup>
-import { localAxios } from '@/util/http-commons';
+import { localAxios } from "@/util/http-commons";
 
-import { ref, onMounted } from 'vue';
-import { useRoute } from 'vue-router';
-import { tourboardView } from '@/api/tourboard';
-import { start } from '@popperjs/core';
+import { ref, onMounted } from "vue";
+import { useRoute } from "vue-router";
+import { tourboardView, plusPeople, makeReserve } from "@/api/tourboard";
+import { jwtDecode } from "jwt-decode";
 
 const route = useRoute();
 const local = localAxios();
@@ -17,8 +17,20 @@ const imageUrl = ref([]);
 
 const tag = ref([]);
 
-const startDate = ref('');
-const endDate = ref('');
+const startDate = ref("");
+const endDate = ref("");
+
+/// 예약자의 숫자
+const reserveNum = ref(0);
+
+const add = () => {
+  reserveNum.value++;
+};
+
+const subtract = () => {
+  reserveNum.value--;
+};
+///
 
 onMounted(() => {
   getTourBoard();
@@ -33,21 +45,21 @@ const getTourBoard = () => {
       // 이 부분에 for 문으로 반복을 시켜야겠다
       // for (var i = 0; i < data.tourboard.fileInfos.value.
       for (var j = 0; j < data.tourboard.fileInfos.length; j++) {
-        console.log('welcome');
+        console.log("welcome");
         file.value.push(data.tourboard.fileInfos[j]);
         getFile(j);
       }
 
-      tag.value = tourboard.value.tourboard_keyword.split(', ');
+      tag.value = tourboard.value.tourboard_keyword.split(", ");
       for (var j = 0; j < tag.value.length; j++) {
-        tag.value[j] = '#' + tag.value[j];
+        tag.value[j] = "#" + tag.value[j];
       }
       startDate.value = `${tourboard.value.tourboard_startDate[0]}/${tourboard.value.tourboard_startDate[1]}/${tourboard.value.tourboard_startDate[3]}`;
       endDate.value =
         tourboard.value.tourboard_endDate[0] +
-        '/' +
+        "/" +
         tourboard.value.tourboard_endDate[1] +
-        '/' +
+        "/" +
         tourboard.value.tourboard_endDate[3];
     },
     (error) => {
@@ -64,9 +76,9 @@ const getFile = (j) => {
   // console.log(file.value.saveFolder);
 
   local
-    .get(`/file/${sfolder}/${ofile}/${sfile}`, { responseType: 'arraybuffer' })
+    .get(`/file/${sfolder}/${ofile}/${sfile}`, { responseType: "arraybuffer" })
     .then((response) => {
-      const blob = new Blob([response.data], { type: 'image/jpeg' });
+      const blob = new Blob([response.data], { type: "image/jpeg" });
       imageUrl.value[j] = URL.createObjectURL(blob);
     })
     .catch((error) => {
@@ -74,8 +86,15 @@ const getFile = (j) => {
     });
 };
 
+// 예약하겠다는 버튼이다
 const msg = () => {
-  alert('예약완료!!');
+  alert("예약완료!!");
+  // reserveNum 만큼 현재의 tourboard_id 로 등록자의 숫자를 +
+  plusPeople(tourboard_id, reserveNum.value);
+  // 현재의 tourboard_id 와 현재 user_id 로 reserve 보드에 새로운 테이블을 등록한다
+  let token = sessionStorage.getItem("accessToken");
+  let decodeToken = jwtDecode(token);
+  makeReserve(tourboard_id, decodeToken.userId);
 };
 // 파일 정보를 back 으로 보내고 binary 파일로 받아온다
 </script>
@@ -146,6 +165,13 @@ const msg = () => {
       </div>
     </div>
     <div class="reservation-btn-box">
+      <!-- <input type="text" /> -->
+      <!-- 폼 +- 해볼게요  -->
+      <input type="number" v-model="reserveNum" />
+      <button @click="add">+</button>
+      <button @click="subtract">-</button>
+      <!--  -->
+
       <button class="reservation-btn" @click="msg">예약하기</button>
     </div>
     <div class="second-box">
