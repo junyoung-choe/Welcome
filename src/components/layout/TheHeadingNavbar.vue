@@ -9,7 +9,7 @@ import { jwtDecode } from "jwt-decode";
 const memberStore = useMemberStore();
 
 const menuStore = useMenuStore();
-const { userLogout } = memberStore;
+const { userLogout, falseAgency } = memberStore;
 
 const { menuList } = storeToRefs(menuStore);
 const { changeMenuState } = menuStore;
@@ -47,6 +47,7 @@ isLogout.value = computed(() => {
 const logout = async () => {
   let token = sessionStorage.getItem("accessToken");
   let decodeToken = jwtDecode(token);
+  falseAgency();
   await userLogout(decodeToken.userId);
   console.log("로그아웃!!!!");
   changeMenuState();
