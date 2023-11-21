@@ -38,5 +38,5 @@ public interface TourboardMapper {
     void registerFile(TourBoardDto tourBoardDto) throws Exception;
 
 //    void deleteFile(int articleNo) throws Exception;
-
+    void plus(Map<String, Integer> map) throws Exception;
 }

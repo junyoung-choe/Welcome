@@ -197,6 +197,24 @@ public class TourBoardController {
         return new ResponseEntity<List<TourBoardDto>>(tourboardService.getCheapList(), HttpStatus.OK);
     }
 
+    // 예약된 갯수만큼 예약갯수를 추가한다
+    @GetMapping("plus/{tourboard_id}/{reserveNum}")
+    public ResponseEntity<?> plus(@PathVariable("tourboard_id") int tourboard_id, @PathVariable("reserveNum") int reserveNum) throws Exception {
+        Map<String, Object> map = new HashMap<>();
+        try {
+            System.out.println(tourboard_id + " " + reserveNum);
+            tourboardService.plus(tourboard_id, reserveNum );
+            map.put("resmsg", "보드 예약 추가");
+        } catch (Exception e) {
+            e.printStackTrace();
+            map.put("resmsg", "보드 예약 추가 실패");
+        }
+        ResponseEntity<Map<String, Object>> res = new ResponseEntity(map, HttpStatus.OK);
+        return res;
+    }
+
+
+
     private ResponseEntity<String> exceptionHandling(Exception e) {
         e.printStackTrace();
         return new ResponseEntity<String>("Error : " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);

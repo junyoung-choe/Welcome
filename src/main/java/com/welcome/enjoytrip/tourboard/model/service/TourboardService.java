@@ -2,6 +2,7 @@ package com.welcome.enjoytrip.tourboard.model.service;
 
 import com.welcome.enjoytrip.tourboard.model.TourBoardDto;
 import com.welcome.enjoytrip.tourboard.model.TourboardListDto;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.*;
 
@@ -28,4 +29,5 @@ public interface TourboardService {
 
     public List<TourBoardDto> getPopularList() throws Exception;
     public List<TourBoardDto> getCheapList() throws Exception;
+    public void plus(int tourboard_id, int reserveNum) throws Exception;
 }
