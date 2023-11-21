@@ -1,9 +1,9 @@
 <script setup>
-import { ref, onMounted } from 'vue';
-import { useRoute, useRouter } from 'vue-router';
-import { listTourSerachBoard } from '@/api/tourboard';
+import { ref, onMounted } from "vue";
+import { useRoute, useRouter } from "vue-router";
+import { listTourSerachBoard } from "@/api/tourboard";
 
-import TourBoardListItem from '@/components/tour/item/TourBoardListItem.vue';
+import TourBoardListItem from "@/components/tour/item/TourBoardListItem.vue";
 
 const route = useRoute();
 const router = useRouter();
@@ -23,14 +23,21 @@ const param = {
 
 onMounted(() => {
   getTourSearchResultList();
+  console.log("===========================");
+  console.log(tourList.value);
+  console.log(tourListView.value);
 });
 
 const getTourSearchResultList = () => {
   listTourSerachBoard(
     param,
     ({ data }) => {
+      console.log(data);
       tourList.value = data;
       for (let index = 0; index < cnt.value; index++) {
+        if (tourList.value[index] == undefined) {
+          break;
+        }
         tourListView.value.push(tourList.value[index]);
       }
       console.log(tourListView.value);
@@ -69,7 +76,7 @@ const sortListExpensive = () => {
 
 const getMore = () => {
   if (curCnt.value >= tourList.value.length) {
-    alert('마지막 입니다!');
+    alert("마지막 입니다!");
     return;
   }
 

@@ -1,7 +1,6 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from "vue";
 
-
 /// 사진 업로드를 위한 코드
 import { localAxios } from "@/util/http-commons";
 const local = localAxios();
@@ -10,7 +9,7 @@ const imageUrl = ref("");
 const photo = ref();
 
 onMounted(() => {
-  if (props.tourBoard.fileInfos.length > 0) {
+  if (props.tourBoard.fileInfos != null && props.tourBoard.fileInfos.length > 0) {
     getFile();
   }
   console.log(photo.value);
@@ -46,10 +45,10 @@ const getFile = () => {
 const props = defineProps({ tourBoard: Object });
 
 const keywords = ref([]);
-const startDate = ref('');
-const endDate = ref('');
+const startDate = ref("");
+const endDate = ref("");
 
-keywords.value = props.tourBoard.tourboard_keyword.split(', ');
+keywords.value = props.tourBoard.tourboard_keyword.split(", ");
 startDate.value = `${props.tourBoard.tourboard_startDate[0]}/${props.tourBoard.tourboard_startDate[1]}/${props.tourBoard.tourboard_startDate[2]}`;
 endDate.value = `${props.tourBoard.tourboard_endDate[0]}/${props.tourBoard.tourboard_endDate[1]}/${props.tourBoard.tourboard_endDate[2]}`;
 </script>
