@@ -1,46 +1,55 @@
 <template>
-  <div>
-    <label>Tour tourboard_tourName:</label>
-    <input type="text" v-model="tourBoardDto.tourboard_tourName.value" />
-    <br />
-    <label>Tour tourboard_keyword:</label>
-    <input v-model="tourBoardDto.tourboard_keyword.value" type="text" />
-    <br />
-    <label>Tour tourboard_regDate:</label>
-    <input v-model="tourBoardDto.tourboard_regDate.value" type="text" />
-    <br />
-    <label>Tour tourboard_startDate:</label>
-    <input v-model="tourBoardDto.tourboard_startDate.value" type="text" />
-    <br />
-    <label>Tour tourboard_endDate:</label>
-    <input v-model="tourBoardDto.tourboard_endDate.value" type="text" />
-    <br />
-    <label>Tour tourboard_deadLineDate:</label>
-    <input v-model="tourBoardDto.tourboard_deadLineDate.value" type="text" />
-    <br />
-    <label>Tour tourboard_price:</label>
-    <input v-model="tourBoardDto.tourboard_price.value" type="text" />
-    <br />
-    <label>Tour tourboard_salePrice:</label>
-    <input v-model="tourBoardDto.tourboard_salePrice.value" type="text" />
-    <br />
-    <label>Tour tourboard_stock:</label>
-    <input v-model="tourBoardDto.tourboard_stock.value" type="text" />
-    <br />
-    <label>Tour tourboard_departure:</label>
-    <input v-model="tourBoardDto.tourboard_departure.value" type="text" />
-    <br />
-    <label>Tour tourboard_price:</label>
-    <input v-model="tourBoardDto.tourboard_price.value" type="text" />
-    <br />
-    <label>Tour tourboard_destination:</label>
-    <input v-model="tourBoardDto.tourboard_destination.value" type="text" />
-    <br />
-    <input type="file" multiple @change="onFileChange" />
-    <button @click="upload">Upload</button>
-  </div>
-  <div>
-    <input type="datetime-local" v-model="tourBoardDto.tourboard_startDate.value" />
+  <div class="main">
+    <div class="title">
+      <p>여행 등록</p>
+    </div>
+    <div class="content">
+      <table>
+        <tr>
+          <th><label>여행 이름 </label></th>
+          <th><input type="text" v-model="tourBoardDto.tourboard_tourName.value" /></th>
+        </tr>
+        <tr>
+          <th><label>키워드 등록 </label></th>
+          <th><input v-model="tourBoardDto.tourboard_keyword.value" type="text" /></th>
+        </tr>
+        <tr>
+          <th><label>여행 시작일 </label></th>
+          <th><input v-model="tourBoardDto.tourboard_startDate.value" type="text" /></th>
+        </tr>
+        <tr>
+          <th><label>여행 도착일</label></th>
+          <th><input v-model="tourBoardDto.tourboard_endDate.value" type="text" /></th>
+        </tr>
+        <tr>
+          <th><label>신청 마감 날짜</label></th>
+          <th><input v-model="tourBoardDto.tourboard_deadLineDate.value" type="text" /></th>
+        </tr>
+        <tr>
+          <th><label>가격</label></th>
+          <th><input v-model="tourBoardDto.tourboard_price.value" type="text" /></th>
+        </tr>
+        <tr>
+          <th><label>총원</label></th>
+          <th><input v-model="tourBoardDto.tourboard_stock.value" type="text" /></th>
+        </tr>
+        <tr>
+          <th><label>출발지</label></th>
+          <th><input v-model="tourBoardDto.tourboard_departure.value" type="text" /></th>
+        </tr>
+        <tr>
+          <th><label>여행지</label></th>
+          <th><input v-model="tourBoardDto.tourboard_destination.value" type="text" /></th>
+        </tr>
+        <tr>
+          <th><label>여행설명</label></th>
+          <th><input type="text" /></th>
+        </tr>
+      </table>
+      <input type="file" multiple @change="onFileChange" />
+      <!--  -->
+      <button @click="upload">등록</button>
+    </div>
   </div>
 </template>
 
@@ -49,13 +58,14 @@ import axios from 'axios';
 import { ref, watch } from 'vue';
 const file = ref(null);
 const date = new Date();
-const formattedDate = date.toISOString().slice(0, 16);
+// const formattedDate = date.toISOString().slice(0, 16);
+const formattedDate = date.toLocaleString;
 const tourBoardDto = {
   user_id: ref(2),
   tourboard_tourName: ref(''),
   tourboard_keyword: ref(''),
   tourboard_regDate: ref(''),
-  tourboard_startDate: ref(formattedDate),
+  tourboard_startDate: ref(''),
   tourboard_endDate: ref(''),
   tourboard_deadLineDate: ref(''),
   tourboard_price: ref(0),
@@ -136,3 +146,9 @@ const upload = async () => {
 //   tourboard_views,
 // };
 </script>
+
+<style scoped>
+.main {
+  text-align: center;
+}
+</style>
