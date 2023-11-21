@@ -14,14 +14,14 @@ const onlyAuthUser = async (to, from, next) => {
   if (userInfo.value != null && token) {
     await getUserInfo(token);
   }
-  console.log(userInfo.value , isValidToken.value)
+  console.log(userInfo.value, isValidToken.value);
   // if (!isValidToken.value && userInfo.value === null) {
   // 임시 방편
-  if(token === null) {
-    console.log("로그인 화면으로 가자")
+  if (token === null) {
+    console.log("로그인 화면으로 가자");
     next({ name: "user-login" });
   } else {
-    console.log(userInfo.value , isValidToken.value)
+    console.log(userInfo.value, isValidToken.value);
     next();
   }
 };
@@ -90,6 +90,11 @@ const router = createRouter({
       path: "/map",
       name: "map",
       component: () => import("../views/TheMapView.vue"),
+    },
+    {
+      path: "/gpt",
+      name: "gpt",
+      component: () => import("../components/gpt/gptTest.vue"),
     },
     {
       path: "/tour",

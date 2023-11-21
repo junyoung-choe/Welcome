@@ -1,10 +1,10 @@
 <script setup>
-import { ref, onMounted } from 'vue';
-import { useRouter } from 'vue-router';
-import { listTourBoard } from '@/api/tourboard.js';
+import { ref, onMounted } from "vue";
+import { useRouter } from "vue-router";
+import { listTourBoard, question } from "@/api/tourboard.js";
 
-import TourBoardListItem from '@/components/tour/item/TourBoardListItem.vue';
-import VPageNavigation from '@/components/common/VPageNavigation.vue';
+import TourBoardListItem from "@/components/tour/item/TourBoardListItem.vue";
+import VPageNavigation from "@/components/common/VPageNavigation.vue";
 
 const router = useRouter();
 
@@ -15,8 +15,8 @@ const router = useRouter();
 const param = ref({
   // pgno: currentPage.value,
   // spp: VITE_TOURBOARD_LIST_SIZE,
-  key: '',
-  word: '',
+  key: "",
+  word: "",
 });
 
 const tourList = ref([]);
@@ -24,13 +24,25 @@ const tourListView = ref([]);
 const cnt = ref(10);
 const curCnt = ref(10);
 
+const text = ref("");
+const que = ref({
+  question: "",
+});
+
+const answer = () => {
+  question(que.value, ({ data }) => {
+    console.log(data.choices);
+    text.value = data.choices[0].text;
+  });
+};
+
 onMounted(() => {
   getTourBoardList();
 });
 
 const getTourBoardList = () => {
   tourListView.value.length = 0;
-  console.log('서버에서 글목록 얻어오자!!!', param.value);
+  console.log("서버에서 글목록 얻어오자!!!", param.value);
   listTourBoard(
     param.value,
     ({ data }) => {
@@ -46,7 +58,7 @@ const getTourBoardList = () => {
       }
     },
     (error) => {
-      console.log('error');
+      console.log("error");
       console.log(error);
     }
   );
@@ -87,7 +99,7 @@ const sortListExpensive = () => {
 
 const getMore = () => {
   if (curCnt.value >= tourList.value.length) {
-    alert('마지막 입니다!');
+    alert("마지막 입니다!");
   }
 
   for (let index = curCnt.value; index < cnt.value + curCnt.value; index++) {
@@ -106,7 +118,12 @@ const getMore = () => {
       <div class="box">
         <form class="d-flex" @submit.prevent="getTourBoardList">
           <div class="input-group input-group-sm ms-1">
-            <input type="text" class="form-control" v-model="param.word" placeholder="키워드검색" />
+            <input
+              type="text"
+              class="form-control"
+              v-model="param.word"
+              placeholder="키워드검색"
+            />
             <button class="btn btn-dark" type="submit">검색</button>
           </div>
         </form>
@@ -116,6 +133,9 @@ const getMore = () => {
           <button @click="sortListExpensive">평점순</button>
           <button @click="sortListExpensive">예약순</button>
         </div>
+        <input type="text" name="" id="" v-model="que.question" />
+        <button @click="answer">질문!</button>
+        {{ text }}
       </div>
     </div>
     <div class="section-right">
