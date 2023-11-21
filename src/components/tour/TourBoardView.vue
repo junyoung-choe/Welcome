@@ -2,11 +2,12 @@
 import { localAxios } from "@/util/http-commons";
 
 import { ref, onMounted } from "vue";
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import { tourboardView, plusPeople, makeReserve } from "@/api/tourboard";
 import { jwtDecode } from "jwt-decode";
 
 const route = useRoute();
+const router = useRouter();
 const local = localAxios();
 
 const { tourboard_id } = route.params;
@@ -88,13 +89,19 @@ const getFile = (j) => {
 
 // 예약하겠다는 버튼이다
 const msg = () => {
-  alert("예약완료!!");
-  // reserveNum 만큼 현재의 tourboard_id 로 등록자의 숫자를 +
-  plusPeople(tourboard_id, reserveNum.value);
-  // 현재의 tourboard_id 와 현재 user_id 로 reserve 보드에 새로운 테이블을 등록한다
   let token = sessionStorage.getItem("accessToken");
-  let decodeToken = jwtDecode(token);
-  makeReserve(tourboard_id, decodeToken.userId);
+  if (token == null) {
+    router.push({
+      path: "/user/login",
+    });
+  } else {
+    alert("예약완료!!");
+    // reserveNum 만큼 현재의 tourboard_id 로 등록자의 숫자를 +
+    plusPeople(tourboard_id, reserveNum.value);
+    // 현재의 tourboard_id 와 현재 user_id 로 reserve 보드에 새로운 테이블을 등록한다
+    let decodeToken = jwtDecode(token);
+    makeReserve(tourboard_id, decodeToken.userId);
+  }
 };
 // 파일 정보를 back 으로 보내고 binary 파일로 받아온다
 </script>
