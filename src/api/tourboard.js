@@ -35,6 +35,15 @@ function getFile(sfolder, ofile ,sfile ,success, fail) {
   local.get(`/file/${sfolder}/${ofile}/${sfile}`).then(success).catch(fail);
 }
 
+// 투어보드에 등록자를 +
+function plusPeople(tourboard_id,reserveNum,success,fail) {
+  local.get(`/tourboard/plus/${tourboard_id}/${reserveNum}`).then(success).catch(fail);
+}
+// 사용자 id 와 보드 id를 등록해야한다
+function makeReserve(tourboard_id, user_id, success,fail) {
+  local.get(`/reservation/register/${tourboard_id}/${user_id}`).then(success).catch(fail);
+}
+
 export {
   listTourBoard,
   listDeparture,
@@ -44,4 +53,6 @@ export {
   getPopularList,
   getCheapList,
   getFile,
+  plusPeople,
+  makeReserve,
 };
