@@ -3,7 +3,7 @@ import { useRouter } from "vue-router";
 import { defineStore } from "pinia";
 import { jwtDecode } from "jwt-decode";
 
-import { userConfirm, findById, tokenRegeneration, logout, userMyPage } from "@/api/user";
+import { userConfirm, findById, tokenRegeneration, logout } from "@/api/user";
 import { httpStatusCode } from "@/util/http-status";
 
 export const useMemberStore = defineStore("memberStore", () => {
@@ -35,13 +35,13 @@ export const useMemberStore = defineStore("memberStore", () => {
   //   )
   // }
 
-  const trueAgency = () => {
-      isAgency.value = true;
-  }
-  const falseAgency = () => {
-      isAgency.value = false;
+  // const trueAgency = () => {
+  //     isAgency.value = true;
+  // }
+  // const falseAgency = () => {
+  //     isAgency.value = false;
 
-  }
+  // }
   ///
 
     const userLogin = async (loginUser) => {
@@ -96,7 +96,7 @@ export const useMemberStore = defineStore("memberStore", () => {
           error.response.status
         );
         isValidToken.value = false;
-
+        
         // 그러면 refresh 는 유효한지 확인하고  있으면 acess로 다시 들어온다 
         await tokenRegenerate();
       }
@@ -166,9 +166,10 @@ export const useMemberStore = defineStore("memberStore", () => {
     isLoginError,
     userInfo,
     isValidToken,
-    falseAgency,
+    isAgency,
+    // falseAgency,
     // agencyConfirm,
-    trueAgency,
+    // trueAgency,
     userLogin,
     getUserInfo,
     tokenRegenerate,

@@ -7,6 +7,7 @@ export const useMenuStore = defineStore('menuStore', () => {
     { name: '로그인', show: true, routeName: 'user-login' },
     { name: '내정보', show: false, routeName: 'user-mypage' },
     { name: '로그아웃', show: false, routeName: 'user-logout' },
+    { name: '', show: false, routeName: 'agency-mypage'},
   ]);
 
   // 로그인 된 이후에 메뉴를 변경해준다
@@ -16,9 +17,18 @@ export const useMenuStore = defineStore('menuStore', () => {
     console.log("------------------------")
     console.log(menuList.value)
   };
+  
+  const trueAgency = () => {
+    menuList.value[4].show = true;
+}
+  const falseAgency = () => {
+    menuList.value[4].show = false;
 
+}
   return {
     menuList,
     changeMenuState,
+    trueAgency,
+    falseAgency,
   };
 });

@@ -9,14 +9,22 @@ import { jwtDecode } from "jwt-decode";
 const memberStore = useMemberStore();
 
 const menuStore = useMenuStore();
-const { userLogout, falseAgency } = memberStore;
+const { userLogout } = memberStore;
+// const { isAgency } = storeToRefs(memberStore);
 
 const { menuList } = storeToRefs(menuStore);
-const { changeMenuState } = menuStore;
+const { changeMenuState, trueAgency, falseAgency } = menuStore;
 
 const isLogout = ref({});
 
+const packager = ref(false);
+
 onMounted(() => {
+  packager.value = localStorage.getItem("agency");
+  if (packager.value !== null) {
+    trueAgency();
+  }
+
   let token = sessionStorage.getItem("accessToken");
   // 토큰이 존재한다면 -> 새로고침 시에도 로그인이 유지 되야한다
   if (token != null) {
@@ -29,11 +37,27 @@ onMounted(() => {
   console.log(menuList.value);
   isLogout.value = menuList.value[3].show;
   console.log(isLogout.value);
+
+  console.log("======================");
+  console.log(packager.value);
+  // 로컬 스토리지에 패키저면 초기화된 store 의 값을 true 로 바꿔줘야해
 });
 
 isLogout.value = computed(() => {
   return menuList.value[3].show == true ? true : false;
 });
+
+// packager.value = computed(() => {
+//   return isAgency.value == true ? true : false;
+// });
+
+// watch(
+//   () => packager.value,
+//   (nv, ov) => {
+//     console.log("111111111111111");
+//     console.log(nv);
+//   }
+// );
 
 // 로그아웃
 // const logoutButton = document.getElementById("logoutButton");
@@ -47,6 +71,9 @@ isLogout.value = computed(() => {
 const logout = async () => {
   let token = sessionStorage.getItem("accessToken");
   let decodeToken = jwtDecode(token);
+  // agency 패키저를 위함
+  localStorage.removeItem("agency");
+
   falseAgency();
   await userLogout(decodeToken.userId);
   console.log("로그아웃!!!!");
@@ -115,6 +142,11 @@ const logout = async () => {
             </template>
           </template>
         </template>
+
+        <!--  -->
+        <!-- <template v-if="packager">
+          <router-link to="/" class="nav-link"> 관리자 페이지 </router-link>
+        </template> -->
       </div>
     </div>
   </nav>

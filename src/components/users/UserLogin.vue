@@ -62,11 +62,7 @@ const goAgencyLogin = () => {
           User Login
           <div class="">
             <!-- <label for="userid" class="form-label">아이디 : </label> -->
-            <input
-              type="text"
-              v-model="loginUser.user_account"
-              placeholder="ID"
-            />
+            <input type="text" v-model="loginUser.user_account" placeholder="ID" />
           </div>
           <div class="">
             <!-- <label for="userpwd" class="form-label">비밀번호 : </label> -->
@@ -78,21 +74,17 @@ const goAgencyLogin = () => {
             />
           </div>
           <div>
-            <button type="button" class="login-btn" @click="login">
-              LOGIN
-            </button>
+            <button type="button" class="login-btn" @click="login">LOGIN</button>
           </div>
           <div class="regist-box">
-            <span>Don't have account? </span>
-            <button type="button" class="regist-btn" @click="goRegist">
-              Click Here
-            </button>
+            <!-- <span>Don't have account? </span> -->
+            <span> 회원가입 </span>
+            <button type="button" class="regist-btn" @click="goRegist">Click Here</button>
           </div>
           <div class="regist-box">
-            <span>are you Travel agency ? </span>
-            <button type="button" class="regist-btn" @click="goAgencyLogin">
-              Click Here
-            </button>
+            <!-- <span>are you Travel agency ? </span> -->
+            <span> 여행사 로그인 </span>
+            <button type="button" class="regist-btn" @click="goAgencyLogin">Click Here</button>
           </div>
         </form>
       </div>
