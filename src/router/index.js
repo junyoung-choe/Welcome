@@ -59,12 +59,17 @@ const router = createRouter({
           name: 'agency-join',
           component: () => import('@/components/users/AgencyRegister.vue'),
         },
-
         {
           path: 'mypage',
           name: 'user-mypage',
           beforeEnter: onlyAuthUser,
           component: () => import('@/components/users/UserMyPage.vue'),
+        },
+        {
+          path: "Agencypage",
+          name: "agency-mypage",
+          beforeEnter: onlyAuthUser,
+          component: () => import("@/components/users/AgencyMypage.vue"),
         },
       ],
     },

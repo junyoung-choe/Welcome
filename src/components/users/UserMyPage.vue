@@ -5,7 +5,16 @@ import { ref, onMounted } from 'vue';
 import { userMyPage, getReservation } from '@/api/user';
 import { jwtDecode } from 'jwt-decode';
 
-// const user_id = ref();
+// menu 확인
+import { useMenuStore } from "@/stores/menu";
+import { storeToRefs } from "pinia";
+import MyRegistTourBoard from "./MyRegistTourBoard.vue";
+
+const menuStore = useMenuStore();
+const { menuList } = storeToRefs(menuStore);
+///
+
+const user_id = ref("");
 // const user_password = ref();
 // const user_regDate = ref();
 // const refreshToken = ref();
@@ -24,6 +33,9 @@ onMounted(() => {
 
   // 회원 ID로 reservation 에서 tourBoard_id 를 찾아서 tourBoard 들을 불러온다
   getReservePackage();
+  console.log("=============================");
+  console.log(menuList.value[4].show);
+  console.log("=============================");
 });
 
 const getUserInformation = () => {
@@ -33,6 +45,8 @@ const getUserInformation = () => {
     decodeToken.userId,
     ({ data }) => {
       console.log(data.resdata);
+
+      user_id.value = data.resdata.user_id;
       user_account.value = data.resdata.user_account;
       user_role.value = data.resdata.user_role;
       user_name.value = data.resdata.user_name;
@@ -92,10 +106,19 @@ const getReservePackage = () => {
             </div>
           </div>
         </div>
+<<<<<<< Updated upstream
         <!-- {{ reservation }} -->
         <div v-for="(item, index) in reservation" :key="index">
           {{ item }}
         </div>
+=======
+        <!--  일반 유저일때 -->
+        <template v-if="user_role == 'user'"> asdfasdf {{ reservation }} </template>
+        <!--  여행 에이전트 일때 -->
+        <template v-else>
+          <MyRegistTourBoard :myid="user_id" />
+        </template>
+>>>>>>> Stashed changes
         <div>
           <!-- <button type="button" class="btn btn-outline-secondary mt-2">수정</button> -->
         </div>
