@@ -1,13 +1,7 @@
-<!-- <script setup>
-const dataList = ref([]);
-
-axios 
-    .asdasd
-dataList.value = data.value
-</script>
+<script setup></script>
 
 <template>
-  <div v-for="">this is myregisttourboard</div>
+  <div></div>
 </template>
 
-<style scoped></style> -->
+<style scoped></style>

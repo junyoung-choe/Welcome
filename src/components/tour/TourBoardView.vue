@@ -172,13 +172,11 @@ const msg = () => {
       </div>
     </div>
     <div class="reservation-btn-box">
-      <!-- <input type="text" /> -->
-      <!-- 폼 +- 해볼게요  -->
-      <input type="number" v-model="reserveNum" />
-      <button @click="add">+</button>
-      <button @click="subtract">-</button>
-      <!--  -->
-
+      <div class="plusMinus">
+        <input type="number" v-model="reserveNum" />
+        <button @click="add">+</button>
+        <button @click="subtract">-</button>
+      </div>
       <button class="reservation-btn" @click="msg">예약하기</button>
     </div>
     <div class="second-box">
@@ -302,7 +300,7 @@ const msg = () => {
 }
 .reservation-btn-box {
   position: relative;
-  margin-bottom: 50px;
+  margin-bottom: 100px;
 }
 .reservation-btn {
   position: absolute;
@@ -312,6 +310,22 @@ const msg = () => {
   background-color: #cff0fa;
   width: 200px;
   height: 40px;
+  top: 40px;
+}
+
+.plusMinus {
+  position: absolute;
+  right: 0px;
+}
+
+.plusMinus > input {
+  width: 50px;
+}
+
+.plusMinus button {
+  margin-left: 5px;
+  background-color: white;
+  font-weight: 800;
 }
 
 .reservation-section01 {
