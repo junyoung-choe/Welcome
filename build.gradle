@@ -36,6 +36,9 @@ dependencies {
 	implementation 'org.glassfish.jaxb:jaxb-runtime'
 
 	implementation 'commons-io:commons-io:2.11.0'
+
+	// chat gpt
+	implementation 'io.github.flashvayne:chatgpt-spring-boot-starter:1.0.4'
 }
 
 tasks.named('bootBuildImage') {
