@@ -1,6 +1,6 @@
 <script setup>
 import { ref, onMounted } from 'vue';
-import { listDeparture, listDestination } from '@/api/tourboard';
+import { listDeparture, listDestination, question } from '@/api/tourboard';
 
 import VTourSelect from '../common/VTourSelect.vue';
 import TourPopular from './TourPopular.vue';
@@ -148,5 +148,45 @@ const onChangeDestination = (val) => {
 
 #carouselExampleControls {
   width: 35% !important;
+}
+
+.ai-msg {
+  font-size: 21px;
+  font-weight: 700;
+}
+
+.main-main-box-section02 {
+  margin-top: 100px;
+}
+
+.question-input {
+  width: 400px;
+}
+
+.question-box {
+  display: flex;
+  flex-direction: column;
+}
+
+.question-btn {
+  text-align: center;
+  background-color: #06233a;
+  display: block;
+  text-decoration: none;
+  color: white;
+  padding: 10px;
+  font-size: 20px;
+  margin-top: 10px;
+  border: none;
+}
+.question-input {
+  outline: none;
+  height: 50px;
+  padding: 10px;
+  border: none;
+}
+
+.question-input::placeholder {
+  color: rgba(0, 0, 0, 0.4);
 }
 </style>
