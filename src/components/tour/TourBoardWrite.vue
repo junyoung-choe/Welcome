@@ -85,29 +85,34 @@
 </template>
 
 <script setup>
-import axios from 'axios';
-import { ref, watch } from 'vue';
-import { useRouter } from 'vue-router';
+import axios from "axios";
+import { ref, watch } from "vue";
+import { useRouter } from "vue-router";
+import { jwtDecode } from "jwt-decode";
+
+let token = sessionStorage.getItem("accessToken");
+let decodeToken = jwtDecode(token);
+
 const file = ref(null);
 const date = new Date();
 const router = useRouter();
 // const formattedDate = date.toISOString().slice(0, 16);
 const formattedDate = date.toLocaleString;
 const tourBoardDto = {
-  user_id: ref(2),
-  tourboard_tourName: ref(''),
-  tourboard_keyword: ref(''),
-  tourboard_regDate: ref(''),
-  tourboard_startDate: ref(''),
-  tourboard_endDate: ref(''),
-  tourboard_deadLineDate: ref(''),
+  user_id: ref(decodeToken.userId),
+  tourboard_tourName: ref(""),
+  tourboard_keyword: ref(""),
+  tourboard_regDate: ref(""),
+  tourboard_startDate: ref(""),
+  tourboard_endDate: ref(""),
+  tourboard_deadLineDate: ref(""),
   tourboard_price: ref(0),
   tourboard_salePrice: ref(0),
   tourboard_stock: ref(0),
   tourboard_stockCnt: ref(0),
   tourboard_fnishedYn: ref(false),
-  tourboard_departure: ref(''),
-  tourboard_destination: ref(''),
+  tourboard_departure: ref(""),
+  tourboard_destination: ref(""),
   tourboard_views: ref(0),
 };
 
@@ -128,20 +133,20 @@ const tourBoardDto = {
 // const tourboard_views = ref("0");
 
 const onFileChange = (e) => {
-  console.log('onFileChange called'); // 함수 호출 확인
+  console.log("onFileChange called"); // 함수 호출 확인
   console.log(e.target.files); // 선택한 파일 객체 확인
   file.value = e.target.files;
 };
 
 const upload = async () => {
-  if (confirm('여행지를 등록하시겠습니까?')) {
+  if (confirm("여행지를 등록하시겠습니까?")) {
     let formData = new FormData();
 
     // console.log(file.value);
     // formData.append("upfile", file.value); // file의 실제 값을 얻음
     if (file.value && file.value.length > 0) {
       for (let i = 0; i < file.value.length; i++) {
-        formData.append('upfile', file.value[i]); // 다중 파일 업로드를 위해 배열 형태로 추가
+        formData.append("upfile", file.value[i]); // 다중 파일 업로드를 위해 배열 형태로 추가
       }
     }
 
@@ -150,17 +155,17 @@ const upload = async () => {
     }
 
     try {
-      await axios.post('http://localhost:70/tourboard', formData, {
+      await axios.post("http://localhost:70/tourboard", formData, {
         headers: {
-          'Content-Type': 'multipart/form-data',
+          "Content-Type": "multipart/form-data",
         },
       });
-      console.log('File and TourBoardDto uploaded successfully.');
+      console.log("File and TourBoardDto uploaded successfully.");
     } catch (err) {
       console.error(err);
     }
     router.push({
-      path: '/tour/list',
+      path: "/tour/list",
     });
   }
 };
@@ -226,7 +231,7 @@ input {
   height: 40px;
   margin-top: 20px;
 }
-input[type='file']::file-selector-button {
+input[type="file"]::file-selector-button {
   width: 150px;
   height: 30px;
   background: #fff;
