@@ -7,18 +7,19 @@ const arr = ref([]);
 const tag = ref('');
 
 const router = useRouter();
+const itemData = ref({});
 
 onMounted(() => {
+  console.log(props.item[0]);
   makeTag();
 });
 
 const makeTag = () => {
   arr.value = props.item.tourboard_keyword.split(', ');
-  console.log(arr.value);
+
   for (let i = 0; i < arr.value.length; i++) {
     tag.value += '#' + arr.value[i] + ' ';
   }
-  console.log(tag.value);
 };
 
 const mvView = () => {
@@ -33,7 +34,7 @@ const moveWrite = () => {
 <template>
   <div class="main" @click="mvView">
     <div class="img-section">
-      <img src="src\img\winter.png" alt="" />
+      <img src="src/img/winter.png" alt="" />
     </div>
     <div class="content-section">
       <p class="title">{{ item.tourboard_tourName }}</p>

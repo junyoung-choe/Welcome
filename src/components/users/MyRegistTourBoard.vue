@@ -36,6 +36,7 @@ const getPackage = (user_id) => {
 <template>
   <div>this is myregisttourboard</div>
   {{ packages }}
+
 </template>
 
 <style scoped></style>
