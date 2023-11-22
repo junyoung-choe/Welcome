@@ -1,6 +1,7 @@
 package com.welcome.enjoytrip.tourboard.model;
 
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -15,9 +16,13 @@ public class TourBoardDto {
     private long user_id;
     private String tourboard_tourName;
     private String tourboard_keyword;
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     private LocalDateTime tourboard_regDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     private LocalDateTime tourboard_startDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     private LocalDateTime tourboard_endDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     private LocalDateTime tourboard_deadLineDate;
     private int tourboard_price;
     private int tourboard_salePrice;

@@ -17,7 +17,7 @@
     <insert id="tourboardWrite" parameterType="tourboardDto">
         insert into tourboard (user_id, tourboard_tourName, tourboard_keyword, tourboard_regDate, tourboard_startDate, tourboard_endDate, tourboard_deadLineDate
         , tourboard_price, tourboard_salePrice, tourboard_stock, tourboard_stockCnt, tourboard_fnishedYn, tourboard_departure, tourboard_destination, tourboard_views)
-        values (#{user_id}, #{tourboard_tourName}, #{tourboard_keyword}, now(), now(), now(), now()
+        values (#{user_id}, #{tourboard_tourName}, #{tourboard_keyword}, now(), #{tourboard_startDate}, #{tourboard_endDate}, #{tourboard_deadLineDate}
         , #{tourboard_price}, #{tourboard_salePrice}, #{tourboard_stock}, #{tourboard_stockCnt}, #{tourboard_fnishedYn}, #{tourboard_departure}, #{tourboard_destination}, #{tourboard_views})
         <selectKey resultType="int" keyProperty="tourboard_id" order="AFTER">
             select last_insert_id()
