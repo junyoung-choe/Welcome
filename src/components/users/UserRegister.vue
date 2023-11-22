@@ -37,13 +37,23 @@ const goAgencyRegister = () => {
     <div class="regist-box">
       <p class="welcome">Welcome</p>
       <div class="">
-        Nomal User Register
+        사용자 로그인
         <form>
           <div class="">
-            <input type="text" class="" v-model="loginUser.user_name" placeholder="Name" />
+            <input
+              type="text"
+              class=""
+              v-model="loginUser.user_name"
+              placeholder="Name"
+            />
           </div>
           <div class="">
-            <input type="text" class="" v-model="loginUser.user_account" placeholder="ID" />
+            <input
+              type="text"
+              class=""
+              v-model="loginUser.user_account"
+              placeholder="ID"
+            />
           </div>
           <div class="">
             <input
@@ -54,7 +64,12 @@ const goAgencyRegister = () => {
             />
           </div>
           <div class="">
-            <input type="text" class="" v-model="loginUser.user_phone" placeholder="PhoneNumber" />
+            <input
+              type="text"
+              class=""
+              v-model="loginUser.user_phone"
+              placeholder="PhoneNumber"
+            />
           </div>
 
           <!-- <div class="mb-3">
@@ -76,17 +91,23 @@ const goAgencyRegister = () => {
             </div>
           </div> -->
           <div>
-            <button type="button" class="regist-btn" @click="join">Register</button>
+            <button type="button" class="regist-btn" @click="join">
+              Register
+            </button>
           </div>
           <div class="login-box">
             <!-- <span>Already have an account? </span> -->
             <span>로그인 화면 </span>
-            <button type="button" class="login-btn" @click="goLogin">Click Here</button>
+            <button type="button" class="login-btn" @click="goLogin">
+              Click
+            </button>
           </div>
           <div class="login-box">
             <!-- <span>are you travel agency ? </span> -->
             <span> 여행사 회원가입 </span>
-            <button type="button" class="login-btn" @click="goAgencyRegister">Click Here</button>
+            <button type="button" class="login-btn" @click="goAgencyRegister">
+              Click
+            </button>
           </div>
         </form>
       </div>

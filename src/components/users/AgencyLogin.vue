@@ -66,10 +66,14 @@ const goNomalLogin = () => {
             <input class="form-check-input" type="checkbox" />
             <label class="form-check-label" for="saveid"> 아이디저장 </label>
           </div> -->
-          travel agency Login
+          여행사 로그인
           <div class="">
             <!-- <label for="userid" class="form-label">아이디 : </label> -->
-            <input type="text" v-model="loginUser.user_account" placeholder="ID" />
+            <input
+              type="text"
+              v-model="loginUser.user_account"
+              placeholder="ID"
+            />
           </div>
           <div class="">
             <!-- <label for="userpwd" class="form-label">비밀번호 : </label> -->
@@ -81,17 +85,23 @@ const goNomalLogin = () => {
             />
           </div>
           <div>
-            <button type="button" class="login-btn" @click="login">LOGIN</button>
+            <button type="button" class="login-btn" @click="login">
+              LOGIN
+            </button>
           </div>
           <div class="regist-box">
             <!-- <span>Don't have account? </span> -->
             <span> 회원가입 </span>
-            <button type="button" class="regist-btn" @click="goRegist">Click Here</button>
+            <button type="button" class="regist-btn" @click="goRegist">
+              Click
+            </button>
           </div>
           <div class="regist-box">
             <!-- <span>are you nomal user ? </span> -->
             <span> 일반 유저 로그인 </span>
-            <button type="button" class="regist-btn" @click="goNomalLogin">Click Here</button>
+            <button type="button" class="regist-btn" @click="goNomalLogin">
+              Click
+            </button>
           </div>
         </form>
       </div>
