@@ -6,16 +6,16 @@ import { userMyPage, getReservation } from "@/api/user";
 import { jwtDecode } from "jwt-decode";
 
 // menu 확인
-import { useMenuStore } from '@/stores/menu';
-import { storeToRefs } from 'pinia';
-import MyRegistTourBoard from './MyRegistTourBoard.vue';
-import TourListInMainItem from '../tourMain/item/TourListInMainItem.vue';
+import { useMenuStore } from "@/stores/menu";
+import { storeToRefs } from "pinia";
+import MyRegistTourBoard from "./MyRegistTourBoard.vue";
+import TourListInMainItem from "../tourMain/item/TourListInMainItem.vue";
 
 const menuStore = useMenuStore();
 const { menuList } = storeToRefs(menuStore);
 ///
 
-const user_id = ref('');
+const user_id = ref("");
 // const user_password = ref();
 // const user_regDate = ref();
 // const refreshToken = ref();
@@ -34,9 +34,9 @@ onMounted(() => {
 
   // 회원 ID로 reservation 에서 tourBoard_id 를 찾아서 tourBoard 들을 불러온다
   getReservePackage();
-  console.log('=============================');
+  console.log("=============================");
   console.log(menuList.value[4].show);
-  console.log('=============================');
+  console.log("=============================");
 });
 
 const getUserInformation = () => {
@@ -106,20 +106,23 @@ const getReservePackage = () => {
             </div>
           </div>
         </div>
-        <!-- {{ reservation }} -->
-        <div v-for="(item, index) in reservation" :key="index">
-          {{ item }}
-        </div>
+        <div style="height: 40px"></div>
+        <hr />
         <!--  일반 유저일때 -->
         <template v-if="user_role == 'user'">
-          <div><p>예약 정보</p></div>
-          <div class="user-reservation-list">
-            <TourListInMainItem
-              v-if="reservation != null"
-              v-for="item in reservation"
-              :key="item[0].tourboard_id"
-              :item="item[0]"
-            />
+          <div class="reservation-info-title"><p>예약 정보</p></div>
+          <div>
+            <div
+              v-for="(r, index) in reservation"
+              :key="index"
+              class="user-reservation-list"
+            >
+              <TourListInMainItem
+                v-for="item in r"
+                :key="item.tourboard_id"
+                :item="item"
+              />
+            </div>
           </div>
         </template>
 
@@ -147,5 +150,10 @@ const getReservePackage = () => {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.reservation-info-title {
+  font-size: 30px;
+  margin-top: 30px;
 }
 </style>

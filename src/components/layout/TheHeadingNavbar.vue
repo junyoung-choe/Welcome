@@ -105,6 +105,9 @@ const logout = async () => {
           <li class="nav-item">
             <router-link to="/tour" class="nav-link">여행상품</router-link>
           </li>
+          <li class="nav-item">
+            <router-link to="/tour/AIlist" class="nav-link">AI추천</router-link>
+          </li>
         </ul>
 
         <!-- <ul
