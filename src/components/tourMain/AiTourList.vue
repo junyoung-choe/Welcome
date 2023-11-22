@@ -1,20 +1,27 @@
 <script setup>
 import { ref, onMounted } from 'vue';
-import { useRouter } from 'vue-router';
+import { useRouter, useRoute } from 'vue-router';
 import { listTourBoard, question } from '@/api/tourboard.js';
 
 import TourBoardListItem from '@/components/tour/item/TourBoardListItem.vue';
-import VPageNavigation from '@/components/common/VPageNavigation.vue';
 
 const router = useRouter();
+const route = useRoute();
 
-// const tourBoards = ref([]);
-// const currentPage = ref(1);
-// const totalPage = ref(0);
-// const { VITE_TOURBOARD_LIST_SIZE } = import.meta.env;
+const text = ref('');
+const que = ref({
+  question: '',
+});
+
+const answer = () => {
+  question(que.value, ({ data }) => {
+    text.value = data.choices[0].text;
+    param.value.word = text.value.substring(2);
+    getTourBoardList();
+  });
+};
+
 const param = ref({
-  // pgno: currentPage.value,
-  // spp: VITE_TOURBOARD_LIST_SIZE,
   key: '',
   word: '',
 });
@@ -24,20 +31,10 @@ const tourListView = ref([]);
 const cnt = ref(10);
 const curCnt = ref(10);
 
-const text = ref('');
-const que = ref({
-  question: '',
-});
-
-const answer = () => {
-  question(que.value, ({ data }) => {
-    console.log(data.choices);
-    text.value = data.choices[0].text;
-  });
-};
+const props = defineProps({ text: Object });
 
 onMounted(() => {
-  getTourBoardList();
+  //   getTourBoardList();
 });
 
 const getTourBoardList = () => {
@@ -46,6 +43,8 @@ const getTourBoardList = () => {
   listTourBoard(
     param.value,
     ({ data }) => {
+      console.log('==============');
+      console.log(data);
       tourList.value = data;
       // currentPage.value = data.currentPage;
       // totalPage.value = data.totalPageCount;
@@ -113,15 +112,27 @@ const getMore = () => {
 </script>
 
 <template>
+  <div class="search-box">
+    <div class="ai-msg">
+      <p class="main-text">경험해 보고 싶은 것을 AI에게 물어보세요!</p>
+    </div>
+    <div class="question-box">
+      <input
+        class="question-input"
+        type="text"
+        name=""
+        id=""
+        v-model="que.question"
+        placeholder="ex) 자연이 아름다운 나라"
+      />
+      <!-- <button @click="answer" class="question-btn">검색</button> -->
+
+      <button class="answer-btn" @click="answer">검색</button>
+    </div>
+  </div>
   <div class="main">
     <div class="section-left">
       <div class="box">
-        <form class="d-flex" @submit.prevent="getTourBoardList">
-          <div class="input-group input-group-sm ms-1">
-            <input type="text" class="form-control" v-model="param.word" placeholder="키워드검색" />
-            <button class="btn btn-dark" type="submit">검색</button>
-          </div>
-        </form>
         <div class="btn-box">
           <button @click="sortListCheap">낮은가격순</button>
           <button @click="sortListExpensive">높은가격순</button>
@@ -130,7 +141,7 @@ const getMore = () => {
         </div>
       </div>
     </div>
-    <div class="section-right">
+    <div class="section-right" v-if="tourList.length > 0">
       <div>
         <TourBoardListItem
           v-for="tourBoard in tourListView"
@@ -141,11 +152,6 @@ const getMore = () => {
       <div class="more-btn-box">
         <button @click="getMore">더보기▽</button>
       </div>
-      <!-- <VPageNavigation
-        :current-page="currentPage"
-        :total-page="totalPage"
-        @pageChange="onPageChange"
-      ></VPageNavigation> -->
     </div>
   </div>
 </template>
@@ -153,6 +159,10 @@ const getMore = () => {
 <style scoped>
 .main {
   display: flex;
+}
+.main-text {
+  font-size: 30px;
+  font-weight: 700;
 }
 .section-left {
   border-top: 1px solid rgba(0, 0, 0, 0.2);
@@ -180,6 +190,7 @@ button:hover {
 .btn-box {
   display: flex;
   flex-direction: column;
+  margin-top: 100px;
 }
 
 .btn-box button {
@@ -200,5 +211,22 @@ button:hover {
   top: 140px;
   left: 10px;
   width: 200px !important;
+}
+.search-box {
+  text-align: center;
+  margin-bottom: 20px;
+}
+.question-input {
+  width: 500px;
+  height: 30px;
+  padding: 20px;
+  outline: none;
+}
+.answer-btn {
+  margin-left: 10px;
+  padding: 8px;
+  border: none;
+  background-color: #cff0fa;
+  border-radius: 10px;
 }
 </style>

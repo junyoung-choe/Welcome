@@ -1,20 +1,20 @@
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref, onMounted } from 'vue';
 
 // (getUserInformation) 로그인 정보를 받아오기 위한 필드와 메소드
-import { userMyPage, getReservation } from "@/api/user";
-import { jwtDecode } from "jwt-decode";
+import { userMyPage, getReservation } from '@/api/user';
+import { jwtDecode } from 'jwt-decode';
 
 // const user_id = ref();
 // const user_password = ref();
 // const user_regDate = ref();
 // const refreshToken = ref();
-const user_account = ref("");
-const user_role = ref("");
-const user_name = ref("");
-const user_phone = ref("");
-const user_cash = ref("");
-const user_mileage = ref("");
+const user_account = ref('');
+const user_role = ref('');
+const user_name = ref('');
+const user_phone = ref('');
+const user_cash = ref('');
+const user_mileage = ref('');
 
 const reservation = ref([]);
 
@@ -27,7 +27,7 @@ onMounted(() => {
 });
 
 const getUserInformation = () => {
-  let token = sessionStorage.getItem("accessToken");
+  let token = sessionStorage.getItem('accessToken');
   let decodeToken = jwtDecode(token);
   userMyPage(
     decodeToken.userId,
@@ -47,7 +47,7 @@ const getUserInformation = () => {
 };
 
 const getReservePackage = () => {
-  let token = sessionStorage.getItem("accessToken");
+  let token = sessionStorage.getItem('accessToken');
   let decodeToken = jwtDecode(token);
   getReservation(
     decodeToken.userId,
@@ -66,10 +66,8 @@ const getReservePackage = () => {
 <template>
   <div class="container">
     <div class="row justify-content-center">
-      <div class="col-lg-10">
-        <h2 class="my-3 py-3 shadow-sm bg-light text-center">
-          <mark class="orange">내정보</mark>
-        </h2>
+      <div>
+        <p class="title">마이페이지</p>
       </div>
       <div class="col-lg-10">
         <div class="card mt-3 m-auto" style="max-width: 700px">
@@ -94,7 +92,10 @@ const getReservePackage = () => {
             </div>
           </div>
         </div>
-        asdfasdf {{ reservation }}
+        <!-- {{ reservation }} -->
+        <div v-for="(item, index) in reservation" :key="index">
+          {{ item }}
+        </div>
         <div>
           <!-- <button type="button" class="btn btn-outline-secondary mt-2">수정</button> -->
         </div>
@@ -103,4 +104,9 @@ const getReservePackage = () => {
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.title {
+  font-size: 35px;
+  font-weight: 700;
+}
+</style>
