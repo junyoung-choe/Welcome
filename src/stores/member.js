@@ -3,7 +3,7 @@ import { useRouter } from "vue-router";
 import { defineStore } from "pinia";
 import { jwtDecode } from "jwt-decode";
 
-import { userConfirm, findById, tokenRegeneration, logout } from "@/api/user";
+import { userConfirm, findById, tokenRegeneration, logout, userMyPage } from "@/api/user";
 import { httpStatusCode } from "@/util/http-status";
 
 export const useMemberStore = defineStore("memberStore", () => {
@@ -13,6 +13,36 @@ export const useMemberStore = defineStore("memberStore", () => {
   const isLoginError = ref(false);
   const userInfo = ref(null);
   const isValidToken = ref(false);
+
+  /// 패키저 확인
+  const isAgency = ref(false);
+
+  // const agencyConfirm = async (userid) => {
+  //   await userMyPage(
+  //     userid,
+  //     (response) => {
+  //       if (response.status === httpStatusCode.CREATE && response.resdata.user_role === "agency") {
+  //         isAgency.value = true;
+  //       } else {
+  //         isAgency.value = false;
+  //       }
+  //     },
+  //     (error) => {
+  //       console.error(error);
+  //       // 에러시 다시 로그인 화면으로 보낸다
+  //       router.push({ path: '/user/login' })
+  //     }
+  //   )
+  // }
+
+  const trueAgency = () => {
+      isAgency.value = true;
+  }
+  const falseAgency = () => {
+      isAgency.value = false;
+
+  }
+  ///
 
     const userLogin = async (loginUser) => {
       // login 홈페이지에서 호출되어 userConfirm (api/user 에 있는) 를 호출하여 서버에게 login 으로 post 보내본다 ! 
@@ -136,6 +166,9 @@ export const useMemberStore = defineStore("memberStore", () => {
     isLoginError,
     userInfo,
     isValidToken,
+    falseAgency,
+    // agencyConfirm,
+    trueAgency,
     userLogin,
     getUserInfo,
     tokenRegenerate,

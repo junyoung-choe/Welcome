@@ -10,8 +10,10 @@ const router = useRouter();
 const memberStore = useMemberStore();
 
 const { isLogin } = storeToRefs(memberStore);
-const { userLogin, getUserInfo } = memberStore;
+const { userLogin, getUserInfo, trueAgency } = memberStore;
 const { changeMenuState } = useMenuStore();
+
+const AgencyCode = ref("");
 
 const loginUser = ref({
   user_account: "",
@@ -19,6 +21,9 @@ const loginUser = ref({
 });
 
 const login = async () => {
+  // 패키저 사용자 true 로 적용 !
+  trueAgency();
+
   await userLogin(loginUser.value);
   let token = sessionStorage.getItem("accessToken");
 
@@ -42,9 +47,9 @@ const goRegist = () => {
   });
 };
 
-const goAgencyLogin = () => {
+const goNomalLogin = () => {
   router.push({
-    path: "agencyLogin",
+    path: "login",
   });
 };
 </script>
@@ -59,7 +64,7 @@ const goAgencyLogin = () => {
             <input class="form-check-input" type="checkbox" />
             <label class="form-check-label" for="saveid"> 아이디저장 </label>
           </div> -->
-          User Login
+          travel agency Login
           <div class="">
             <!-- <label for="userid" class="form-label">아이디 : </label> -->
             <input
@@ -89,8 +94,8 @@ const goAgencyLogin = () => {
             </button>
           </div>
           <div class="regist-box">
-            <span>are you Travel agency ? </span>
-            <button type="button" class="regist-btn" @click="goAgencyLogin">
+            <span>are you nomal user ? </span>
+            <button type="button" class="regist-btn" @click="goNomalLogin">
               Click Here
             </button>
           </div>

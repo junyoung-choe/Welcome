@@ -3,6 +3,8 @@ import { localAxios } from "@/util/http-commons";
 
 const local = localAxios();
 
+
+
 async function userRegister(param, success, fail) {
   await local.post(`/member/join`, param).then(success).catch(fail);
 }
@@ -32,4 +34,13 @@ async function logout(userid, success, fail) {
   // 로그아웃 후에 로그인 화면으로 이동한다
 }
 
-export { userConfirm, findById, tokenRegeneration, logout, userRegister, userMyPage };
+async function getReservation(userid, success, fail) {
+  await local.get(`/reservation/package/${userid}`).then(success).catch(fail);
+  // 로그아웃 후에 로그인 화면으로 이동한다
+}
+
+// 패키저 에이전시 확인
+
+
+
+export { userConfirm, findById, tokenRegeneration, logout, userRegister, userMyPage, getReservation };

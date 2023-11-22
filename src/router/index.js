@@ -45,10 +45,21 @@ const router = createRouter({
           component: () => import("@/components/users/UserLogin.vue"),
         },
         {
+          path: "agencyLogin",
+          name: "agency-login",
+          component: () => import("@/components/users/AgencyLogin.vue"),
+        },
+        {
           path: "join",
           name: "user-join",
           component: () => import("@/components/users/UserRegister.vue"),
         },
+        {
+          path: "AgencyJoin",
+          name: "agency-join",
+          component: () => import("@/components/users/AgencyRegister.vue"),
+        },
+
         {
           path: "mypage",
           name: "user-mypage",
