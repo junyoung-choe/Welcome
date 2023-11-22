@@ -20,7 +20,7 @@ public class openAIController {
 
     @PostMapping("/question")
     public ChatGptResponseDto sendQuestion(@RequestBody QuestionRequestDto requestDto) {
-        String que = "(" + requestDto.getQuestion() + ") 괄호안에 있는 문장에 해당하는 나라 말해줘, 하나의 나라만 명사로 말해줘, 무조건 나라이름으로 답해줘";
+        String que = "(" + requestDto.getQuestion() + ") 괄호 안에 적는 문장에 가장 가까운 나라를 나라 이름만 명사로 답해줘 대한민국, 한국은 빼고";
         requestDto.setQuestion(que);
         System.out.println(requestDto);
         ChatGptResponseDto dto = chatGptService.askQuestion(requestDto);
