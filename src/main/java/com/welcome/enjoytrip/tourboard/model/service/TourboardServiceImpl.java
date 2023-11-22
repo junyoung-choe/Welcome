@@ -84,6 +84,11 @@ public class TourboardServiceImpl implements TourboardService {
     }
 
     @Override
+    public List<TourBoardDto> tourboardViewUserId(int user_id) {
+        return tourboardMapper.tourboardViewUserId(user_id);
+    }
+
+    @Override
     public void tourboardPatch(TourBoardDto tourBoardDto) {
         tourboardMapper.tourboardPatch(tourBoardDto);
     }

@@ -18,6 +18,7 @@ public interface TourboardMapper {
     void tourboardWrite(TourBoardDto tourBoardDto);
     TourBoardDto tourboardView(int tourboard_id);
     List<TourBoardDto> tourboardList();
+    public List<TourBoardDto> tourboardViewUserId(int user_id);
     void tourboardPatch(TourBoardDto tourBoardDto);
     void tourboardPut(TourBoardDto tourBoardDto);
     void tourboardDelete(int tourboard_id);
