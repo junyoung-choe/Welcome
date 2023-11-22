@@ -102,6 +102,24 @@ public class TourBoardController {
         ResponseEntity<Map<String, Object>> res = new ResponseEntity(map, HttpStatus.OK);
         return res;
     }
+
+    @GetMapping("/user/{id}")
+    public ResponseEntity<?> tourboardViewbyUserId(@PathVariable("id") int user_id ) {
+        Map<String, Object> map = new HashMap<>();
+        System.out.println("들어올까요?" + user_id);
+        try {
+            List<TourBoardDto> list = tourboardService.tourboardViewUserId(user_id);
+            map.put("resmsg", "패키지 불러오기 성공");
+            map.put("list", list);
+            System.out.println(list);
+        } catch (Exception e) {
+            e.printStackTrace();
+            map.put("resmsg", "패키지 불러오기 실패");
+        }
+        ResponseEntity<Map<String, Object>> res = new ResponseEntity(map, HttpStatus.OK);
+        return res;
+    }
+
 //    @GetMapping
 //    public ResponseEntity<?> tourboardList() {
 //        Map<String, Object> map = new HashMap<>();

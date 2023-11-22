@@ -15,6 +15,8 @@ public interface TourboardService {
     public TourBoardDto tourboardView(int tourboard_id);
     public List<TourBoardDto> tourboardList();
 
+    public List<TourBoardDto> tourboardViewUserId(int user_id);
+
     public void tourboardPatch(TourBoardDto tourBoardDto);
 
     public void tourboardPut(TourBoardDto tourBoardDto);

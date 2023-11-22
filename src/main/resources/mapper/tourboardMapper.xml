@@ -153,4 +153,10 @@
         where tourboard_id = #{tourboard_id}
     </update>
 
+    <select id="tourboardViewUserId" parameterType="int" resultType="tourBoardDto">
+        select *
+        from tourboard
+        where user_id = #{user_id}
+    </select>
+
 </mapper>
