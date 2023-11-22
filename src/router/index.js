@@ -65,12 +65,6 @@ const router = createRouter({
           beforeEnter: onlyAuthUser,
           component: () => import('@/components/users/UserMyPage.vue'),
         },
-        {
-          path: "Agencypage",
-          name: "agency-mypage",
-          beforeEnter: onlyAuthUser,
-          component: () => import("@/components/users/AgencyMypage.vue"),
-        },
       ],
     },
     {
