@@ -2,6 +2,7 @@ package com.welcome.enjoytrip.reservation.model.service;
 
 import com.welcome.enjoytrip.reservation.model.ReservationDto;
 import com.welcome.enjoytrip.reservation.model.mapper.ReservationMapper;
+import com.welcome.enjoytrip.tourboard.model.TourBoardDto;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -33,5 +34,10 @@ public class ReservationServiceImpl implements ReservationService {
     @Override
     public void reservationDelete(int reservation_id) throws Exception {
         reservationMapper.reservationDelete(reservation_id);
+    }
+
+    @Override
+    public List<TourBoardDto> reservationPackage(int user_id) throws Exception {
+        return reservationMapper.reservationPackage(user_id);
     }
 }

@@ -35,6 +35,20 @@ public class ReservationController {
         return res;
     }
 
+    @GetMapping("/package/{user_id}")
+    public ResponseEntity<?> reservationPackage(@PathVariable("user_id") int user_id) {
+        Map<String, Object> map = new HashMap<>();
+        try {
+            map.put("resdata", reservationService.reservationPackage(user_id));
+            map.put("resmsg", "성공");
+        } catch (Exception e) {
+            e.printStackTrace();
+            map.put("resmsg", "실패");
+        }
+        ResponseEntity<Map<String, Object>> res = new ResponseEntity(map, HttpStatus.OK);
+        return res;
+    }
+
     @GetMapping("register/{tourboard_id}/{user_id}")
     public ResponseEntity<?> reservationRegister(@PathVariable("tourboard_id") int tourboard_id, @PathVariable("user_id") int user_id) {
         Map<String, Object> map = new HashMap<>();
