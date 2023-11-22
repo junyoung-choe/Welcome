@@ -1,9 +1,9 @@
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted } from "vue";
 
 // (getUserInformation) 로그인 정보를 받아오기 위한 필드와 메소드
-import { userMyPage, getReservation } from '@/api/user';
-import { jwtDecode } from 'jwt-decode';
+import { userMyPage, getReservation } from "@/api/user";
+import { jwtDecode } from "jwt-decode";
 
 // menu 확인
 import { useMenuStore } from "@/stores/menu";
@@ -18,12 +18,12 @@ const user_id = ref("");
 // const user_password = ref();
 // const user_regDate = ref();
 // const refreshToken = ref();
-const user_account = ref('');
-const user_role = ref('');
-const user_name = ref('');
-const user_phone = ref('');
-const user_cash = ref('');
-const user_mileage = ref('');
+const user_account = ref("");
+const user_role = ref("");
+const user_name = ref("");
+const user_phone = ref("");
+const user_cash = ref("");
+const user_mileage = ref("");
 
 const reservation = ref([]);
 
@@ -39,7 +39,7 @@ onMounted(() => {
 });
 
 const getUserInformation = () => {
-  let token = sessionStorage.getItem('accessToken');
+  let token = sessionStorage.getItem("accessToken");
   let decodeToken = jwtDecode(token);
   userMyPage(
     decodeToken.userId,
@@ -61,7 +61,7 @@ const getUserInformation = () => {
 };
 
 const getReservePackage = () => {
-  let token = sessionStorage.getItem('accessToken');
+  let token = sessionStorage.getItem("accessToken");
   let decodeToken = jwtDecode(token);
   getReservation(
     decodeToken.userId,
@@ -106,19 +106,16 @@ const getReservePackage = () => {
             </div>
           </div>
         </div>
-<<<<<<< Updated upstream
         <!-- {{ reservation }} -->
         <div v-for="(item, index) in reservation" :key="index">
           {{ item }}
         </div>
-=======
         <!--  일반 유저일때 -->
         <template v-if="user_role == 'user'"> asdfasdf {{ reservation }} </template>
         <!--  여행 에이전트 일때 -->
         <template v-else>
           <MyRegistTourBoard :myid="user_id" />
         </template>
->>>>>>> Stashed changes
         <div>
           <!-- <button type="button" class="btn btn-outline-secondary mt-2">수정</button> -->
         </div>
