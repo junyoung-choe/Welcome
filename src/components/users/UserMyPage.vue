@@ -6,16 +6,16 @@ import { userMyPage, getReservation } from "@/api/user";
 import { jwtDecode } from "jwt-decode";
 
 // menu 확인
-import { useMenuStore } from '@/stores/menu';
-import { storeToRefs } from 'pinia';
-import MyRegistTourBoard from './MyRegistTourBoard.vue';
-import TourListInMainItem from '../tourMain/item/TourListInMainItem.vue';
+import { useMenuStore } from "@/stores/menu";
+import { storeToRefs } from "pinia";
+import MyRegistTourBoard from "./MyRegistTourBoard.vue";
+import TourListInMainItem from "../tourMain/item/TourListInMainItem.vue";
 
 const menuStore = useMenuStore();
 const { menuList } = storeToRefs(menuStore);
 ///
 
-const user_id = ref('');
+const user_id = ref("");
 // const user_password = ref();
 // const user_regDate = ref();
 // const refreshToken = ref();
@@ -34,9 +34,9 @@ onMounted(() => {
 
   // 회원 ID로 reservation 에서 tourBoard_id 를 찾아서 tourBoard 들을 불러온다
   getReservePackage();
-  console.log('=============================');
+  console.log("=============================");
   console.log(menuList.value[4].show);
-  console.log('=============================');
+  console.log("=============================");
 });
 
 const getUserInformation = () => {
@@ -126,6 +126,7 @@ const getReservePackage = () => {
         <!-- <template v-if="user_role == 'user'"> {{ reservation }} </template> -->
         <!--  여행 에이전트 일때 -->
         <template v-else>
+          <router-link to="/tour/write">새로운 패키지 등록하기</router-link>
           <MyRegistTourBoard :myid="user_id" />
         </template>
         <div>
