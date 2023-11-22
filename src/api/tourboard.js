@@ -1,4 +1,4 @@
-import { localAxios } from '@/util/http-commons';
+import { localAxios } from "@/util/http-commons";
 
 const local = localAxios();
 
@@ -11,11 +11,17 @@ function listDeparture(success, fail) {
 }
 
 function listDestination(param, success, fail) {
-  local.get(`/tourboard/destinationList`, { params: param }).then(success).catch(fail);
+  local
+    .get(`/tourboard/destinationList`, { params: param })
+    .then(success)
+    .catch(fail);
 }
 
 function listTourSerachBoard(param, success, fail) {
-  local.get(`/tourboard/tourSearchList`, { params: param }).then(success).catch(fail);
+  local
+    .get(`/tourboard/tourSearchList`, { params: param })
+    .then(success)
+    .catch(fail);
 }
 
 function tourboardView(param, success, fail) {
@@ -31,17 +37,27 @@ function getCheapList(success, fail) {
 }
 
 // 파일을 받아온다
-function getFile(sfolder, ofile ,sfile ,success, fail) {
+function getFile(sfolder, ofile, sfile, success, fail) {
   local.get(`/file/${sfolder}/${ofile}/${sfile}`).then(success).catch(fail);
 }
 
 // 투어보드에 등록자를 +
-function plusPeople(tourboard_id,reserveNum,success,fail) {
-  local.get(`/tourboard/plus/${tourboard_id}/${reserveNum}`).then(success).catch(fail);
+function plusPeople(tourboard_id, reserveNum, success, fail) {
+  local
+    .get(`/tourboard/plus/${tourboard_id}/${reserveNum}`)
+    .then(success)
+    .catch(fail);
 }
 // 사용자 id 와 보드 id를 등록해야한다
-function makeReserve(tourboard_id, user_id, success,fail) {
-  local.get(`/reservation/register/${tourboard_id}/${user_id}`).then(success).catch(fail);
+function makeReserve(tourboard_id, user_id, success, fail) {
+  local
+    .get(`/reservation/register/${tourboard_id}/${user_id}`)
+    .then(success)
+    .catch(fail);
+}
+
+async function question(param, success, fail) {
+  await local.post(`/chat-gpt/question`, param).then(success).catch(fail);
 }
 
 export {
@@ -55,4 +71,5 @@ export {
   getFile,
   plusPeople,
   makeReserve,
+  question,
 };
