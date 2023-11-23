@@ -49,9 +49,9 @@ function plusPeople(tourboard_id, reserveNum, success, fail) {
     .catch(fail);
 }
 // 사용자 id 와 보드 id를 등록해야한다
-function makeReserve(tourboard_id, user_id, success, fail) {
+function makeReserve(tourboard_id, user_id, reserveNum, success, fail) {
   local
-    .get(`/reservation/register/${tourboard_id}/${user_id}`)
+    .get(`/reservation/register/${tourboard_id}/${user_id}/${reserveNum}`)
     .then(success)
     .catch(fail);
 }
