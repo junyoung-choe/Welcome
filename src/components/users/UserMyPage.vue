@@ -112,16 +112,8 @@ const getReservePackage = () => {
         <template v-if="user_role == 'user'">
           <div class="reservation-info-title"><p>예약 정보</p></div>
           <div>
-            <div
-              v-for="(r, index) in reservation"
-              :key="index"
-              class="user-reservation-list"
-            >
-              <TourListInMainItem
-                v-for="item in r"
-                :key="item.tourboard_id"
-                :item="item"
-              />
+            <div v-for="(r, index) in reservation" :key="index" class="user-reservation-list">
+              <TourListInMainItem v-for="item in r" :key="item.tourboard_id" :item="item" />
             </div>
           </div>
         </template>

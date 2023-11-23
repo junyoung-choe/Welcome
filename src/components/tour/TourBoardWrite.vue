@@ -8,13 +8,17 @@
         <tr>
           <th><label>여행 이름 </label></th>
           <th>
-            <input
-              class="text-type"
-              type="text"
-              v-model="tourBoardDto.tourboard_tourName.value"
-            />
+            <input class="text-type" type="text" v-model="tourBoardDto.tourboard_tourName.value" />
           </th>
         </tr>
+
+        <tr>
+          <th><label>여행 내용 </label></th>
+          <th>
+            <input class="text-type" type="text" v-model="tourBoardDto.tourboard_content.value" />
+          </th>
+        </tr>
+
         <tr>
           <th><label>키워드 등록 </label></th>
           <th>
@@ -71,31 +75,27 @@
         <tr>
           <th><label>가격</label></th>
           <th>
-            <input
-              class="text-type"
-              v-model="tourBoardDto.tourboard_price.value"
-              type="text"
-            />
+            <input class="text-type" v-model="tourBoardDto.tourboard_price.value" type="text" />
           </th>
         </tr>
+
+        <tr>
+          <th><label>할인된 가격</label></th>
+          <th>
+            <input class="text-type" v-model="tourBoardDto.tourboard_salePrice.value" type="text" />
+          </th>
+        </tr>
+
         <tr>
           <th><label>총원</label></th>
           <th>
-            <input
-              class="text-type"
-              v-model="tourBoardDto.tourboard_stock.value"
-              type="text"
-            />
+            <input class="text-type" v-model="tourBoardDto.tourboard_stock.value" type="text" />
           </th>
         </tr>
         <tr>
           <th><label>출발지</label></th>
           <th>
-            <input
-              class="text-type"
-              v-model="tourBoardDto.tourboard_departure.value"
-              type="text"
-            />
+            <input class="text-type" v-model="tourBoardDto.tourboard_departure.value" type="text" />
           </th>
         </tr>
         <tr>
@@ -111,11 +111,7 @@
         <tr>
           <th><label>여행설명</label></th>
           <th>
-            <input
-              class="text-type"
-              type="text"
-              placeholder="여행의 테마나 주의사항 등"
-            />
+            <input class="text-type" type="text" placeholder="여행의 테마나 주의사항 등" />
           </th>
         </tr>
       </table>
@@ -148,6 +144,7 @@ const router = useRouter();
 const tourBoardDto = {
   user_id: ref(decodeToken.userId),
   tourboard_tourName: ref(""),
+  tourboard_content: ref(""),
   tourboard_keyword: ref(""),
   tourboard_regDate: ref(""),
   tourboard_startDate: ref("2020-12-31T23:59"),
