@@ -17,9 +17,10 @@ const imageUrl = ref("");
 const photo = ref();
 
 onMounted(() => {
+  console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
   console.log(props.item[0]);
   makeTag();
-  if (props.item.fileInfos[0] != null) {
+  if (props.item.fileInfos != null) {
     getFile();
   }
 });
@@ -103,7 +104,7 @@ img {
   padding: 10px;
 }
 .title {
-  font-size: 30px;
+  font-size: 25px;
   font-weight: 600;
   margin-bottom: 0px;
 }

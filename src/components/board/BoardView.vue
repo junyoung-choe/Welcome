@@ -1,9 +1,9 @@
 <script setup>
-import { ref, onMounted } from 'vue';
-import { useRoute, useRouter } from 'vue-router';
-import { detailArticle, deleteArticle } from '@/api/board';
-import { jwtDecode } from 'jwt-decode';
-import { localAxios } from '@/util/http-commons';
+import { ref, onMounted } from "vue";
+import { useRoute, useRouter } from "vue-router";
+import { detailArticle, deleteArticle } from "@/api/board";
+import { jwtDecode } from "jwt-decode";
+import { localAxios } from "@/util/http-commons";
 
 const route = useRoute();
 const router = useRouter();
@@ -14,19 +14,19 @@ const board = ref({});
 const comment = ref({
   user_id: 0,
   board_id: 0,
-  comment_content: '',
+  comment_content: "",
 });
 
 // 로그인한 회원과 토큰에 저장된 회원이 같을때만 삭제 수정 버튼이 생성된다
 const possible = ref(false);
 
 const commentsPossible = ref(false);
-const date = ref('');
+const date = ref("");
 
 const getUserInformation = () => {
-  let token = sessionStorage.getItem('accessToken');
+  let token = sessionStorage.getItem("accessToken");
   let decodeToken = jwtDecode(token);
-  console.log(decodeToken.userId + ' , ' + board.value);
+  console.log(decodeToken.userId + " , " + board.value);
   if (decodeToken.userId == board.value.user_id) {
     possible.value = true;
   }
@@ -45,7 +45,7 @@ onMounted(() => {
 
 const getBoard = () => {
   // const { articleno } = route.params;
-  console.log(board_id + '번글 얻으러 가자!!!');
+  console.log(board_id + "번글 얻으러 가자!!!");
   detailArticle(
     board_id,
     ({ data }) => {
@@ -61,16 +61,16 @@ const getBoard = () => {
 };
 
 function moveList() {
-  router.push({ name: 'board-list' });
+  router.push({ name: "board-list" });
 }
 
 function moveModify() {
-  router.push({ name: 'board-modify', params: { board_id } });
+  router.push({ name: "board-modify", params: { board_id } });
 }
 
 function onDeleteArticle() {
   // const { articleno } = route.params;
-  console.log(board_id + '번글 삭제하러 가자!!!');
+  console.log(board_id + "번글 삭제하러 가자!!!");
   deleteArticle(
     board_id,
     (response) => {
@@ -87,7 +87,7 @@ function commentRegButton() {
 }
 
 function regComment(param, success, fail) {
-  console.log('해당 글에 댓글 등록하러 갑니데이');
+  console.log("해당 글에 댓글 등록하러 갑니데이");
   local.post(`board/comment`, param).then(success).catch(fail);
 }
 </script>
@@ -112,14 +112,7 @@ function regComment(param, success, fail) {
   <div class="d-flex justify-content-end">
     <button type="button" class="list-btn" @click="moveList">글목록</button>
     <button v-if="possible" type="button" class="list-btn" @click="moveModify">글수정</button>
-    <button
-      v-if="possible"
-      type="button"
-      class="btn btn-outline-danger mb-3 ms-1"
-      @click="onDeleteArticle"
-    >
-      글삭제
-    </button>
+    <button v-if="possible" type="button" class="list-btn" @click="onDeleteArticle">글삭제</button>
   </div>
 
   <hr />

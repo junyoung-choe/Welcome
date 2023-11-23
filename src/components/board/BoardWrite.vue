@@ -1,5 +1,5 @@
 <script setup>
-import BoardFormItem from './item/BoardFormItem.vue';
+import BoardFormItem from "./item/BoardFormItem.vue";
 </script>
 
 <template>
@@ -8,7 +8,7 @@ import BoardFormItem from './item/BoardFormItem.vue';
       <div class="row justify-content-center">
         <div class="col-lg-10">
           <h2 class="my-3 py-3 shadow-sm bg-light text-center">
-            <mark class="sky">글쓰기</mark>
+            <div><p>글쓰기</p></div>
           </h2>
         </div>
         <div class="col-lg-10 text-start">

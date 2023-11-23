@@ -1,15 +1,15 @@
 <script setup>
-import { ref, onMounted } from 'vue';
-import { listDeparture, listDestination, question } from '@/api/tourboard';
+import { ref, onMounted } from "vue";
+import { listDeparture, listDestination, question } from "@/api/tourboard";
 
-import VTourSelect from '../common/VTourSelect.vue';
-import TourPopular from './TourPopular.vue';
-import TourCheap from './TourCheap.vue';
+import VTourSelect from "../common/VTourSelect.vue";
+import TourPopular from "./TourPopular.vue";
+import TourCheap from "./TourCheap.vue";
 
 const departureList = ref([]);
 const destinationList = ref([]);
-const depa = ref('');
-const dest = ref('');
+const depa = ref("");
+const dest = ref("");
 
 onMounted(() => {
   getDepartureList();
@@ -70,13 +70,13 @@ const onChangeDestination = (val) => {
     <div id="carouselExampleControls" class="carousel slide w-50" data-bs-ride="carousel">
       <div class="carousel-inner">
         <div class="carousel-item active">
-          <img src="src\img\winter.png" class="d-block w-100" alt="..." />
+          <img src="src\img\sea.jpg" class="d-block w-100" alt="..." />
         </div>
         <div class="carousel-item">
-          <img src="src\img\winter.png" class="d-block w-100" alt="..." />
+          <img src="src\img\nature.jpg" class="d-block w-100" alt="..." />
         </div>
         <div class="carousel-item">
-          <img src="src\img\winter.png" class="d-block w-100" alt="..." />
+          <img src="src\img\kite.jpg" class="d-block w-100" alt="..." />
         </div>
       </div>
       <button

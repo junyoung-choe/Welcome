@@ -15,7 +15,12 @@
         <tr>
           <th><label>여행 내용 </label></th>
           <th>
-            <input class="text-type" type="text" v-model="tourBoardDto.tourboard_content.value" />
+            <input
+              class="text-type"
+              type="text"
+              v-model="tourBoardDto.tourboard_content.value"
+              placeholder="여행의 테마나 주의사항 등"
+            />
           </th>
         </tr>
 
@@ -106,12 +111,6 @@
               v-model="tourBoardDto.tourboard_destination.value"
               type="text"
             />
-          </th>
-        </tr>
-        <tr>
-          <th><label>여행설명</label></th>
-          <th>
-            <input class="text-type" type="text" placeholder="여행의 테마나 주의사항 등" />
           </th>
         </tr>
       </table>

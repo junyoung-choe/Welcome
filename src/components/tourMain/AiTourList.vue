@@ -130,6 +130,12 @@ const getMore = () => {
       <button class="answer-btn" @click="answer">검색</button>
     </div>
   </div>
+  <div style="text-align: center">
+    <p v-if="text != ''" class="p-tag">
+      AI추천 결과 <span class="result">{{ text }}</span
+      >(으)로 검색한 여행입니다
+    </p>
+  </div>
   <div class="main">
     <div class="section-left">
       <div class="box">
@@ -228,5 +234,12 @@ button:hover {
   border: none;
   background-color: #cff0fa;
   border-radius: 10px;
+}
+.p-tag {
+  font-size: 20px;
+}
+.result {
+  font-weight: 900;
+  font-size: 25px;
 }
 </style>

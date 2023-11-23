@@ -71,7 +71,6 @@ endDate.value = `${props.tourBoard.tourboard_endDate[0]}/${props.tourBoard.tourb
         <img src="/src/img/winter.png" alt="Uploaded Image" />
       </template>
       <!-- <img :src="imageUrl" alt="Uploaded Image" /> -->
-      <!-- <img src="/src/img/winter.png" alt="" /> -->
     </div>
     <div class="product-section">
       <div class="title-name">
@@ -178,5 +177,7 @@ img {
 
 .product-section {
   margin: 30px 10px;
+  width: 100%;
+  min-width: 600px;
 }
 </style>

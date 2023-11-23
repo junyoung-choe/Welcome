@@ -26,7 +26,7 @@ onMounted(() => {
         {{ board.board_title }}
       </router-link>
     </td>
-    <td class="font-setting" style="width: 100px">{{ board.user_id }}</td>
+    <td class="font-setting" style="width: 100px">{{ board.user_name }}</td>
     <td class="font-setting" style="width: 100px">{{ date }}</td>
     <td class="font-setting" style="width: 100px">{{ board.board_views }}</td>
   </tr>
