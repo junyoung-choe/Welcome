@@ -126,12 +126,22 @@ public class TourboardServiceImpl implements TourboardService {
 
     @Override
     public List<TourBoardDto> getPopularList() throws Exception {
-        return tourboardMapper.getPopularList();
+        List<TourBoardDto> list = tourboardMapper.getPopularList();
+        for(TourBoardDto tourBoardDto : list) {
+            List<FileInfoDto> files = tourboardMapper.fileInfoList((int) tourBoardDto.getTourboard_id());
+            tourBoardDto.setFileInfos(files);
+        }
+        return list;
     }
 
     @Override
     public List<TourBoardDto> getCheapList() throws Exception {
-        return tourboardMapper.getCheapList();
+        List<TourBoardDto> list = tourboardMapper.getCheapList();
+        for(TourBoardDto tourBoardDto : list) {
+            List<FileInfoDto> files = tourboardMapper.fileInfoList((int) tourBoardDto.getTourboard_id());
+            tourBoardDto.setFileInfos(files);
+        }
+        return list;
     }
 
     @Override
