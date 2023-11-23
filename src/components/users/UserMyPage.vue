@@ -129,6 +129,7 @@ const getReservePackage = () => {
         <!-- <template v-if="user_role == 'user'"> {{ reservation }} </template> -->
         <!--  여행 에이전트 일때 -->
         <template v-else>
+          <router-link to="/tour/write">새로운 패키지 등록하기</router-link>
           <MyRegistTourBoard :myid="user_id" />
         </template>
         <div>

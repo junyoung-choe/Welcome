@@ -8,7 +8,11 @@
         <tr>
           <th><label>여행 이름 </label></th>
           <th>
-            <input class="text-type" type="text" v-model="tourBoardDto.tourboard_tourName.value" />
+            <input
+              class="text-type"
+              type="text"
+              v-model="tourBoardDto.tourboard_tourName.value"
+            />
           </th>
         </tr>
         <tr>
@@ -22,16 +26,36 @@
             />
           </th>
         </tr>
+        <!-- <tr>
+          <v-col cols="12">
+            <label class="form-label">여행 시작일 : </label>
+            <v-text-field
+              type="datetime-local"
+              v-model="tourBoardDto.tourboard_startDate.value"
+              variant="outlined"
+            ></v-text-field>
+          </v-col>
+        </tr> -->
+        <!-- 여행 시작일:
+        <input type="datetime-local" value="2077-06-15T13:27" /> -->
         <tr>
           <th><label>여행 시작일 </label></th>
           <th>
-            <input class="text-type" v-model="tourBoardDto.tourboard_startDate.value" type="text" />
+            <input
+              class="text-type"
+              v-model="tourBoardDto.tourboard_startDate.value"
+              type="datetime-local"
+            />
           </th>
         </tr>
         <tr>
           <th><label>여행 도착일</label></th>
           <th>
-            <input class="text-type" v-model="tourBoardDto.tourboard_endDate.value" type="text" />
+            <input
+              class="text-type"
+              v-model="tourBoardDto.tourboard_endDate.value"
+              type="datetime-local"
+            />
           </th>
         </tr>
         <tr>
@@ -40,26 +64,38 @@
             <input
               class="text-type"
               v-model="tourBoardDto.tourboard_deadLineDate.value"
-              type="text"
+              type="datetime-local"
             />
           </th>
         </tr>
         <tr>
           <th><label>가격</label></th>
           <th>
-            <input class="text-type" v-model="tourBoardDto.tourboard_price.value" type="text" />
+            <input
+              class="text-type"
+              v-model="tourBoardDto.tourboard_price.value"
+              type="text"
+            />
           </th>
         </tr>
         <tr>
           <th><label>총원</label></th>
           <th>
-            <input class="text-type" v-model="tourBoardDto.tourboard_stock.value" type="text" />
+            <input
+              class="text-type"
+              v-model="tourBoardDto.tourboard_stock.value"
+              type="text"
+            />
           </th>
         </tr>
         <tr>
           <th><label>출발지</label></th>
           <th>
-            <input class="text-type" v-model="tourBoardDto.tourboard_departure.value" type="text" />
+            <input
+              class="text-type"
+              v-model="tourBoardDto.tourboard_departure.value"
+              type="text"
+            />
           </th>
         </tr>
         <tr>
@@ -74,7 +110,13 @@
         </tr>
         <tr>
           <th><label>여행설명</label></th>
-          <th><input class="text-type" type="text" placeholder="여행의 테마나 주의사항 등" /></th>
+          <th>
+            <input
+              class="text-type"
+              type="text"
+              placeholder="여행의 테마나 주의사항 등"
+            />
+          </th>
         </tr>
       </table>
       <input type="file" multiple @change="onFileChange" class="file-type" />
@@ -86,7 +128,7 @@
 
 <script setup>
 import axios from "axios";
-import { ref, watch } from "vue";
+import { ref } from "vue";
 import { useRouter } from "vue-router";
 import { jwtDecode } from "jwt-decode";
 
@@ -94,18 +136,23 @@ let token = sessionStorage.getItem("accessToken");
 let decodeToken = jwtDecode(token);
 
 const file = ref(null);
-const date = new Date();
+// const date = new Date();
 const router = useRouter();
 // const formattedDate = date.toISOString().slice(0, 16);
-const formattedDate = date.toLocaleString;
+// const formattedDate = date.toLocaleString;
+
+// const sDate = ref("2021-12-31T23:59");
+// const eDate = ref("2021-12-31T23:59");
+// const dDate = ref("2021-12-31T23:59");
+
 const tourBoardDto = {
   user_id: ref(decodeToken.userId),
   tourboard_tourName: ref(""),
   tourboard_keyword: ref(""),
   tourboard_regDate: ref(""),
-  tourboard_startDate: ref(""),
-  tourboard_endDate: ref(""),
-  tourboard_deadLineDate: ref(""),
+  tourboard_startDate: ref("2020-12-31T23:59"),
+  tourboard_endDate: ref("2030-12-31T23:59"),
+  tourboard_deadLineDate: ref("2030-12-31T23:59"),
   tourboard_price: ref(0),
   tourboard_salePrice: ref(0),
   tourboard_stock: ref(0),
@@ -141,6 +188,13 @@ const onFileChange = (e) => {
 const upload = async () => {
   if (confirm("여행지를 등록하시겠습니까?")) {
     let formData = new FormData();
+    console.log("날짜 타입 확인");
+    console.log(tourBoardDto.tourboard_startDate);
+
+    console.log(tourBoardDto.tourboard_startDate);
+
+    // tourBoardDto.tourboard_startDate =
+    //   tourBoardDto.tourboard_startDate.toIOSOString();
 
     // console.log(file.value);
     // formData.append("upfile", file.value); // file의 실제 값을 얻음

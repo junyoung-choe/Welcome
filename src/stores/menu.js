@@ -7,7 +7,7 @@ export const useMenuStore = defineStore('menuStore', () => {
     { name: '로그인', show: true, routeName: 'user-login' },
     { name: '내정보', show: false, routeName: 'user-mypage' },
     { name: '로그아웃', show: false, routeName: 'user-logout' },
-    { name: '', show: false, routeName: 'agency-mypage'},
+    { name: '', show: false, routeName: ''},
   ]);
 
   // 로그인 된 이후에 메뉴를 변경해준다
