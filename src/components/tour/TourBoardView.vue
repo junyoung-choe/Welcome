@@ -1,10 +1,10 @@
 <script setup>
-import { localAxios } from "@/util/http-commons";
+import { localAxios } from '@/util/http-commons';
 
-import { ref, onMounted } from "vue";
-import { useRoute, useRouter } from "vue-router";
-import { tourboardView, plusPeople, makeReserve } from "@/api/tourboard";
-import { jwtDecode } from "jwt-decode";
+import { ref, onMounted } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
+import { tourboardView, plusPeople, makeReserve } from '@/api/tourboard';
+import { jwtDecode } from 'jwt-decode';
 
 const route = useRoute();
 const router = useRouter();
@@ -18,8 +18,8 @@ const imageUrl = ref([]);
 
 const tag = ref([]);
 
-const startDate = ref("");
-const endDate = ref("");
+const startDate = ref('');
+const endDate = ref('');
 
 /// 예약자의 숫자
 const reserveNum = ref(0);
@@ -46,21 +46,21 @@ const getTourBoard = () => {
       // 이 부분에 for 문으로 반복을 시켜야겠다
       // for (var i = 0; i < data.tourboard.fileInfos.value.
       for (var j = 0; j < data.tourboard.fileInfos.length; j++) {
-        console.log("welcome");
+        console.log('welcome');
         file.value.push(data.tourboard.fileInfos[j]);
         getFile(j);
       }
 
-      tag.value = tourboard.value.tourboard_keyword.split(", ");
+      tag.value = tourboard.value.tourboard_keyword.split(', ');
       for (var j = 0; j < tag.value.length; j++) {
-        tag.value[j] = "#" + tag.value[j];
+        tag.value[j] = '#' + tag.value[j];
       }
       startDate.value = `${tourboard.value.tourboard_startDate[0]}/${tourboard.value.tourboard_startDate[1]}/${tourboard.value.tourboard_startDate[3]}`;
       endDate.value =
         tourboard.value.tourboard_endDate[0] +
-        "/" +
+        '/' +
         tourboard.value.tourboard_endDate[1] +
-        "/" +
+        '/' +
         tourboard.value.tourboard_endDate[3];
     },
     (error) => {
@@ -77,9 +77,9 @@ const getFile = (j) => {
   // console.log(file.value.saveFolder);
 
   local
-    .get(`/file/${sfolder}/${ofile}/${sfile}`, { responseType: "arraybuffer" })
+    .get(`/file/${sfolder}/${ofile}/${sfile}`, { responseType: 'arraybuffer' })
     .then((response) => {
-      const blob = new Blob([response.data], { type: "image/jpeg" });
+      const blob = new Blob([response.data], { type: 'image/jpeg' });
       imageUrl.value[j] = URL.createObjectURL(blob);
     })
     .catch((error) => {
@@ -89,13 +89,13 @@ const getFile = (j) => {
 
 // 예약하겠다는 버튼이다
 const msg = () => {
-  let token = sessionStorage.getItem("accessToken");
+  let token = sessionStorage.getItem('accessToken');
   if (token == null) {
     router.push({
-      path: "/user/login",
+      path: '/user/login',
     });
   } else {
-    alert("예약완료!!");
+    alert('예약완료!!');
     // reserveNum 만큼 현재의 tourboard_id 로 등록자의 숫자를 +
     plusPeople(tourboard_id, reserveNum.value);
     // 현재의 tourboard_id 와 현재 user_id 로 reserve 보드에 새로운 테이블을 등록한다
@@ -127,6 +127,7 @@ const msg = () => {
         <div>
           <p class="title">{{ tourboard.tourboard_tourName }}</p>
           <p class="note">
+            <!-- {{ tourboard.tourboard_content }} -->
             안전, 청결은 기본. 장가계 핵심 명소 관광으로 구성된 상품입니다. 합리적인 가격으로
             장가계를 여행해보세요.
           </p>
@@ -183,19 +184,16 @@ const msg = () => {
       <div class="schedule">
         <p class="schedule-title">여행 주요일정</p>
         <div class="schedule-section01">
-          <div><p>일정</p></div>
+          <div style="margin-right: 50px"><p>일정</p></div>
           <div>
-            <p>{{ startDate }}</p>
-            <p>{{ endDate }}</p>
+            <p>시작: {{ startDate }}</p>
+            <p>종료: {{ endDate }}</p>
           </div>
-        </div>
-        <div>
-          <div><p>여행도시</p></div>
         </div>
         <div class="reservation-section01">
           <div><p>예약현황</p></div>
           <div>
-            <span class="reservation-text">예약: {{ tourboard.tourboard_stock }}명</span>
+            <span class="reservation-text">모집인원: {{ tourboard.tourboard_stock }}명</span>
             <span>현재: {{ tourboard.tourboard_stockCnt }}명</span>
           </div>
         </div>
@@ -333,5 +331,6 @@ const msg = () => {
 }
 .reservation-text {
   margin-right: 20px;
+  margin-left: 20px;
 }
 </style>

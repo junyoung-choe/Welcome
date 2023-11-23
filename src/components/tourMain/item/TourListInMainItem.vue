@@ -34,7 +34,7 @@ const moveWrite = () => {
 <template>
   <div class="main" @click="mvView">
     <div class="img-section">
-      <img src="src/img/winter.png" alt="" />
+      <img src="src\img\winter.png" alt="" />
     </div>
     <div class="content-section">
       <p class="title">{{ item.tourboard_tourName }}</p>

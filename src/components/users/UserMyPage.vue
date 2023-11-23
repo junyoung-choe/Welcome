@@ -1,30 +1,30 @@
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref, onMounted } from 'vue';
 
 // (getUserInformation) 로그인 정보를 받아오기 위한 필드와 메소드
-import { userMyPage, getReservation } from "@/api/user";
-import { jwtDecode } from "jwt-decode";
+import { userMyPage, getReservation } from '@/api/user';
+import { jwtDecode } from 'jwt-decode';
 
 // menu 확인
-import { useMenuStore } from "@/stores/menu";
-import { storeToRefs } from "pinia";
-import MyRegistTourBoard from "./MyRegistTourBoard.vue";
-import TourListInMainItem from "../tourMain/item/TourListInMainItem.vue";
+import { useMenuStore } from '@/stores/menu';
+import { storeToRefs } from 'pinia';
+import MyRegistTourBoard from './MyRegistTourBoard.vue';
+import TourListInMainItem from '../tourMain/item/TourListInMainItem.vue';
 
 const menuStore = useMenuStore();
 const { menuList } = storeToRefs(menuStore);
 ///
 
-const user_id = ref("");
+const user_id = ref('');
 // const user_password = ref();
 // const user_regDate = ref();
 // const refreshToken = ref();
-const user_account = ref("");
-const user_role = ref("");
-const user_name = ref("");
-const user_phone = ref("");
-const user_cash = ref("");
-const user_mileage = ref("");
+const user_account = ref('');
+const user_role = ref('');
+const user_name = ref('');
+const user_phone = ref('');
+const user_cash = ref('');
+const user_mileage = ref('');
 
 const reservation = ref([]);
 
@@ -34,13 +34,13 @@ onMounted(() => {
 
   // 회원 ID로 reservation 에서 tourBoard_id 를 찾아서 tourBoard 들을 불러온다
   getReservePackage();
-  console.log("=============================");
+  console.log('=============================');
   console.log(menuList.value[4].show);
-  console.log("=============================");
+  console.log('=============================');
 });
 
 const getUserInformation = () => {
-  let token = sessionStorage.getItem("accessToken");
+  let token = sessionStorage.getItem('accessToken');
   let decodeToken = jwtDecode(token);
   userMyPage(
     decodeToken.userId,
@@ -62,7 +62,7 @@ const getUserInformation = () => {
 };
 
 const getReservePackage = () => {
-  let token = sessionStorage.getItem("accessToken");
+  let token = sessionStorage.getItem('accessToken');
   let decodeToken = jwtDecode(token);
   getReservation(
     decodeToken.userId,
@@ -88,7 +88,7 @@ const getReservePackage = () => {
           <div class="row g-0">
             <div class="col-md-4">
               <img
-                src="https://source.unsplash.com/random/250x250/?food"
+                src="https://source.unsplash.com/random/250x250/?human"
                 class="img-fluid rounded-start"
                 alt="..."
               />
@@ -96,11 +96,11 @@ const getReservePackage = () => {
             <div class="col-md-8">
               <div class="card-body text-start">
                 <ul class="list-group list-group-flush">
-                  <li class="list-group-item">{{ user_account }}</li>
-                  <li class="list-group-item">{{ user_name }}</li>
-                  <li class="list-group-item">{{ user_phone }}</li>
-                  <li class="list-group-item">{{ user_cash }}</li>
-                  <li class="list-group-item">{{ user_mileage }}</li>
+                  <li class="list-group-item">이름: {{ user_name }}</li>
+                  <li class="list-group-item">번호: {{ user_phone }}</li>
+                  <!-- <li class="list-group-item">{{ user_cash }}</li>
+                  <li class="list-group-item">{{ user_mileage }}</li> -->
+                  <li class="list-group-item">권한: {{ user_role }}</li>
                 </ul>
               </div>
             </div>
@@ -121,7 +121,7 @@ const getReservePackage = () => {
         <!-- <template v-if="user_role == 'user'"> {{ reservation }} </template> -->
         <!--  여행 에이전트 일때 -->
         <template v-else>
-          <router-link to="/tour/write">새로운 패키지 등록하기</router-link>
+          <router-link class="regist-package" to="/tour/write">새로운 패키지 등록하기</router-link>
           <MyRegistTourBoard :myid="user_id" />
         </template>
         <div>
@@ -140,13 +140,25 @@ const getReservePackage = () => {
 
 .user-reservation-list {
   margin-top: 50px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display: grid;
+  grid-template-rows: repeat(3, 180px);
+  grid-template-columns: repeat(3, 1fr);
 }
 
 .reservation-info-title {
   font-size: 30px;
   margin-top: 30px;
+}
+.regist-package {
+  text-decoration: none;
+  color: rgba(0, 0, 0, 0.7);
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  background-color: rgb(255, 237, 240);
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.regist-package:hover {
+  background-color: rgb(252, 203, 211);
 }
 </style>
