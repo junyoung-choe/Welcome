@@ -5,12 +5,12 @@
 <mapper namespace="com.welcome.enjoytrip.reservation.model.mapper.ReservationMapper">
 
     <insert id="reservationWrite" parameterType="reservationDto">
-        insert into reservation (user_id, tourboard_id, reservation_regDate, reservation_yn)
-        values (#{user_id}, #{tourboard_id}, now(), true )
+        insert into reservation (user_id, tourboard_id, reservation_regDate, reservation_yn, reservation_cnt)
+        values (#{user_id}, #{tourboard_id}, now(), true, #{reservation_cnt} )
     </insert>
 
     <select id="reservationList" resultType="reservationDto">
-        select reservation_id, user_id, tourboard_id, reservation_regDate, reservation_yn
+        select reservation_id, user_id, tourboard_id, reservation_regDate, reservation_yn, reservation_cnt
         from reservation
     </select>
 
@@ -27,6 +27,7 @@
             tourboard_id = #{tourboard_id},
             reservation_regDate = #{reservation_regDate},
             reservation_yn = #{reservation_yn}
+            reservation_cnt = #{reservation_cnt}
 
         where reservation_id = #{reservation_id}
     </update>
