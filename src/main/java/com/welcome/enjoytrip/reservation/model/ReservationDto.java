@@ -15,4 +15,5 @@ public class ReservationDto {
     private long tourboard_id;
     private LocalDateTime reservation_regDate;
     private boolean reservation_yn;
+    private int reservation_cnt;
 }

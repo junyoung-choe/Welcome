@@ -49,13 +49,14 @@ public class ReservationController {
         return res;
     }
 
-    @GetMapping("register/{tourboard_id}/{user_id}")
-    public ResponseEntity<?> reservationRegister(@PathVariable("tourboard_id") int tourboard_id, @PathVariable("user_id") int user_id) {
+    @GetMapping("register/{tourboard_id}/{user_id}/{reservation_cnt}")
+    public ResponseEntity<?> reservationRegister(@PathVariable("tourboard_id") int tourboard_id, @PathVariable("user_id") int user_id, @PathVariable("reservation_cnt") int reservation_cnt) {
         Map<String, Object> map = new HashMap<>();
         try {
             ReservationDto reservationDto = new ReservationDto();
             reservationDto.setTourboard_id(tourboard_id);
             reservationDto.setUser_id(user_id);
+            reservationDto.setReservation_cnt(reservation_cnt);
             System.out.println(reservationDto);
             reservationService.reservationWrite(reservationDto);
             map.put("resmsg", "reservation 등록 성공");

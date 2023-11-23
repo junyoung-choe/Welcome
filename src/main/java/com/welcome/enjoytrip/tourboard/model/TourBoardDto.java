@@ -32,5 +32,6 @@ public class TourBoardDto {
     private String tourboard_departure;
     private String tourboard_destination;
     private int tourboard_views;
+    private String tourboard_content;
     private List<FileInfoDto> fileInfos;
 }

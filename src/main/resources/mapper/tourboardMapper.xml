@@ -16,9 +16,9 @@
     <!--        selectKey auto_increase 로 만들어진 int 값을 dto 저장해둔다         -->
     <insert id="tourboardWrite" parameterType="tourboardDto">
         insert into tourboard (user_id, tourboard_tourName, tourboard_keyword, tourboard_regDate, tourboard_startDate, tourboard_endDate, tourboard_deadLineDate
-        , tourboard_price, tourboard_salePrice, tourboard_stock, tourboard_stockCnt, tourboard_fnishedYn, tourboard_departure, tourboard_destination, tourboard_views)
+        , tourboard_price, tourboard_salePrice, tourboard_stock, tourboard_stockCnt, tourboard_fnishedYn, tourboard_departure, tourboard_destination, tourboard_views, tourboard_content)
         values (#{user_id}, #{tourboard_tourName}, #{tourboard_keyword}, now(), #{tourboard_startDate}, #{tourboard_endDate}, #{tourboard_deadLineDate}
-        , #{tourboard_price}, #{tourboard_salePrice}, #{tourboard_stock}, #{tourboard_stockCnt}, #{tourboard_fnishedYn}, #{tourboard_departure}, #{tourboard_destination}, #{tourboard_views})
+        , #{tourboard_price}, #{tourboard_salePrice}, #{tourboard_stock}, #{tourboard_stockCnt}, #{tourboard_fnishedYn}, #{tourboard_departure}, #{tourboard_destination}, #{tourboard_views}, #{tourboard_content})
         <selectKey resultType="int" keyProperty="tourboard_id" order="AFTER">
             select last_insert_id()
         </selectKey>
@@ -26,14 +26,14 @@
 
     <select id="tourboardView" parameterType="Integer" resultType="tourboardDto" >
         select tourboard_id, user_id, tourboard_tourName, tourboard_keyword, tourboard_regDate, tourboard_startDate, tourboard_endDate, tourboard_deadLineDate
-             , tourboard_price, tourboard_salePrice, tourboard_stock, tourboard_stockCnt, tourboard_fnishedYn, tourboard_departure, tourboard_destination, tourboard_views
+             , tourboard_price, tourboard_salePrice, tourboard_stock, tourboard_stockCnt, tourboard_fnishedYn, tourboard_departure, tourboard_destination, tourboard_views, tourboard_content
         from tourboard
         where tourboard_id = #{tourboard_id}
     </select>
 
     <select id="tourboardList" resultType="tourboardDto">
         select tourboard_id, user_id, tourboard_tourName, tourboard_keyword, tourboard_regDate, tourboard_startDate, tourboard_endDate, tourboard_deadLineDate
-             , tourboard_price, tourboard_salePrice, tourboard_stock, tourboard_stockCnt, tourboard_fnishedYn, tourboard_departure, tourboard_destination, tourboard_views
+             , tourboard_price, tourboard_salePrice, tourboard_stock, tourboard_stockCnt, tourboard_fnishedYn, tourboard_departure, tourboard_destination, tourboard_views, tourboard_content
         from tourboard
     </select>
 
@@ -59,7 +59,8 @@
             tourboard_fnishedYn = #{tourboard_fnishedYn},
             tourboard_departure = #{tourboard_departure},
             tourboard_destination = #{tourboard_destination},
-            tourboard_views = #{tourboard_views}
+            tourboard_views = #{tourboard_views},
+            tourboard_content = #{tourboard_content}
         where tourboard_id = #{tourboard_id}
     </update>
 
