@@ -81,10 +81,11 @@ endDate.value = `${props.tourBoard.tourboard_endDate[0]}/${props.tourBoard.tourb
         <span v-for="keyword in keywords" :key="keyword">#{{ keyword }}</span>
       </div>
       <div class="content">
-        <span
+        {{ tourBoard.tourboard_content }}
+        <!-- <span
           >가성비 좋은 시내 호텔에서 투숙하며, 다낭 핵심 시내 관광코스와 인기 관광지인 바나힐
           테마파크를 관광할 수 있는 특가 상품입니다.</span
-        >
+        > -->
       </div>
       <div class="date">
         <span>여행날짜</span>

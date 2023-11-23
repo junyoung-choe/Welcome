@@ -206,7 +206,7 @@ const upload = async () => {
     }
 
     try {
-      await axios.post("http://localhost:70/tourboard", formData, {
+      await axios.post("http://192.168.205.84:70/tourboard", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },

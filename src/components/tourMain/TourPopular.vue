@@ -1,9 +1,9 @@
 <script setup>
-import { ref, onMounted } from 'vue';
-import { getPopularList } from '@/api/tourboard.js';
-import { Swiper, SwiperSlide } from 'swiper/vue';
+import { ref, onMounted } from "vue";
+import { getPopularList } from "@/api/tourboard.js";
+import { Swiper, SwiperSlide } from "swiper/vue";
 
-import TourListInMainItem from './item/TourListInMainItem.vue';
+import TourListInMainItem from "./item/TourListInMainItem.vue";
 
 const popularList = ref([]);
 
