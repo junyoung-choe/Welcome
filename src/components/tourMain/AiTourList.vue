@@ -1,16 +1,16 @@
 <script setup>
-import { ref, onMounted } from 'vue';
-import { useRouter, useRoute } from 'vue-router';
-import { listTourBoard, question } from '@/api/tourboard.js';
+import { ref, onMounted } from "vue";
+import { useRouter, useRoute } from "vue-router";
+import { listTourBoard, question } from "@/api/tourboard.js";
 
-import TourBoardListItem from '@/components/tour/item/TourBoardListItem.vue';
+import TourBoardListItem from "@/components/tour/item/TourBoardListItem.vue";
 
 const router = useRouter();
 const route = useRoute();
 
-const text = ref('');
+const text = ref("");
 const que = ref({
-  question: '',
+  question: "",
 });
 
 const answer = () => {
@@ -22,8 +22,8 @@ const answer = () => {
 };
 
 const param = ref({
-  key: '',
-  word: '',
+  key: "",
+  word: "",
 });
 
 const tourList = ref([]);
@@ -39,11 +39,11 @@ onMounted(() => {
 
 const getTourBoardList = () => {
   tourListView.value.length = 0;
-  console.log('서버에서 글목록 얻어오자!!!', param.value);
+  console.log("서버에서 글목록 얻어오자!!!", param.value);
   listTourBoard(
     param.value,
     ({ data }) => {
-      console.log('==============');
+      console.log("==============");
       console.log(data);
       tourList.value = data;
       // currentPage.value = data.currentPage;
@@ -57,7 +57,7 @@ const getTourBoardList = () => {
       }
     },
     (error) => {
-      console.log('error');
+      console.log("error");
       console.log(error);
     }
   );
@@ -98,7 +98,7 @@ const sortListExpensive = () => {
 
 const getMore = () => {
   if (curCnt.value >= tourList.value.length) {
-    alert('마지막 입니다!');
+    alert("마지막 입니다!");
   }
 
   for (let index = curCnt.value; index < cnt.value + curCnt.value; index++) {
