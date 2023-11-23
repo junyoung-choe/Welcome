@@ -159,5 +159,10 @@
         from tourboard
         where user_id = #{user_id}
     </select>
+    
+    <select id="getDestinationForGPT" parameterType="string">
+        select distinct tourboard_destination
+        from tourboard
+    </select>
 
 </mapper>

@@ -85,7 +85,12 @@ public class TourboardServiceImpl implements TourboardService {
 
     @Override
     public List<TourBoardDto> tourboardViewUserId(int user_id) {
-        return tourboardMapper.tourboardViewUserId(user_id);
+        List<TourBoardDto> list = tourboardMapper.tourboardViewUserId(user_id);
+        for(TourBoardDto tourBoardDto : list) {
+            List<FileInfoDto> files = tourboardMapper.fileInfoList((int) tourBoardDto.getTourboard_id());
+            tourBoardDto.setFileInfos(files);
+        }
+        return list;
     }
 
     @Override
@@ -150,6 +155,12 @@ public class TourboardServiceImpl implements TourboardService {
         map.put("tourboard_id", tourboard_id);
         map.put("reserveNum", reserveNum);
         tourboardMapper.plus(map);
+    }
+
+    @Override
+    public List<String> getDestinationForGPT() throws Exception {
+        List<String> list = tourboardMapper.getDestinationForGPT();
+        return list;
     }
 
 

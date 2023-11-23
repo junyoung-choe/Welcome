@@ -32,4 +32,5 @@ public interface TourboardService {
     public List<TourBoardDto> getPopularList() throws Exception;
     public List<TourBoardDto> getCheapList() throws Exception;
     public void plus(int tourboard_id, int reserveNum) throws Exception;
+    List<String> getDestinationForGPT() throws Exception;
 }

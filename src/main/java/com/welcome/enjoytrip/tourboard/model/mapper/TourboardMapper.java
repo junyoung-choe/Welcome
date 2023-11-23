@@ -40,4 +40,5 @@ public interface TourboardMapper {
 
 //    void deleteFile(int articleNo) throws Exception;
     void plus(Map<String, Integer> map) throws Exception;
+    List<String> getDestinationForGPT() throws Exception;
 }

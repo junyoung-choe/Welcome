@@ -2,6 +2,7 @@ package com.welcome.enjoytrip.reservation.model.service;
 
 import com.welcome.enjoytrip.reservation.model.ReservationDto;
 import com.welcome.enjoytrip.reservation.model.mapper.ReservationMapper;
+import com.welcome.enjoytrip.tourboard.model.FileInfoDto;
 import com.welcome.enjoytrip.tourboard.model.TourBoardDto;
 import org.springframework.stereotype.Service;
 
@@ -38,6 +39,11 @@ public class ReservationServiceImpl implements ReservationService {
 
     @Override
     public List<TourBoardDto> reservationPackage(int user_id) throws Exception {
-        return reservationMapper.reservationPackage(user_id);
+        List<TourBoardDto> list = reservationMapper.reservationPackage(user_id);
+        for(TourBoardDto tourBoardDto : list) {
+            List<FileInfoDto> files = reservationMapper.fileInfoList((int) tourBoardDto.getTourboard_id());
+            tourBoardDto.setFileInfos(files);
+        }
+        return list;
     }
 }
