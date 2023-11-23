@@ -1,9 +1,9 @@
 <script setup>
-import { ref, onMounted, computed } from "vue";
-import { useMenuStore } from "@/stores/menu";
-import { storeToRefs } from "pinia";
-import { useMemberStore } from "@/stores/member";
-import { jwtDecode } from "jwt-decode";
+import { ref, onMounted, computed } from 'vue';
+import { useMenuStore } from '@/stores/menu';
+import { storeToRefs } from 'pinia';
+import { useMemberStore } from '@/stores/member';
+import { jwtDecode } from 'jwt-decode';
 
 // 상단바의 로그인 로그아웃을 위해서
 const memberStore = useMemberStore();
@@ -20,12 +20,12 @@ const isLogout = ref({});
 const packager = ref(false);
 
 onMounted(() => {
-  packager.value = localStorage.getItem("agency");
+  packager.value = localStorage.getItem('agency');
   if (packager.value !== null) {
     trueAgency();
   }
 
-  let token = sessionStorage.getItem("accessToken");
+  let token = sessionStorage.getItem('accessToken');
   // 토큰이 존재한다면 -> 새로고침 시에도 로그인이 유지 되야한다
   if (token != null) {
     menuList.value[0].show = false;
@@ -33,12 +33,12 @@ onMounted(() => {
     menuList.value[2].show = true;
     menuList.value[3].show = true;
   }
-  console.log("======================");
+  console.log('======================');
   console.log(menuList.value);
   isLogout.value = menuList.value[3].show;
   console.log(isLogout.value);
 
-  console.log("======================");
+  console.log('======================');
   console.log(packager.value);
   // 로컬 스토리지에 패키저면 초기화된 store 의 값을 true 로 바꿔줘야해
 });
@@ -69,17 +69,17 @@ isLogout.value = computed(() => {
 // }
 
 const logout = async () => {
-  let token = sessionStorage.getItem("accessToken");
+  let token = sessionStorage.getItem('accessToken');
   let decodeToken = jwtDecode(token);
   // agency 패키저를 위함
-  localStorage.removeItem("agency");
+  localStorage.removeItem('agency');
 
   falseAgency();
   await userLogout(decodeToken.userId);
-  console.log("로그아웃!!!!");
+  console.log('로그아웃!!!!');
   changeMenuState();
-  sessionStorage.removeItem("accessToken");
-  sessionStorage.removeItem("refreshToken");
+  sessionStorage.removeItem('accessToken');
+  sessionStorage.removeItem('refreshToken');
   // 로그아웃 후에 로그인 화면으로 이동한다
 };
 // 로그아웃
@@ -133,6 +133,7 @@ const logout = async () => {
         {{ menuList[3] }} -->
         <template v-for="menu in menuList" :key="menu.routeName">
           <template v-if="menu.show">
+            <div style="margin-right: 10px"></div>
             <template v-if="menu.routeName === 'user-logout'">
               <router-link to="/" @click.prevent="logout" class="nav-link">
                 {{ menu.name }}
