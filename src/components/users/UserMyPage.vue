@@ -1,30 +1,30 @@
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted } from "vue";
 
 // (getUserInformation) 로그인 정보를 받아오기 위한 필드와 메소드
-import { userMyPage, getReservation } from '@/api/user';
-import { jwtDecode } from 'jwt-decode';
+import { userMyPage, getReservation } from "@/api/user";
+import { jwtDecode } from "jwt-decode";
 
 // menu 확인
-import { useMenuStore } from '@/stores/menu';
-import { storeToRefs } from 'pinia';
-import MyRegistTourBoard from './MyRegistTourBoard.vue';
-import TourListInMainItem from '../tourMain/item/TourListInMainItem.vue';
+import { useMenuStore } from "@/stores/menu";
+import { storeToRefs } from "pinia";
+import MyRegistTourBoard from "./MyRegistTourBoard.vue";
+import TourListInMainItem from "../tourMain/item/TourListInMainItem.vue";
 
 const menuStore = useMenuStore();
 const { menuList } = storeToRefs(menuStore);
 ///
 
-const user_id = ref('');
+const user_id = ref("");
 // const user_password = ref();
 // const user_regDate = ref();
 // const refreshToken = ref();
-const user_account = ref('');
-const user_role = ref('');
-const user_name = ref('');
-const user_phone = ref('');
-const user_cash = ref('');
-const user_mileage = ref('');
+const user_account = ref("");
+const user_role = ref("");
+const user_name = ref("");
+const user_phone = ref("");
+const user_cash = ref("");
+const user_mileage = ref("");
 
 const reservation = ref([]);
 
@@ -34,13 +34,13 @@ onMounted(() => {
 
   // 회원 ID로 reservation 에서 tourBoard_id 를 찾아서 tourBoard 들을 불러온다
   getReservePackage();
-  console.log('=============================');
+  console.log("=============================");
   console.log(menuList.value[4].show);
-  console.log('=============================');
+  console.log("=============================");
 });
 
 const getUserInformation = () => {
-  let token = sessionStorage.getItem('accessToken');
+  let token = sessionStorage.getItem("accessToken");
   let decodeToken = jwtDecode(token);
   userMyPage(
     decodeToken.userId,
@@ -62,7 +62,7 @@ const getUserInformation = () => {
 };
 
 const getReservePackage = () => {
-  let token = sessionStorage.getItem('accessToken');
+  let token = sessionStorage.getItem("accessToken");
   let decodeToken = jwtDecode(token);
   getReservation(
     decodeToken.userId,
@@ -101,6 +101,9 @@ const getReservePackage = () => {
                   <!-- <li class="list-group-item">{{ user_cash }}</li>
                   <li class="list-group-item">{{ user_mileage }}</li> -->
                   <li class="list-group-item">권한: {{ user_role }}</li>
+                  <li v-if="user_role == 'user'" class="list-group-item">
+                    마일리지 : {{ user_mileage }}
+                  </li>
                 </ul>
               </div>
             </div>
