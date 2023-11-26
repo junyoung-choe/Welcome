@@ -8,7 +8,11 @@
         <tr>
           <th><label>여행 이름 </label></th>
           <th>
-            <input class="text-type" type="text" v-model="tourBoardDto.tourboard_tourName.value" />
+            <input
+              class="text-type"
+              type="text"
+              v-model="tourBoardDto.tourboard_tourName.value"
+            />
           </th>
         </tr>
 
@@ -80,27 +84,43 @@
         <tr>
           <th><label>가격</label></th>
           <th>
-            <input class="text-type" v-model="tourBoardDto.tourboard_price.value" type="text" />
+            <input
+              class="text-type"
+              v-model="tourBoardDto.tourboard_price.value"
+              type="text"
+            />
           </th>
         </tr>
 
         <tr>
           <th><label>할인된 가격</label></th>
           <th>
-            <input class="text-type" v-model="tourBoardDto.tourboard_salePrice.value" type="text" />
+            <input
+              class="text-type"
+              v-model="tourBoardDto.tourboard_salePrice.value"
+              type="text"
+            />
           </th>
         </tr>
 
         <tr>
           <th><label>총원</label></th>
           <th>
-            <input class="text-type" v-model="tourBoardDto.tourboard_stock.value" type="text" />
+            <input
+              class="text-type"
+              v-model="tourBoardDto.tourboard_stock.value"
+              type="text"
+            />
           </th>
         </tr>
         <tr>
           <th><label>출발지</label></th>
           <th>
-            <input class="text-type" v-model="tourBoardDto.tourboard_departure.value" type="text" />
+            <input
+              class="text-type"
+              v-model="tourBoardDto.tourboard_departure.value"
+              type="text"
+            />
           </th>
         </tr>
         <tr>
@@ -205,7 +225,7 @@ const upload = async () => {
     }
 
     try {
-      await axios.post("http://192.168.205.84:70/tourboard", formData, {
+      await axios.post("http://localhost:70/tourboard", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
