@@ -1,35 +1,13 @@
-# enjoytrip-final-front
+# enjoytrip-final-frontend
 
-This template should help get you started developing with Vue 3 in Vite.
+- 깃 플로우  
+  feat/
 
-## Recommended IDE Setup
-
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
-## Project Setup
-
-```sh
-npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
+- 커밋 컨벤션  
+  feat : 새로운 기능 추가  
+  fix : 버그 수정  
+  docs : 문서 수정  
+  style : 코드 포맷팅, 세미콜론 누락, 코드 변경이 없는 경우  
+  refactor : 코드 리펙토링  
+  test : 테스트 코드, 리펙토링 테스트 코드 추가  
+  chore : 빌드 업무 수정, 패키지 매니저 수정  
