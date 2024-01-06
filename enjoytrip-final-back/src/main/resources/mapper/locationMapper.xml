@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.welcome.enjoytrip.location.model.mapper.LocationMapper">
+
+    <insert id="locationWrite" parameterType="locationDto">
+        insert into location (tourboard_id, location_name, location_startDate, location_endDate)
+        values (#{tourboard_id}, #{location_name}, now(), now() )
+    </insert>
+
+    <select id="locationList" resultType="locationDto">
+        select tourboard_id, user_id, location_name, location_startDate, location_endDate
+        from location
+    </select>
+
+    <update id="locationPut" parameterType="locationDto">
+        update location
+        set location_name = #{location_name},
+            location_startDate = #{location_startDate},
+            location_endDate = #{location_endDate}
+        where location_id = #{location_id}
+    </update>
+
+    <delete id="locationDelete" parameterType="Integer" >
+        delete from location
+        where location_id = #{location_id}
+    </delete>
+
+</mapper>

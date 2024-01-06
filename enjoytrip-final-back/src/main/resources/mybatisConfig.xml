@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	<typeAliases>
+		<typeAlias type="com.welcome.enjoytrip.board.model.BoardDto" alias="boarddto" />
+		<typeAlias type="com.welcome.enjoytrip.member.model.MemberDto" alias="memberdto" />
+		<typeAlias type="com.welcome.enjoytrip.board.model.CommentDto" alias="commentdto" />
+		<typeAlias type="com.welcome.enjoytrip.location.model.LocationDto" alias="locationdto" />
+		<typeAlias type="com.welcome.enjoytrip.reservation.model.ReservationDto" alias="reservationdto" />
+		<typeAlias type="com.welcome.enjoytrip.tourboard.model.TourBoardDto" alias="tourboarddto" />
+		<typeAlias type="com.welcome.enjoytrip.tourboard.model.FileInfoDto" alias="fileinfodto" />
+	</typeAliases>
+
+	<mappers>
+		<mapper resource="mapper/memberMapper.xml" />
+	</mappers>
+</configuration>
