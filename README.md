@@ -11,7 +11,12 @@ final project
 ## 개요
 - 프로젝트 이름: welcome ✈️
 - 프로젝트 지속기간: 2023.12-2023.12
-- 개발 엔진 및 언어: java & JS 
+- 개발 엔진 및 언어
+![Java](https://img.shields.io/badge/Java-007396.svg?&style=for-the-badge&logo=Java&logoColor=white)
+![Spring](https://img.shields.io/badge/Spring-6DB33F.svg?&style=for-the-badge&logo=Spring&logoColor=white)
+![MySQL](https://img.shields.io/badge/MySQL-4479A1.svg?&style=for-the-badge&logo=MySQL&logoColor=white)
+![Git](https://img.shields.io/badge/Git-F05032.svg?&style=for-the-badge&logo=Git&logoColor=white)
+![IntelliJ](https://img.shields.io/badge/IntelliJ-000000.svg?&style=for-the-badge&logo=IntelliJ&logoColor=000000)
 - 멤버: 팀 환영(최준영, 김수환)
 
 ## 제안서
