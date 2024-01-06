@@ -11,7 +11,7 @@ final project
 ## 개요
 - 프로젝트 이름: welcome ✈️
 - 프로젝트 지속기간: 2023.12-2023.12
-- 개발 엔진 및 언어
+- 개발 엔진 및 언어  
 ![Java](https://img.shields.io/badge/Java-007396.svg?&style=for-the-badge&logo=Java&logoColor=white)
 ![Spring](https://img.shields.io/badge/Spring-6DB33F.svg?&style=for-the-badge&logo=Spring&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E.svg?&style=for-the-badge&logo=JavaScript&logoColor=white)
@@ -32,6 +32,14 @@ final project
 
 ## 프로젝트 시연
 ![시연영상_5조_김수환_최준영_AdobeExpress](https://github.com/junyoung-choe/welcome/assets/83858869/a92a2bb1-678e-4358-be14-9e8a11e3fab4)
+
+- DB 정규화 과정으로 Relation DB 설계를 진행했습니다.
+- DB 데이터 기반으로 패키지의 조회수, 최신순, 추천순 목록을 구현했습니다.
+- Rest API 사용으로 front-end 와 back-end 를 모듈화하여 개발했습니다.
+- Chat Gpt API 를 이용하여 키워드 기반 AI 추천 여행지 기능을 구현했습니다.
+- JWT 를 이용한 token 기반 로그인을 구현했습니다.
+- Skill Keywords  
+JS, Vue, Java, Spring Boot, MySql, MyBatis
 
 
 
