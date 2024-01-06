@@ -24,6 +24,7 @@ final project
 <img width="600" alt="image" src="https://github.com/junyoung-choe/welcome/assets/83858869/3109dc16-cd8f-4e31-8ef8-aca95d76630e">
 
 ## 프로젝트 시연
-![시연영상_5조_김수환_최준영](https://github.com/junyoung-choe/welcome/assets/83858869/0609cd98-0b91-4bb0-ae44-71e3e3f0e15c)
+![시연영상_5조_김수환_최준영_AdobeExpress](https://github.com/junyoung-choe/welcome/assets/83858869/a92a2bb1-678e-4358-be14-9e8a11e3fab4)
+
 
 
