@@ -1,12 +1,14 @@
-# welcome
-final project
+# Welcome Service
+여행사 플렛폼 welcome
+당신의 원하는 여행지에 적합한 패키지를 한눈에 비교하고 선택하세요  
+당신의 여행을 함께합니다.
 
 ## 목차
   - [개요](#개요)
   - [제안서](#제안서)
   - [ERD](#ERD)
   - [Figma](#Figma)
-  - [프로젝트 시연](#프로젝트 시연)
+  - [기능](#기능)
     
 ## 개요
 - 프로젝트 이름: welcome ✈️
@@ -30,7 +32,7 @@ final project
 ## Figma
 <img width="300" alt="image" src="https://github.com/junyoung-choe/welcome/assets/83858869/3109dc16-cd8f-4e31-8ef8-aca95d76630e">
 
-## 프로젝트 시연
+## 기능
 ![시연영상_5조_김수환_최준영_AdobeExpress](https://github.com/junyoung-choe/welcome/assets/83858869/a92a2bb1-678e-4358-be14-9e8a11e3fab4)
 
 - DB 정규화 과정으로 Relation DB 설계를 진행했습니다.
