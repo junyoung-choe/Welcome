@@ -1,47 +1,118 @@
-# Welcome Service
-여행사 플렛폼 welcome
-당신의 원하는 여행지에 적합한 패키지를 한눈에 비교하고 선택하세요  
-당신의 여행을 함께합니다.
+# Welcome - 여행 상품 통합 서비스🛫
 
 ## 목차
-  - [개요](#개요)
-  - [제안서](#제안서)
-  - [ERD](#ERD)
-  - [Figma](#Figma)
-  - [기능](#기능)
-    
-## 개요
-- 프로젝트 이름: welcome ✈️
-- 프로젝트 지속기간: 2023.12-2023.12
-- 개발 엔진 및 언어  
-![Java](https://img.shields.io/badge/Java-007396.svg?&style=for-the-badge&logo=Java&logoColor=white)
-![Spring](https://img.shields.io/badge/Spring-6DB33F.svg?&style=for-the-badge&logo=Spring&logoColor=white)
-![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E.svg?&style=for-the-badge&logo=JavaScript&logoColor=white)
-![Vue](https://img.shields.io/badge/Vue.js-4FC08D?style=for-the-badge&logo=Vue.js&logoColor=white)
-![MySQL](https://img.shields.io/badge/MySQL-4479A1.svg?&style=for-the-badge&logo=MySQL&logoColor=white)
-![Git](https://img.shields.io/badge/Git-F05032.svg?&style=for-the-badge&logo=Git&logoColor=white)
-![IntelliJ](https://img.shields.io/badge/IntelliJ-000000.svg?&style=for-the-badge&logo=IntelliJ&logoColor=000000)
-- 멤버: 팀 환영(최준영, 김수환)
+1. [개요](#개요)
+2. [주요 기능](#주요-기능)
+3. [개발 환경](#개발-환경)
+4. [ERD](#ERD)
+5. [서비스 화면](#서비스-화면)
+6. [개발 일정 및 팀원 소개](#개발-일정-및-팀원-소개)
 
-## 제안서
-<img width="300" alt="image" src="https://github.com/junyoung-choe/welcome/assets/83858869/c6e28833-df51-47d2-adbc-e8764cf48c99">
+## 개요
+> **여정을 환영합니다, 당신의 여행을 함께 만들어요!**
+
+'Welcome'은 여러 여행사에서 제공하는 여행상품을 통합하여, 예약할 수 있는 서비스입니다.
+
+기존 여행상품을 예약하기 위해서는 다양한 여행사 및 여행상품을 조회해야 하는 반면, </br>
+'Welcome'서비스를 활용하면 다양한 여행 상품을 한눈에 볼 수 있어 사용자 편의성을 제공할 수 있습니다.</br>
+
+</br>
+
+## 주요 기능
+- ### 일반 유저
+    - 등록된 여행 상품을 조회하거나, 인기 많은 상품 등을 추천받을 수 있습니다.
+    - AI추천을 통해 기분이나, 경험 등을 활용하여 추천받을 수 있습니다.
+    - 조회된 여행 상품을 예약할 수 있습니다. 
+    - 자유게시판 기능을 활용하여 여행에 관련한 의견을 주고받을 수 있습니다.
+
+- ### 여행사 유저
+    - 일반 유저에게 제공할 여행 상품을 등록할 수 있습니다.
+    - 등록한 패키지를 관리할 수 있습니다.
+
+## 개발 환경
+Management Tool 
+</br>
+
+<img src="https://img.shields.io/badge/notion-000000?style=for-the-badge&logo=notion&logoColor=white">
+<img src="https://img.shields.io/badge/Mattermost-0058CC?style=for-the-badge&logo=Mattermost&logoColor=white">
+
+Front 
+</br>
+
+<img src="https://img.shields.io/badge/vue.js-4FC08D?style=for-the-badge&logo=vuedotjs&logoColor=white">
+<img src="https://img.shields.io/badge/bootstrap-7952B3?style=for-the-badge&logo=bootstrap&logoColor=white"/>
+<img src="https://img.shields.io/badge/css3-1572B6?style=for-the-badge&logo=css3&logoColor=white"/>
+
+Backend 
+</br>
+
+<img src="https://img.shields.io/badge/spring-6DB33F?style=for-the-badge&logo=spring&logoColor=white">
+<img src="https://img.shields.io/badge/Spring Security-6DB33F?style=for-the-badge&logo=Spring Security&logoColor=white">
+<img src="https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=MySQL&logoColor=white">
+<img src="https://img.shields.io/badge/MyBatis-000000?style=for-the-badge&logo=MyBatis&logoColor=white">
+
+</br>
 
 ## ERD
-<img width="1467" alt="welcome_ERD" src="https://github.com/junyoung-choe/welcome/assets/83858869/d992b68e-2288-45bf-ad08-e5ff8b8d67a5">
+<img width="1000" alt="welcome_ERD" src="https://github.com/junyoung-choe/welcome/assets/83858869/d992b68e-2288-45bf-ad08-e5ff8b8d67a5">
 
-## Figma
-<img width="300" alt="image" src="https://github.com/junyoung-choe/welcome/assets/83858869/3109dc16-cd8f-4e31-8ef8-aca95d76630e">
+</br>
 
-## 기능
-![시연영상_5조_김수환_최준영_AdobeExpress](https://github.com/junyoung-choe/welcome/assets/83858869/a92a2bb1-678e-4358-be14-9e8a11e3fab4)
+## 서비스 화면
+### 메인 화면
+- Welcome의 메인 화면입니다
+- 상단 바를 통해 로그인 및 메뉴를 이용할 수 있고, 많이 예약 상품이나 특가 상품 등을 볼 수 있습니다.
+</br>
 
-- DB 정규화 과정으로 Relation DB 설계를 진행했습니다.
-- DB 데이터 기반으로 패키지의 조회수, 최신순, 추천순 목록을 구현했습니다.
-- Rest API 사용으로 front-end 와 back-end 를 모듈화하여 개발했습니다.
-- Chat Gpt API 를 이용하여 키워드 기반 AI 추천 여행지 기능을 구현했습니다.
-- JWT 를 이용한 token 기반 로그인을 구현했습니다.
-- Skill Keywords  
-JS, Vue, Java, Spring Boot, MySql, MyBatis
+<img src="https://github.com/ksh4030/public-wifi/assets/124498333/cc61f110-63f5-4d93-9c04-b059d0ed6e62" width="500">
 
+### 검색
+- 메인 화면에서 출발지와 도착지를 선택하여 검색할 수 있습니다.
+- 영상 오류로 나오지 않았지만 드롭다운 형태로 선택할 수 있습니다.
+</br>
 
+<img src="https://github.com/ksh4030/public-wifi/assets/124498333/b3edb6dd-5459-4189-aa7b-ad223ab3ecbd" width="500">
 
+### 여행 상품 조회
+- 상단 바에서 여행상품 탭을 통해 등록된 전체 여행상품을 조회할 수 있습니다.
+- 키워드 검색, 가격 등으로 정렬해서 조회할 수 있습니다.
+</br>
+
+<img src="https://github.com/ksh4030/public-wifi/assets/124498333/e793bf51-cb4b-4b09-81fc-1ea07ca55f2b" width="500">
+
+### 예약
+- 조회한 여행 상품을 선택하여 예약할 수 있습니다.
+</br>
+
+<img src="https://github.com/ksh4030/public-wifi/assets/124498333/94e76f47-8e14-438e-805d-e6da5840f204" width="500">
+
+### 내 정보
+- 내 정보 탭을 통해 개인정보 및 예약한 상품을 조회할 수 있습니다.
+</br>
+
+<img src="https://github.com/ksh4030/public-wifi/assets/124498333/31fcfffd-153e-4c77-b793-94b6044df408" width="500">
+
+### 게시판
+- 사용자는 게시판을 통해 자유롭게 의견을 주고 받을 수 있습니다.
+</br>
+
+<img src="https://github.com/ksh4030/public-wifi/assets/124498333/0f10b3be-a45e-4847-b80e-9bb7f5cb38e4" width="500">
+
+### AI 추천
+- 사용자는 다양한 키워드를 활용하여 AI기반으로 추천을 받을 수 있습니다.
+</br>
+
+<img src="https://github.com/ksh4030/public-wifi/assets/124498333/a2825dce-31e5-453f-8b61-6016d0a67a0c" width="500">
+
+### 여행 상품 등록
+- 여행사 계정으로 로그인 후 여행 상품을 등록할 수 있습니다.
+</br>
+
+<img src="https://github.com/ksh4030/public-wifi/assets/124498333/2b7367eb-dfd0-432b-8628-caa13dc0f8dc" width="500">
+
+</br>
+
+## 개발 일정 및 팀원 소개
+### 🗓️개발 일정
+
+### 👪팀원 소개
